@@ -82,6 +82,7 @@ public class SpaceShipMovement : MonoBehaviour
 
     private float CalculateNewXPosition()
     {
-        return transform.position.x + Input.GetAxis("Horizontal") * this.speed * Time.deltaTime;
+        //return transform.position.x + Input.GetAxis("Horizontal") * this.speed * Time.deltaTime;
+        return Math.Min(8.28f, Math.Max(-8.25f, transform.position.x + Input.GetAxis("Horizontal") * this.speed * Time.deltaTime));
     }
 }
