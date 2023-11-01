@@ -7,6 +7,8 @@ TagManager:
   - Right
   - Left
   - Unmoved
+  - Enemy
+  - PlayerLaser
   layers:
   - Default
   - TransparentFX

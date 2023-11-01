@@ -12,8 +12,17 @@ public class LaserMovement : MonoBehaviour
     public void Update()
     {
         if (transform.position.y > 7)
-        {
+        {            
             Destroy(gameObject);
         }        
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {        
+        var collisionObject = collision.gameObject;
+        if (collisionObject.tag == "Enemy")
+        {
+            Destroy(collisionObject);
+        }
     }
 }

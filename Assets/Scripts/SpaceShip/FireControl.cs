@@ -12,7 +12,7 @@ public class FireControl : MonoBehaviour
     public void Start()
     {
         this.ActualLaserPower = GameManager.MaxShipLaserPower;
-        InvokeRepeating(nameof(GainFirePower), 1f, GameManager.LaserPowerRegainFactor);
+        //InvokeRepeating(nameof(GainFirePower), 1f, GameManager.LaserPowerRegainFactor);
     }
 
     public void Update()
@@ -25,9 +25,7 @@ public class FireControl : MonoBehaviour
                transform.position.z), Quaternion.identity);
 
             this.ActualLaserPower--;
-        }
-
-        Debug.Log($"FirePower: {this.ActualLaserPower}");
+        }        
     }
 
     private void GainFirePower()
