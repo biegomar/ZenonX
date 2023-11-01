@@ -23,6 +23,7 @@ public class LaserMovement : MonoBehaviour
         if (collisionObject.tag == "Enemy")
         {
             Destroy(collisionObject);
+            Destroy(gameObject);
         }
     }
 }
