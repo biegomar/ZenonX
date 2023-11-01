@@ -11,16 +11,9 @@ public class LaserMovement : MonoBehaviour
 
     public void Update()
     {
-        //if (transform.position.y < 3)
-        //{
-        //    transform.position = new Vector3(
-        //       transform.position.x,
-        //       transform.position.y + 0.01f,
-        //       transform.position.z);
-
-        //    return;
-        //}
-
-        //Destroy(this);
+        if (transform.position.y > 3)
+        {
+            Destroy(gameObject);
+        }        
     }
 }
