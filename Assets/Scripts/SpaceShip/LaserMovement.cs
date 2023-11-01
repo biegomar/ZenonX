@@ -11,7 +11,7 @@ public class LaserMovement : MonoBehaviour
 
     public void Update()
     {
-        if (transform.position.y > 3)
+        if (transform.position.y > 7)
         {
             Destroy(gameObject);
         }        
