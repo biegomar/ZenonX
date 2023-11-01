@@ -8,16 +8,23 @@ public class FireControl : MonoBehaviour
     private GameObject Laser;
 
     private uint ActualLaserPower;
+    private float ActualLaserFrequence;
+    private float LaserInterval;
 
     public void Start()
     {
+        this.ActualLaserFrequence = GameManager.Level1LaserFrequence;
         this.ActualLaserPower = GameManager.MaxShipLaserPower;
-        //InvokeRepeating(nameof(GainFirePower), 1f, GameManager.LaserPowerRegainFactor);
+        this.LaserInterval = 0;
+
+        InvokeRepeating(nameof(GainFirePower), 1f, GameManager.LaserPowerRegainInterval);
     }
 
     public void Update()
     {
-        if (this.ActualLaserPower > 0 && Input.GetKeyDown(KeyCode.Space))
+        this.LaserInterval += Time.deltaTime;
+
+        if (this.LaserInterval >= this.ActualLaserFrequence && this.ActualLaserPower > 0 && Input.GetKeyDown(KeyCode.Space))
         {
             Instantiate(Laser, new Vector3(
                transform.position.x,
@@ -25,6 +32,7 @@ public class FireControl : MonoBehaviour
                transform.position.z), Quaternion.identity);
 
             this.ActualLaserPower--;
+            this.LaserInterval = 0;
         }        
     }
 
