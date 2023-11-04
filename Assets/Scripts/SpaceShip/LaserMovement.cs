@@ -24,6 +24,9 @@ public class LaserMovement : MonoBehaviour
         {
             Destroy(collisionObject);
             Destroy(gameObject);
+
+            GameManager.Score++;
+            Debug.Log($"Score: {GameManager.Score}");
         }
     }
 }

@@ -13,9 +13,7 @@ public class SpaceShipMovement : MonoBehaviour
 
     private Rigidbody2D Rigidbody;
 
-    private bool isShipBoosted;
-    private float velocity = 5f;
-    private float speed = 5f;
+    private bool isShipBoosted;    
 
     // Start is called before the first frame update
     void Start()
@@ -67,7 +65,7 @@ public class SpaceShipMovement : MonoBehaviour
 
         if (!this.isShipBoosted & (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)))
         {
-            this.Rigidbody.AddForce(Vector2.up * velocity, ForceMode2D.Impulse);
+            this.Rigidbody.AddForce(Vector2.up * GameManager.ShipBoosterVelocity, ForceMode2D.Impulse);
             this.isShipBoosted = true;
         }            
     }
@@ -83,6 +81,6 @@ public class SpaceShipMovement : MonoBehaviour
     private float CalculateNewXPosition()
     {
         //return transform.position.x + Input.GetAxis("Horizontal") * this.speed * Time.deltaTime;
-        return Math.Min(8.28f, Math.Max(-8.25f, transform.position.x + Input.GetAxis("Horizontal") * this.speed * Time.deltaTime));
+        return Math.Min(8.28f, Math.Max(-8.25f, transform.position.x + Input.GetAxis("Horizontal") * GameManager.ShipHorizontalSpeed * Time.deltaTime));
     }
 }
