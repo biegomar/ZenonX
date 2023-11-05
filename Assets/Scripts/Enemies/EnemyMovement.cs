@@ -1,18 +1,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts.Enemies.MovementStrategies;
 using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
-{
-    private const int sinusMultiplier = 2;
-    private double activeSinus;
-    private float initialX;    
+{    
+    private IMovementStrategy activeMovementStrategy;
 
     void Start()
-    {
-        this.activeSinus = 0d;
-        this.initialX = transform.position.x;
+    {        
+        this.activeMovementStrategy = new SinusMovement(transform.position);
     }
 
     void Update()
@@ -70,27 +68,11 @@ public class EnemyMovement : MonoBehaviour
 
     private float CalculateNewXPosition()
     {
-        if (transform.position.y < 5) 
-        {
-            var result = this.initialX + (float)Math.Sin(activeSinus) * GameManager.EnemySinusAmplitude;
-
-            if (activeSinus < Math.PI * sinusMultiplier)
-            {
-                activeSinus += GameManager.EnemySinusStep;
-            }
-            else
-            {
-                activeSinus = 0d;
-            }
-
-            return result;
-        }
-
-        return transform.position.x;        
+        return this.activeMovementStrategy.CalculateNewXPosition(gameObject);        
     }
 
     private float CalculateNewYPosition()
     {        
-        return transform.position.y - GameManager.EnemyYStep * GameManager.EnemyYSpeed;
+        return this.activeMovementStrategy.CalculateNewYPosition(gameObject);
     }
 }

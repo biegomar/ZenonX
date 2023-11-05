@@ -10,6 +10,7 @@ TagManager:
   - Enemy
   - PlayerLaser
   - Border
+  - SpaceShip
   layers:
   - Default
   - TransparentFX

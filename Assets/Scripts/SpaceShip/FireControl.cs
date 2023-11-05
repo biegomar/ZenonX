@@ -12,8 +12,7 @@ public class FireControl : MonoBehaviour
     private float LaserInterval;
 
     public void Start()
-    {
-        this.ActualLaserFrequence = GameManager.Level1LaserFrequence;
+    {        
         this.ActualLaserPower = GameManager.MaxShipLaserPower;
         this.LaserInterval = 0;
 
@@ -22,6 +21,7 @@ public class FireControl : MonoBehaviour
 
     public void Update()
     {
+        this.ActualLaserFrequence = GameManager.Level1LaserFrequence;
         this.LaserInterval += Time.deltaTime;
 
         if (this.LaserInterval >= this.ActualLaserFrequence && this.ActualLaserPower > 0 && Input.GetKeyDown(KeyCode.Space))
