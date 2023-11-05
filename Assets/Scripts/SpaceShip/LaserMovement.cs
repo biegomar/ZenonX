@@ -15,18 +15,5 @@ public class LaserMovement : MonoBehaviour
         {            
             Destroy(gameObject);
         }        
-    }
-
-    public void OnTriggerEnter2D(Collider2D collision)
-    {        
-        var collisionObject = collision.gameObject;
-        if (collisionObject.tag == "Enemy")
-        {
-            Destroy(collisionObject);
-            Destroy(gameObject);
-
-            GameManager.Score++;
-            Debug.Log($"Score: {GameManager.Score}");
-        }
-    }
+    }   
 }

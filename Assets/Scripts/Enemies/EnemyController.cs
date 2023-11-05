@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
@@ -9,17 +11,19 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     private GameObject EnemyTemplate;
 
+    [SerializeField]
+    private GameObject LootTemplate;
+
     private float WaveTimer;
     private bool IsFirstWaveReleased;
     private bool IsSecondWaveReleased;
     private bool IsThirdWaveReleased;
 
-    private IDictionary<Guid, GameObject> EnemyWaves;
+    public IDictionary<Guid, IList<GameObject>> EnemyWaves;
 
     public void Start()
     {
-        this.EnemyWaves = new Dictionary<Guid, GameObject>();
-
+        EnemyWaves = new Dictionary<Guid, IList<GameObject>>();
         WaveTimer = 0;
         IsFirstWaveReleased = false;
         IsSecondWaveReleased = false;
@@ -46,36 +50,66 @@ public class EnemyController : MonoBehaviour
         {
             this.SpawnWave(3f, 7f);
             IsThirdWaveReleased=true;
-        }
-    }
+        }        
+    }    
 
     private void SpawnWave(float appearFrom, float appearTo)
     {
         var posX = UnityEngine.Random.Range(appearFrom, appearTo);
 
-        Instantiate(EnemyTemplate, new Vector3(
+        var id = Guid.NewGuid();
+        var gameObjects = new List<GameObject>
+        {
+            Instantiate(EnemyTemplate, new Vector3(
                transform.position.x + posX,
                transform.position.y,
-               transform.position.z), Quaternion.identity);
+               transform.position.z), Quaternion.identity),
 
-        Instantiate(EnemyTemplate, new Vector3(
+
+            Instantiate(EnemyTemplate, new Vector3(
                transform.position.x + posX,
                transform.position.y + GameManager.EnemyDistance,
-               transform.position.z), Quaternion.identity);
+               transform.position.z), Quaternion.identity),
 
-        Instantiate(EnemyTemplate, new Vector3(
+            Instantiate(EnemyTemplate, new Vector3(
                transform.position.x + posX,
                transform.position.y + GameManager.EnemyDistance * 2,
-               transform.position.z), Quaternion.identity);
+               transform.position.z), Quaternion.identity),
 
-        Instantiate(EnemyTemplate, new Vector3(
+            Instantiate(EnemyTemplate, new Vector3(
                transform.position.x + posX,
                transform.position.y + GameManager.EnemyDistance * 3,
-               transform.position.z), Quaternion.identity);
+               transform.position.z), Quaternion.identity),
 
-        Instantiate(EnemyTemplate, new Vector3(
+            Instantiate(EnemyTemplate, new Vector3(
                transform.position.x + posX,
                transform.position.y + GameManager.EnemyDistance * 4,
-               transform.position.z), Quaternion.identity);        
+               transform.position.z), Quaternion.identity)
+        };
+
+        this.EnemyWaves.Add(id, gameObjects);
     }
+
+    public void SpawnLoot(Vector3 lastPosition)
+    {
+        var deadWaves = new List<Guid>();
+        foreach (var wave in EnemyWaves)
+        {                        
+            if (!wave.Value.Any())
+            {
+                deadWaves.Add(wave.Key);
+                Instantiate(LootTemplate, lastPosition, Quaternion.identity);
+            }
+        }
+
+        this.RemoveDeadWaveFromDictionary(deadWaves);
+    }
+
+    private void RemoveDeadWaveFromDictionary(IEnumerable<Guid> deadWaves)
+    {
+        foreach (var wave in deadWaves)
+        {
+            this.EnemyWaves.Remove(wave);
+        }
+    }    
 }

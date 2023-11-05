@@ -23,6 +23,51 @@ public class EnemyMovement : MonoBehaviour
                transform.position.z);
     }
 
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        var collisionObject = collision.gameObject;
+        if (collisionObject.tag == "PlayerLaser")
+        {
+            Destroy(collisionObject);
+
+            GameObject go = GameObject.Find("Enemies");
+            if (go != null) 
+            {
+                var enemyController = go.GetComponent<EnemyController>();
+                if (enemyController != null)
+                {
+                    RemoveEnemyFromWave(enemyController.EnemyWaves);
+
+                    var lastPosition = transform.position;
+                    Destroy(gameObject);
+
+                    enemyController.SpawnLoot(lastPosition);
+
+                    GameManager.Score++;
+                }
+                else
+                {
+                    Debug.Log("go.GetComponent<EnemyController>() is null");
+                }
+            }
+            else
+            {
+                Debug.Log("GameObject.Find(Enemies) is null");
+            }            
+        }
+    }
+
+    private void RemoveEnemyFromWave(IDictionary<Guid, IList<GameObject>> EnemyWaves)
+    {
+        foreach (var wave in EnemyWaves)
+        {
+            if (wave.Value.Contains(gameObject))
+            {
+                wave.Value.Remove(gameObject);
+            }
+        }
+    }
+
     private float CalculateNewXPosition()
     {
         if (transform.position.y < 5) 

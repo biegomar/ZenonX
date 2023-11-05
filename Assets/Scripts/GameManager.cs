@@ -1,3 +1,7 @@
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+
 public static class GameManager
 {
     //Player
@@ -7,7 +11,7 @@ public static class GameManager
     public static uint MaxShipLaserPower = 50;
     public static float LaserPowerRegainInterval = 1f;
 
-    //Enemies
+    //Enemies    
     public static float EnemySinusStep = 0.01f;
     public static float EnemySinusAmplitude = 0.25f;
     public static float EnemyYStep = 0.03f;
