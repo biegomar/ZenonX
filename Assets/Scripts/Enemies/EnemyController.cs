@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
@@ -12,8 +14,12 @@ public class EnemyController : MonoBehaviour
     private bool IsSecondWaveReleased;
     private bool IsThirdWaveReleased;
 
+    private IDictionary<Guid, GameObject> EnemyWaves;
+
     public void Start()
     {
+        this.EnemyWaves = new Dictionary<Guid, GameObject>();
+
         WaveTimer = 0;
         IsFirstWaveReleased = false;
         IsSecondWaveReleased = false;
@@ -26,26 +32,26 @@ public class EnemyController : MonoBehaviour
 
         if (!IsFirstWaveReleased && WaveTimer > 1f && WaveTimer < 1.1f) 
         {
-            this.SpawnWave();
+            this.SpawnWave(-7f, -2f);
             IsFirstWaveReleased=true;
         }
 
         if (!IsSecondWaveReleased && WaveTimer > 2f && WaveTimer < 2.1f)
         {
-            this.SpawnWave();
+            this.SpawnWave(-2f, 3f);
             IsSecondWaveReleased=true;
         }
 
         if (!IsThirdWaveReleased && WaveTimer > 3f && WaveTimer < 3.1f)
         {
-            this.SpawnWave();
+            this.SpawnWave(3f, 7f);
             IsThirdWaveReleased=true;
         }
     }
 
-    private void SpawnWave()
+    private void SpawnWave(float appearFrom, float appearTo)
     {
-        var posX = Random.Range(-7f, 7f);
+        var posX = UnityEngine.Random.Range(appearFrom, appearTo);
 
         Instantiate(EnemyTemplate, new Vector3(
                transform.position.x + posX,
