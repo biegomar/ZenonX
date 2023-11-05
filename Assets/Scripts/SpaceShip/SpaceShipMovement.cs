@@ -34,6 +34,16 @@ public class SpaceShipMovement : MonoBehaviour
         BoostShip();
     }
 
+    public void OnTriggerEnter2D(Collider2D collision)
+    {        
+        var collisionObject = collision.gameObject;
+        if (collisionObject.tag == "Border")
+        {            
+            this.Rigidbody.velocity = Vector2.zero;
+            this.Rigidbody.isKinematic = true;
+        }
+    }
+
     private void ShowRelevantShipSprite()
     {
         if (Input.GetAxis("Horizontal") > 0)
@@ -65,6 +75,7 @@ public class SpaceShipMovement : MonoBehaviour
 
         if (!this.isShipBoosted & (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)))
         {
+            this.Rigidbody.isKinematic = false;
             this.Rigidbody.AddForce(Vector2.up * GameManager.ShipBoosterVelocity, ForceMode2D.Impulse);
             this.isShipBoosted = true;
         }            

@@ -9,6 +9,7 @@ TagManager:
   - Unmoved
   - Enemy
   - PlayerLaser
+  - Border
   layers:
   - Default
   - TransparentFX
