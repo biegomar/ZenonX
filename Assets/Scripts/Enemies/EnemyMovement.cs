@@ -5,25 +5,33 @@ using Assets.Scripts.Enemies.MovementStrategies;
 using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
-{    
+{
+    private Vector2 startPosition;
     private IMovementStrategy activeMovementStrategy;
 
     void Start()
-    {        
-        this.activeMovementStrategy = new SinusMovement(transform.position);
+    {     
+        this.startPosition = transform.position;
+        this.activeMovementStrategy = new SinusMovement(this.startPosition);
     }
 
     void Update()
-    {
+    {               
         transform.position = new Vector3(
                CalculateNewXPosition(),
                CalculateNewYPosition(),
                transform.position.z);
+
+        if (transform.position.y >= this.startPosition.y)
+        {
+            this.startPosition = transform.position;
+            this.activeMovementStrategy = new SinusMovement(this.startPosition);
+        }
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        var collisionObject = collision.gameObject;
+        var collisionObject = collision.gameObject;        
         if (collisionObject.tag == "PlayerLaser")
         {
             Destroy(collisionObject);
@@ -52,6 +60,11 @@ public class EnemyMovement : MonoBehaviour
             {
                 Debug.Log("GameObject.Find(Enemies) is null");
             }            
+        }
+
+        if (collisionObject.tag == "Border") 
+        {            
+            this.activeMovementStrategy = new DirectMovement(startPosition);
         }
     }
 
