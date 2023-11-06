@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using Assets.Scripts.Enemies;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -11,19 +12,20 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     private GameObject EnemyTemplate;
 
-    [SerializeField]
+    [SerializeField]   
     private GameObject LootTemplate;
 
+    
     private float WaveTimer;
     private bool IsFirstWaveReleased;
     private bool IsSecondWaveReleased;
     private bool IsThirdWaveReleased;
 
-    public IDictionary<Guid, IList<GameObject>> EnemyWaves;
+    public IDictionary<Guid, IList<EnemyFlightFormationItem>> EnemyWaves;
 
     public void Start()
     {
-        EnemyWaves = new Dictionary<Guid, IList<GameObject>>();
+        EnemyWaves = new Dictionary<Guid, IList<EnemyFlightFormationItem>>();
         WaveTimer = 0;
         IsFirstWaveReleased = false;
         IsSecondWaveReleased = false;
@@ -58,33 +60,68 @@ public class EnemyController : MonoBehaviour
         var posX = UnityEngine.Random.Range(appearFrom, appearTo);
 
         var id = Guid.NewGuid();
-        var gameObjects = new List<GameObject>
+        var gameObjects = new List<EnemyFlightFormationItem>
         {
-            Instantiate(EnemyTemplate, new Vector3(
+            new EnemyFlightFormationItem
+            {
+                WaveId = id,
+                Enemy = Instantiate(EnemyTemplate, new Vector3(
                transform.position.x + posX,
                transform.position.y,
                transform.position.z), Quaternion.identity),
-
-
-            Instantiate(EnemyTemplate, new Vector3(
+                StartPosition = new Vector3(
+               transform.position.x + posX,
+               transform.position.y,
+               transform.position.z)
+            },
+            new EnemyFlightFormationItem
+            {
+                WaveId = id,
+                Enemy = Instantiate(EnemyTemplate, new Vector3(
                transform.position.x + posX,
                transform.position.y + GameManager.EnemyDistance,
                transform.position.z), Quaternion.identity),
-
-            Instantiate(EnemyTemplate, new Vector3(
+                StartPosition = new Vector3(
+               transform.position.x + posX,
+               transform.position.y + GameManager.EnemyDistance,
+               transform.position.z)
+            },
+            new EnemyFlightFormationItem
+            {
+                WaveId = id,
+                Enemy = Instantiate(EnemyTemplate, new Vector3(
                transform.position.x + posX,
                transform.position.y + GameManager.EnemyDistance * 2,
                transform.position.z), Quaternion.identity),
-
-            Instantiate(EnemyTemplate, new Vector3(
+                StartPosition = new Vector3(
+               transform.position.x + posX,
+               transform.position.y + GameManager.EnemyDistance * 2,
+               transform.position.z)
+            },
+            new EnemyFlightFormationItem
+            {
+                WaveId = id,
+                Enemy = Instantiate(EnemyTemplate, new Vector3(
                transform.position.x + posX,
                transform.position.y + GameManager.EnemyDistance * 3,
                transform.position.z), Quaternion.identity),
-
-            Instantiate(EnemyTemplate, new Vector3(
+                StartPosition = new Vector3(
+               transform.position.x + posX,
+               transform.position.y + GameManager.EnemyDistance * 3,
+               transform.position.z)
+            },
+            new EnemyFlightFormationItem
+            {
+                WaveId = id,
+                Enemy = Instantiate(EnemyTemplate, new Vector3(
                transform.position.x + posX,
                transform.position.y + GameManager.EnemyDistance * 4,
-               transform.position.z), Quaternion.identity)
+               transform.position.z), Quaternion.identity),
+                StartPosition = new Vector3(
+               transform.position.x + posX,
+               transform.position.y + GameManager.EnemyDistance * 4,
+               transform.position.z)
+            }
         };
 
         this.EnemyWaves.Add(id, gameObjects);

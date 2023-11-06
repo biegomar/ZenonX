@@ -9,10 +9,14 @@ namespace Assets.Scripts.Enemies.MovementStrategies
 {
     internal class DirectMovement : IMovementStrategy
     {
-        private Vector2 targetPosition;            
+        private Vector2 startPosition;
+        private Vector2 targetPosition;
+        private float duration = 7f;
+        private float elapsedTime;
 
-        public DirectMovement(Vector2 initialPosition, int count = 1)
+        public DirectMovement(Vector2 initialPosition, GameObject gameObject, int count = 1)
         {
+            this.startPosition = gameObject.transform.position;
             DefineTargetPosition(initialPosition, count);            
         }
 
@@ -27,19 +31,21 @@ namespace Assets.Scripts.Enemies.MovementStrategies
                 _ => initialPosition.x,
             };
 
-            this.targetPosition = new Vector2(newX, initialPosition.y + 0.01f);            
+            this.targetPosition = new Vector2(newX, initialPosition.y);            
         }
 
         public float CalculateNewXPosition(GameObject gameObject)
         {
-            var vec = Vector2.Lerp(gameObject.transform.position, this.targetPosition, GameManager.EnemyYSpeed * Time.deltaTime);
+            this.elapsedTime += Time.deltaTime;
+
+            var vec = Vector2.Lerp(this.startPosition, this.targetPosition, this.elapsedTime / this.duration);
 
             return vec.x;
         }
 
         public float CalculateNewYPosition(GameObject gameObject)
         {
-            var vec = Vector2.Lerp(gameObject.transform.position, this.targetPosition, GameManager.EnemyYSpeed * Time.deltaTime);
+            var vec = Vector2.Lerp(this.startPosition, this.targetPosition, this.elapsedTime / this.duration);
 
             return vec.y;
         }

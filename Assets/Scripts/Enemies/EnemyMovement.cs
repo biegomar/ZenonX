@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Assets.Scripts.Enemies;
 using Assets.Scripts.Enemies.MovementStrategies;
 using UnityEngine;
 
@@ -22,11 +24,7 @@ public class EnemyMovement : MonoBehaviour
                CalculateNewYPosition(),
                transform.position.z);
 
-        if (transform.position.y >= this.startPosition.y)
-        {
-            this.startPosition = transform.position;
-            this.activeMovementStrategy = new SinusMovement(this.startPosition);
-        }
+        TryToSwitchToSinusMovement();
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
@@ -64,19 +62,47 @@ public class EnemyMovement : MonoBehaviour
 
         if (collisionObject.tag == "Border") 
         {            
-            this.activeMovementStrategy = new DirectMovement(startPosition);
+            this.activeMovementStrategy = new DirectMovement(startPosition, gameObject);
         }
     }
 
-    private void RemoveEnemyFromWave(IDictionary<Guid, IList<GameObject>> EnemyWaves)
+    private void RemoveEnemyFromWave(IDictionary<Guid, IList<EnemyFlightFormationItem>> EnemyWaves)
     {
         foreach (var wave in EnemyWaves)
         {
-            if (wave.Value.Contains(gameObject))
+            var enemyFlightFormationItem = wave.Value.Where(item => item.Enemy == gameObject).FirstOrDefault();
+            if (enemyFlightFormationItem != null)
             {
-                wave.Value.Remove(gameObject);
+                wave.Value.Remove(enemyFlightFormationItem);
+            }                                   
+        }
+    }
+
+    private void TryToSwitchToSinusMovement()
+    {
+        GameObject go = GameObject.Find("Enemies");
+        if (go != null)
+        {
+            var enemyController = go.GetComponent<EnemyController>();
+            if (enemyController != null)
+            {
+                var waveId = enemyController.EnemyWaves.Values.SelectMany(x => x).Where(x => x.Enemy == gameObject).Select(x => x.WaveId).SingleOrDefault();
+
+                if (waveId != null && !enemyController.EnemyWaves[waveId].Where(x => x.StartPosition.y != x.Enemy.transform.position.y).Any())
+                {
+                    this.startPosition = transform.position;
+                    this.activeMovementStrategy = new SinusMovement(this.startPosition);
+                }
+            }
+            else
+            {
+                Debug.Log("go.GetComponent<EnemyController>() is null");
             }
         }
+        else
+        {
+            Debug.Log("GameObject.Find(Enemies) is null");
+        }               
     }
 
     private float CalculateNewXPosition()
