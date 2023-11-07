@@ -8,6 +8,7 @@ public static class GameManager
     public static float ShipHorizontalSpeed = 7f;
     public static float ShipBoosterVelocity = 5f;
     public static float ShipLaserSpeed = 5f;
+    public static uint ShipLaserHitPoints = 1;
     public static uint MaxShipLaserPower = 50;
     public static float LaserPowerRegainInterval = 1f;
 
