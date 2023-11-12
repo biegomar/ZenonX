@@ -65,6 +65,7 @@ public class EnemyController : MonoBehaviour
             new EnemyFlightFormationItem
             {
                 WaveId = id,
+                Health = 2,
                 Enemy = Instantiate(EnemyTemplate, new Vector3(
                transform.position.x + posX,
                transform.position.y,
@@ -77,6 +78,7 @@ public class EnemyController : MonoBehaviour
             new EnemyFlightFormationItem
             {
                 WaveId = id,
+                Health = 2,
                 Enemy = Instantiate(EnemyTemplate, new Vector3(
                transform.position.x + posX,
                transform.position.y + GameManager.Instance.EnemyDistance,
@@ -89,6 +91,7 @@ public class EnemyController : MonoBehaviour
             new EnemyFlightFormationItem
             {
                 WaveId = id,
+                Health = 2,
                 Enemy = Instantiate(EnemyTemplate, new Vector3(
                transform.position.x + posX,
                transform.position.y + GameManager.Instance.EnemyDistance * 2,
@@ -101,6 +104,7 @@ public class EnemyController : MonoBehaviour
             new EnemyFlightFormationItem
             {
                 WaveId = id,
+                Health = 2,
                 Enemy = Instantiate(EnemyTemplate, new Vector3(
                transform.position.x + posX,
                transform.position.y + GameManager.Instance.EnemyDistance * 3,
@@ -113,6 +117,7 @@ public class EnemyController : MonoBehaviour
             new EnemyFlightFormationItem
             {
                 WaveId = id,
+                Health = 2,
                 Enemy = Instantiate(EnemyTemplate, new Vector3(
                transform.position.x + posX,
                transform.position.y + GameManager.Instance.EnemyDistance * 4,

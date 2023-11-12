@@ -7,8 +7,10 @@ using UnityEngine;
 
 namespace Assets.Scripts.Enemies
 {
-    public class EnemyFlightFormationItem : EnemyItem
+    public class EnemyItem
     {
-        public Guid WaveId { get; set; }        
+        public GameObject Enemy { get; set; }
+        public Vector3 StartPosition { get; set; }
+        public int Health { get; set; }
     }
 }
