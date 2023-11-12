@@ -31,23 +31,32 @@ public class EnemyMovement : MonoBehaviour
     {
         var collisionObject = collision.gameObject;        
         if (collisionObject.tag == "PlayerLaser")
-        {
-            Destroy(collisionObject);
-
+        {            
             GameObject go = GameObject.Find("Enemies");
             if (go != null) 
             {
                 var enemyController = go.GetComponent<EnemyController>();
                 if (enemyController != null)
                 {
-                    RemoveEnemyFromWave(enemyController.EnemyWaves);
+                    var enemyItem = enemyController.Enemies[gameObject.GetInstanceID()];
+                    if (enemyItem != null)
+                    {
+                        enemyItem.Health = enemyItem.Health - 1;
+                        if (enemyItem.Health <= 0)
+                        {
+                            RemoveEnemyFromWave(enemyController.EnemyWaves);
 
-                    var lastPosition = transform.position;
-                    Destroy(gameObject);
+                            var lastPosition = transform.position;
+                            
+                            Destroy(gameObject);
 
-                    enemyController.SpawnLoot(lastPosition);
+                            enemyController.SpawnLoot(lastPosition);
 
-                    GameManager.Instance.Score++;
+                            GameManager.Instance.Score++;
+                        }                        
+                    }
+
+                    Destroy(collisionObject);
                 }
                 else
                 {
