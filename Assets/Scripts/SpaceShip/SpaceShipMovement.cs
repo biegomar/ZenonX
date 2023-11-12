@@ -76,7 +76,7 @@ public class SpaceShipMovement : MonoBehaviour
         if (!this.isShipBoosted & (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)))
         {
             this.Rigidbody.isKinematic = false;
-            this.Rigidbody.AddForce(Vector2.up * GameManager.ShipBoosterVelocity, ForceMode2D.Impulse);
+            this.Rigidbody.AddForce(Vector2.up * GameManager.Instance.ShipBoosterVelocity, ForceMode2D.Impulse);
             this.isShipBoosted = true;
         }            
     }
@@ -92,6 +92,6 @@ public class SpaceShipMovement : MonoBehaviour
     private float CalculateNewXPosition()
     {
         //return transform.position.x + Input.GetAxis("Horizontal") * this.speed * Time.deltaTime;
-        return Math.Min(8.28f, Math.Max(-8.25f, transform.position.x + Input.GetAxis("Horizontal") * GameManager.ShipHorizontalSpeed * Time.deltaTime));
+        return Math.Min(8.28f, Math.Max(-8.25f, transform.position.x + Input.GetAxis("Horizontal") * GameManager.Instance.ShipHorizontalSpeed * Time.deltaTime));
     }
 }

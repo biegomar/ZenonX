@@ -6,7 +6,7 @@ public class LaserMovement : MonoBehaviour
 {
     public void Start()
     {
-        GetComponent<Rigidbody2D>().velocity = Vector2.up * GameManager.ShipLaserSpeed;    
+        GetComponent<Rigidbody2D>().velocity = Vector2.up * GameManager.Instance.ShipLaserSpeed;    
     }
 
     public void Update()

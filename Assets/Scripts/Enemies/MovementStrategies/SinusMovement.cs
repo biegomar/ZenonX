@@ -23,11 +23,11 @@ namespace Assets.Scripts.Enemies.MovementStrategies
         {
             if (gameObject.transform.position.y < 5)
             {
-                var result = this.initialX + (float)Math.Sin(activeSinus) * GameManager.EnemySinusAmplitude;
+                var result = this.initialX + (float)Math.Sin(activeSinus) * GameManager.Instance.EnemySinusAmplitude;
 
                 if (activeSinus < Math.PI * sinusMultiplier)
                 {
-                    activeSinus += GameManager.EnemySinusStep;
+                    activeSinus += GameManager.Instance.EnemySinusStep;
                 }
                 else
                 {
@@ -42,7 +42,7 @@ namespace Assets.Scripts.Enemies.MovementStrategies
 
         public float CalculateNewYPosition(GameObject gameObject)
         {
-            return gameObject.transform.position.y - GameManager.EnemyYStep * GameManager.EnemyYSpeed;
+            return gameObject.transform.position.y - GameManager.Instance.EnemyYStep * GameManager.Instance.EnemyYSpeed;
         }
     }
 }

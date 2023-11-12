@@ -13,15 +13,15 @@ public class FireControl : MonoBehaviour
 
     public void Start()
     {        
-        this.ActualLaserPower = GameManager.MaxShipLaserPower;
+        this.ActualLaserPower = GameManager.Instance.MaxShipLaserPower;
         this.LaserInterval = 0;
 
-        InvokeRepeating(nameof(GainFirePower), 1f, GameManager.LaserPowerRegainInterval);
+        InvokeRepeating(nameof(GainFirePower), 1f, GameManager.Instance.LaserPowerRegainInterval);
     }
 
     public void Update()
     {
-        this.ActualLaserFrequence = GameManager.Level1LaserFrequence;
+        this.ActualLaserFrequence = GameManager.Instance.Level1LaserFrequence;
         this.LaserInterval += Time.deltaTime;
 
         if (this.LaserInterval >= this.ActualLaserFrequence && this.ActualLaserPower > 0 && Input.GetKeyDown(KeyCode.Space))

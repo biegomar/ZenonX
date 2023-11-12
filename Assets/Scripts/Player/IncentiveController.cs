@@ -11,7 +11,7 @@ public static class IncentiveController
         if (!isFirstIncentive)
         {
             isFirstIncentive = true;
-            GameManager.Level1LaserFrequence = 0.2f;
+            GameManager.Instance.Level1LaserFrequence = 0.2f;
         }
     }
 }

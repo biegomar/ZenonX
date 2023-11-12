@@ -47,7 +47,7 @@ public class EnemyMovement : MonoBehaviour
 
                     enemyController.SpawnLoot(lastPosition);
 
-                    GameManager.Score++;
+                    GameManager.Instance.Score++;
                 }
                 else
                 {

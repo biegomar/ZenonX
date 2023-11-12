@@ -2,26 +2,71 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class GameManager
+public sealed class GameManager
 {
+    private static readonly object lockObject = new object();
+    private static GameManager instance = null;
+
     //Player
-    public static float ShipHorizontalSpeed = 7f;
-    public static float ShipBoosterVelocity = 5f;
-    public static float ShipLaserSpeed = 5f;
-    public static uint ShipLaserHitPoints = 1;
-    public static uint MaxShipLaserPower = 50;
-    public static float LaserPowerRegainInterval = 1f;
+    public float ShipHorizontalSpeed { get; set; }
+    public float ShipBoosterVelocity { get; set; }
+    public float ShipLaserSpeed { get; set; }
+    public uint ShipLaserHitPoints { get; set; }
+    public uint MaxShipLaserPower { get; set; }
+    public float LaserPowerRegainInterval { get; set; }
 
     //Enemies    
-    public static float EnemySinusStep = 0.01f;
-    public static float EnemySinusAmplitude = 0.25f;
-    public static float EnemyYStep = 0.03f;
-    public static float EnemyYSpeed = 0.4f;
-    public static float EnemyDistance = 0.5f;
+    public float EnemySinusStep { get; set; }
+    public float EnemySinusAmplitude { get; set; }
+    public float EnemyYStep { get; set; }
+    public float EnemyYSpeed { get; set; }
+    public float EnemyDistance { get; set; }
 
     //Level 1
-    public static float Level1LaserFrequence = 0.4f;
+    public float Level1LaserFrequence { get; set; }
 
     //Score
-    public static uint Score = 0;
+    public uint Score { get; set; }
+
+    // Privater Konstruktor, um Instanziierung von auﬂen zu verhindern
+    private GameManager()
+    {
+        // Setze Standardwerte
+        ShipHorizontalSpeed = 7f;
+        ShipBoosterVelocity = 5f;
+        ShipLaserSpeed = 5f;
+        ShipLaserHitPoints = 1;
+        MaxShipLaserPower = 50;
+        LaserPowerRegainInterval = 1f;
+
+        EnemySinusStep = 0.01f;
+        EnemySinusAmplitude = 0.25f;
+        EnemyYStep = 0.03f;
+        EnemyYSpeed = 0.4f;
+        EnemyDistance = 0.5f;
+
+        Level1LaserFrequence = 0.4f;
+
+        Score = 0;
+    }
+
+    // ÷ffentliche Methode, um die Instanz abzurufen
+    public static GameManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                lock (lockObject)
+                {
+                    if (instance == null)
+                    {
+                        instance = new GameManager();
+                    }
+                }
+            }
+            return instance;
+        }
+    }
 }
+

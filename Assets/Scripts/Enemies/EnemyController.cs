@@ -79,11 +79,11 @@ public class EnemyController : MonoBehaviour
                 WaveId = id,
                 Enemy = Instantiate(EnemyTemplate, new Vector3(
                transform.position.x + posX,
-               transform.position.y + GameManager.EnemyDistance,
+               transform.position.y + GameManager.Instance.EnemyDistance,
                transform.position.z), Quaternion.identity),
                 StartPosition = new Vector3(
                transform.position.x + posX,
-               transform.position.y + GameManager.EnemyDistance,
+               transform.position.y + GameManager.Instance.EnemyDistance,
                transform.position.z)
             },
             new EnemyFlightFormationItem
@@ -91,11 +91,11 @@ public class EnemyController : MonoBehaviour
                 WaveId = id,
                 Enemy = Instantiate(EnemyTemplate, new Vector3(
                transform.position.x + posX,
-               transform.position.y + GameManager.EnemyDistance * 2,
+               transform.position.y + GameManager.Instance.EnemyDistance * 2,
                transform.position.z), Quaternion.identity),
                 StartPosition = new Vector3(
                transform.position.x + posX,
-               transform.position.y + GameManager.EnemyDistance * 2,
+               transform.position.y + GameManager.Instance.EnemyDistance * 2,
                transform.position.z)
             },
             new EnemyFlightFormationItem
@@ -103,11 +103,11 @@ public class EnemyController : MonoBehaviour
                 WaveId = id,
                 Enemy = Instantiate(EnemyTemplate, new Vector3(
                transform.position.x + posX,
-               transform.position.y + GameManager.EnemyDistance * 3,
+               transform.position.y + GameManager.Instance.EnemyDistance * 3,
                transform.position.z), Quaternion.identity),
                 StartPosition = new Vector3(
                transform.position.x + posX,
-               transform.position.y + GameManager.EnemyDistance * 3,
+               transform.position.y + GameManager.Instance.EnemyDistance * 3,
                transform.position.z)
             },
             new EnemyFlightFormationItem
@@ -115,11 +115,11 @@ public class EnemyController : MonoBehaviour
                 WaveId = id,
                 Enemy = Instantiate(EnemyTemplate, new Vector3(
                transform.position.x + posX,
-               transform.position.y + GameManager.EnemyDistance * 4,
+               transform.position.y + GameManager.Instance.EnemyDistance * 4,
                transform.position.z), Quaternion.identity),
                 StartPosition = new Vector3(
                transform.position.x + posX,
-               transform.position.y + GameManager.EnemyDistance * 4,
+               transform.position.y + GameManager.Instance.EnemyDistance * 4,
                transform.position.z)
             }
         };

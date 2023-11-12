@@ -7,7 +7,7 @@ public class LootMovement : MonoBehaviour
     void Start()
     {
         var Rigidbody = GetComponent<Rigidbody2D>();
-        Rigidbody.AddForce(new Vector2(0.3f, 1f) * GameManager.ShipBoosterVelocity, ForceMode2D.Impulse);
+        Rigidbody.AddForce(new Vector2(0.3f, 1f) * GameManager.Instance.ShipBoosterVelocity, ForceMode2D.Impulse);
     }
 
     public void Update()
