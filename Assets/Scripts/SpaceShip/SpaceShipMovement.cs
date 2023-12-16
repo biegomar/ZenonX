@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class SpaceShipMovement : MonoBehaviour
 {
@@ -11,9 +12,32 @@ public class SpaceShipMovement : MonoBehaviour
     private GameObject shipRight;
     private GameObject shipLeft;
 
+    //new input system
+    private GameInput gameInput;
+    private InputAction move;
+    private InputAction boost;
+
     private Rigidbody2D Rigidbody;
 
-    private bool isShipBoosted;    
+    private bool isShipBoosted;
+
+
+    private void OnEnable()
+    {
+        this.gameInput = new GameInput();
+        this.move = this.gameInput.Player.Move;
+        this.boost = this.gameInput.Player.Boost;
+
+        this.move.Enable();
+        this.boost.Enable();
+    }
+
+    private void OnDisable()
+    {
+        this.move.Disable();
+        this.boost.Disable();
+    }
+
 
     // Start is called before the first frame update
     void Start()
@@ -46,19 +70,19 @@ public class SpaceShipMovement : MonoBehaviour
 
     private void ShowRelevantShipSprite()
     {
-        if (Input.GetAxis("Horizontal") > 0)
+        if (this.move.ReadValue<Vector2>().x > 0)
         {
             this.shipRight.SetActive(true);
             this.shipLeft.SetActive(false);
             this.ship.SetActive(false);
         }
-        else if (Input.GetAxis("Horizontal") < 0)
+        else if (this.move.ReadValue<Vector2>().x < 0)
         {
             this.shipLeft.SetActive(true);
             this.shipRight.SetActive(false);
             this.ship.SetActive(false);
         }
-        else if (Input.GetAxis("Horizontal") == 0)
+        else if (this.move.ReadValue<Vector2>().x == 0)
         {
             this.ship.SetActive(true);
             this.shipLeft.SetActive(false);
@@ -73,7 +97,7 @@ public class SpaceShipMovement : MonoBehaviour
             this.isShipBoosted = false;
         }        
 
-        if (!this.isShipBoosted & Input.GetButtonDown("Jump"))
+        if (!this.isShipBoosted & this.boost.triggered)
         {
             this.Rigidbody.isKinematic = false;
             this.Rigidbody.AddForce(Vector2.up * GameManager.Instance.ShipBoosterVelocity, ForceMode2D.Impulse);
@@ -90,8 +114,7 @@ public class SpaceShipMovement : MonoBehaviour
     }
 
     private float CalculateNewXPosition()
-    {
-        //return transform.position.x + Input.GetAxis("Horizontal") * this.speed * Time.deltaTime;
-        return Math.Min(8.28f, Math.Max(-8.25f, transform.position.x + Input.GetAxis("Horizontal") * GameManager.Instance.ShipHorizontalSpeed * Time.deltaTime));
+    {        
+        return Math.Min(8.28f, Math.Max(-8.25f, transform.position.x + this.move.ReadValue<Vector2>().x * GameManager.Instance.ShipHorizontalSpeed * Time.deltaTime));
     }
 }
