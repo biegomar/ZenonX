@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4363780327639663734}
   - component: {fileID: 7873405687848173904}
   - component: {fileID: 5398237204274341501}
-  - component: {fileID: 3208529520636451288}
   - component: {fileID: 7039523771308464599}
   m_Layer: 0
   m_Name: laserGreen
@@ -122,18 +121,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.09, y: 0.33}
   m_Direction: 0
---- !u!114 &3208529520636451288
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 730346492699851099}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3008df2e02542de4297d907b51825c5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &7039523771308464599
 Rigidbody2D:
   serializedVersion: 4
