@@ -13,6 +13,7 @@ public sealed class GameManager
     public float ShipLaserSpeed { get; set; }
     public uint ShipLaserHitPoints { get; set; }
     public uint MaxShipLaserPower { get; set; }
+    public uint ActualLaserPower { get; set; }
     public float LaserPowerRegainInterval { get; set; }
 
     //Enemies    
@@ -37,7 +38,8 @@ public sealed class GameManager
         ShipLaserSpeed = 6.5f;
         ShipLaserHitPoints = 1;
         MaxShipLaserPower = 50;
-        LaserPowerRegainInterval = 1f;
+        ActualLaserPower = MaxShipLaserPower;
+        LaserPowerRegainInterval = 2.5f;
 
         EnemySinusStep = 0.01f;
         EnemySinusAmplitude = 0.25f;

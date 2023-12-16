@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LootMovement : MonoBehaviour
-{    
+{
+    private bool isInCollisionHandling = false;
+
     void Start()
     {
         var Rigidbody = GetComponent<Rigidbody2D>();
@@ -20,11 +22,15 @@ public class LootMovement : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        var collisionObject = collision.gameObject;
-        if (collisionObject.tag == "SpaceShip")
-        {
-            Destroy(gameObject);
-            IncentiveController.GiveIncentive();
-        }
+        if (!isInCollisionHandling)
+        {            
+            var collisionObject = collision.gameObject;
+            if (collisionObject.tag == "SpaceShip")
+            {
+                isInCollisionHandling = true;
+                Destroy(gameObject);
+                IncentiveController.GiveIncentive();
+            }
+        }        
     }
 }

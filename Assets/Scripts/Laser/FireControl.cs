@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,10 +8,10 @@ public class FireControl : MonoBehaviour
 {
     [SerializeField]
     private GameObject Laser;
-
-    private uint ActualLaserPower;
+    
     private float ActualLaserFrequence;
     private float LaserInterval;
+    private float ActualLaserPowerRegainInterval;        
 
     //new input system
     private GameInput gameInput;
@@ -30,36 +31,57 @@ public class FireControl : MonoBehaviour
     }
 
     public void Start()
-    {        
-        this.ActualLaserPower = GameManager.Instance.MaxShipLaserPower;
+    {
         this.LaserInterval = 0;
-
-        InvokeRepeating(nameof(GainFirePower), 1f, GameManager.Instance.LaserPowerRegainInterval);
+        this.ActualLaserPowerRegainInterval = 0;               
     }
 
     public void Update()
     {
         this.ActualLaserFrequence = GameManager.Instance.Level1LaserFrequence;
         this.LaserInterval += Time.deltaTime;
+        this.ActualLaserPowerRegainInterval += Time.deltaTime;
 
-        if (this.LaserInterval >= this.ActualLaserFrequence && this.ActualLaserPower > 0 && this.IsFirePressed())
+        this.FeuerFrei();
+        this.GainFirePower();               
+    }
+
+    private void FeuerFrei()
+    {
+        if (this.LaserInterval >= this.ActualLaserFrequence && GameManager.Instance.ActualLaserPower > 0 && this.IsFirePressed())
         {
             Instantiate(Laser, new Vector3(
                transform.position.x,
                transform.position.y + 0.3f,
                transform.position.z), Quaternion.identity);
 
-            this.ActualLaserPower--;
+            GameManager.Instance.ActualLaserPower--;
             this.LaserInterval = 0;
-        }        
+        }
     }
 
     private void GainFirePower()
     {
-        if (this.ActualLaserPower < 100)
+        if (this.ActualLaserPowerRegainInterval >= GetLaserPowerRegainIntervalHalfLife())
         {
-            this.ActualLaserPower++;
-        }               
+            if (GameManager.Instance.ActualLaserPower < GameManager.Instance.MaxShipLaserPower)
+            {
+                GameManager.Instance.ActualLaserPower++;
+                this.ActualLaserPowerRegainInterval = 0;
+            }
+        }                  
+    }
+
+    private float GetLaserPowerRegainIntervalHalfLife()
+    {
+        var percentage = ((float)GameManager.Instance.ActualLaserPower / GameManager.Instance.MaxShipLaserPower);
+        return percentage switch
+        {
+            >= .5f => GameManager.Instance.LaserPowerRegainInterval,
+            >= .25f and < .5f => GameManager.Instance.LaserPowerRegainInterval / 2,
+            >= .1f and < .25f => GameManager.Instance.LaserPowerRegainInterval / 3,
+            < .1f => GameManager.Instance.LaserPowerRegainInterval / 4
+        };
     }
 
     private bool IsFirePressed()

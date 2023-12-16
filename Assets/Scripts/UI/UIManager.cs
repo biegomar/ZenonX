@@ -8,9 +8,13 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField]
     private TextMeshProUGUI ScoreText;
-    
+
+    [SerializeField]
+    private TextMeshProUGUI LaserPower;
+
     void Update()
     {
         ScoreText.text = $"Score: {GameManager.Instance.Score}";
+        LaserPower.text = $"Laserpower: {GameManager.Instance.ActualLaserPower}/{GameManager.Instance.MaxShipLaserPower}";
     }
 }
