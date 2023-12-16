@@ -71,9 +71,9 @@ public class SpaceShipMovement : MonoBehaviour
         if (this.Rigidbody.velocity.y == 0)
         {
             this.isShipBoosted = false;
-        }
+        }        
 
-        if (!this.isShipBoosted & (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)))
+        if (!this.isShipBoosted & Input.GetButtonDown("Jump"))
         {
             this.Rigidbody.isKinematic = false;
             this.Rigidbody.AddForce(Vector2.up * GameManager.Instance.ShipBoosterVelocity, ForceMode2D.Impulse);

@@ -24,7 +24,7 @@ public class FireControl : MonoBehaviour
         this.ActualLaserFrequence = GameManager.Instance.Level1LaserFrequence;
         this.LaserInterval += Time.deltaTime;
 
-        if (this.LaserInterval >= this.ActualLaserFrequence && this.ActualLaserPower > 0 && Input.GetKeyDown(KeyCode.Space))
+        if (this.LaserInterval >= this.ActualLaserFrequence && this.ActualLaserPower > 0 && this.IsFirePressed())
         {
             Instantiate(Laser, new Vector3(
                transform.position.x,
@@ -42,5 +42,10 @@ public class FireControl : MonoBehaviour
         {
             this.ActualLaserPower++;
         }               
+    }
+
+    private bool IsFirePressed()
+    {
+        return Input.GetButtonDown("Fire1") || Input.GetButtonDown("Fire2") || Input.GetButtonDown("Fire3");
     }
 }
