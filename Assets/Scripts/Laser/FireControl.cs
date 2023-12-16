@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class FireControl : MonoBehaviour
 {
@@ -10,6 +11,23 @@ public class FireControl : MonoBehaviour
     private uint ActualLaserPower;
     private float ActualLaserFrequence;
     private float LaserInterval;
+
+    //new input system
+    private GameInput gameInput;
+    private InputAction fire;    
+
+    private void OnEnable()
+    {
+        this.gameInput = new GameInput();
+        this.fire = this.gameInput.Player.Fire;        
+
+        this.fire.Enable();        
+    }
+
+    private void OnDisable()
+    {
+        this.fire.Disable();        
+    }
 
     public void Start()
     {        
@@ -46,6 +64,6 @@ public class FireControl : MonoBehaviour
 
     private bool IsFirePressed()
     {
-        return Input.GetButtonDown("Fire1") || Input.GetButtonDown("Fire2") || Input.GetButtonDown("Fire3");
+        return this.fire.triggered;
     }
 }

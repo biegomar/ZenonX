@@ -34,7 +34,7 @@ public sealed class GameManager
         // Setze Standardwerte
         ShipHorizontalSpeed = 7f;
         ShipBoosterVelocity = 5f;
-        ShipLaserSpeed = 5f;
+        ShipLaserSpeed = 6.5f;
         ShipLaserHitPoints = 1;
         MaxShipLaserPower = 50;
         LaserPowerRegainInterval = 1f;
