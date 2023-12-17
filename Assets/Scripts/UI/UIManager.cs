@@ -15,6 +15,6 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         ScoreText.text = $"Score: {GameManager.Instance.Score}";
-        LaserPower.text = $"Laserpower: {GameManager.Instance.ActualLaserPower}/{GameManager.Instance.MaxShipLaserPower}";
+        //LaserPower.text = $"Laserpower: {GameManager.Instance.ActualLaserPower}/{GameManager.Instance.MaxShipLaserPower}";
     }
 }
