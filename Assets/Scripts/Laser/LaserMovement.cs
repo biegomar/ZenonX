@@ -11,9 +11,12 @@ public class LaserMovement : MonoBehaviour
 
     public void Update()
     {
-        if (transform.position.y > 6)
+        if (GameManager.Instance.IsGameRunning)
         {
-            Destroy(gameObject);
-        }
+            if (transform.position.y > 6)
+            {
+                Destroy(gameObject);
+            }
+        }        
     }
 }

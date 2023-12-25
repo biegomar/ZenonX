@@ -53,9 +53,13 @@ public class SpaceShipMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ShowRelevantShipSprite();
-        MoveHorizontal();
-        BoostShip();
+        // use delta time for game pause here.        
+        if (GameManager.Instance.IsGameRunning && Time.deltaTime > 0f)
+        {
+            ShowRelevantShipSprite();
+            MoveHorizontal();
+            BoostShip();
+        }      
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
@@ -70,24 +74,27 @@ public class SpaceShipMovement : MonoBehaviour
 
     private void ShowRelevantShipSprite()
     {
-        if (this.move.ReadValue<Vector2>().x > 0)
+        
         {
-            this.shipRight.SetActive(true);
-            this.shipLeft.SetActive(false);
-            this.ship.SetActive(false);
-        }
-        else if (this.move.ReadValue<Vector2>().x < 0)
-        {
-            this.shipLeft.SetActive(true);
-            this.shipRight.SetActive(false);
-            this.ship.SetActive(false);
-        }
-        else if (this.move.ReadValue<Vector2>().x == 0)
-        {
-            this.ship.SetActive(true);
-            this.shipLeft.SetActive(false);
-            this.shipRight.SetActive(false);
-        }
+            if (this.move.ReadValue<Vector2>().x > 0)
+            {
+                this.shipRight.SetActive(true);
+                this.shipLeft.SetActive(false);
+                this.ship.SetActive(false);
+            }
+            else if (this.move.ReadValue<Vector2>().x < 0)
+            {
+                this.shipLeft.SetActive(true);
+                this.shipRight.SetActive(false);
+                this.ship.SetActive(false);
+            }
+            else if (this.move.ReadValue<Vector2>().x == 0)
+            {
+                this.ship.SetActive(true);
+                this.shipLeft.SetActive(false);
+                this.shipRight.SetActive(false);
+            }
+        }        
     }
 
     private void BoostShip()

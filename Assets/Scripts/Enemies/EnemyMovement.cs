@@ -18,13 +18,17 @@ public class EnemyMovement : MonoBehaviour
     }
 
     void Update()
-    {               
-        transform.position = new Vector3(
-               CalculateNewXPosition(),
-               CalculateNewYPosition(),
-               transform.position.z);
+    {
+        // use delta time for game pause here.
+        if (GameManager.Instance.IsGameRunning && Time.deltaTime > 0f)
+        {
+            transform.position = new Vector3(
+                  CalculateNewXPosition(),
+                  CalculateNewYPosition(),
+                  transform.position.z);
 
-        TryToSwitchToSinusMovement();
+            TryToSwitchToSinusMovement();
+        }        
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
@@ -72,6 +76,12 @@ public class EnemyMovement : MonoBehaviour
         if (collisionObject.tag == "Border") 
         {            
             this.activeMovementStrategy = new DirectMovement(startPosition, gameObject);
+        }
+
+        if (collisionObject.tag == "SpaceShip")
+        {
+            Debug.Log("GameOver!");
+            GameManager.Instance.IsGameRunning = false;
         }
     }
 

@@ -29,6 +29,9 @@ public sealed class GameManager
     //Score
     public uint Score { get; set; }
 
+    //Game states
+    public bool IsGameRunning { get; set; }
+
     // Privater Konstruktor, um Instanziierung von auﬂen zu verhindern
     private GameManager()
     {
@@ -50,6 +53,8 @@ public sealed class GameManager
         Level1LaserFrequence = 0.4f;
 
         Score = 0;
+
+        IsGameRunning = true;
     }
 
     // ÷ffentliche Methode, um die Instanz abzurufen

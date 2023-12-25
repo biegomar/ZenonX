@@ -41,13 +41,17 @@ public class FireControl : MonoBehaviour
 
     public void Update()
     {
-        this.ActualLaserFrequence = GameManager.Instance.Level1LaserFrequence;
-        this.LaserInterval += Time.deltaTime;
-        this.ActualLaserPowerRegainInterval += Time.deltaTime;
+        // use delta time for game pause here.
+        if (GameManager.Instance.IsGameRunning && Time.deltaTime > 0f)
+        {
+            this.ActualLaserFrequence = GameManager.Instance.Level1LaserFrequence;
+            this.LaserInterval += Time.deltaTime;
+            this.ActualLaserPowerRegainInterval += Time.deltaTime;
 
-        this.FeuerFrei();
-        this.GainFirePower();
-        this.healthBarManager.SetHealthValue();
+            this.FeuerFrei();
+            this.GainFirePower();
+            this.healthBarManager.SetHealthValue();
+        }        
     }
 
     private void FeuerFrei()

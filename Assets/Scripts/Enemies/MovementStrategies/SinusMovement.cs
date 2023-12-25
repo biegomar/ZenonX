@@ -42,7 +42,7 @@ namespace Assets.Scripts.Enemies.MovementStrategies
 
         public float CalculateNewYPosition(GameObject gameObject)
         {
-            return gameObject.transform.position.y - GameManager.Instance.EnemyYStep * GameManager.Instance.EnemyYSpeed;
+            return (gameObject.transform.position.y - GameManager.Instance.EnemyYStep * GameManager.Instance.EnemyYSpeed);
         }
     }
 }

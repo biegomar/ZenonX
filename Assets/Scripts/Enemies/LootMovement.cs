@@ -14,10 +14,13 @@ public class LootMovement : MonoBehaviour
 
     public void Update()
     {
-        if (transform.position.y > 30)
+        if (GameManager.Instance.IsGameRunning)
         {
-            Destroy(gameObject);
-        }
+            if (transform.position.y > 30)
+            {
+                Destroy(gameObject);
+            }
+        }        
     }
 
     public void OnTriggerEnter2D(Collider2D collision)

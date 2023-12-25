@@ -14,9 +14,12 @@ public class SkyScroller : MonoBehaviour
     }
 
     void Update()
-    {                
-        var offset = material.mainTextureOffset;
-        offset.y += Time.deltaTime / 20f;
-        material.mainTextureOffset = offset;
+    {     
+        if (GameManager.Instance.IsGameRunning)
+        {
+            var offset = material.mainTextureOffset;
+            offset.y += Time.deltaTime / 20f;
+            material.mainTextureOffset = offset;
+        }        
     }
 }
