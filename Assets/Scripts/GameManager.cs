@@ -39,7 +39,7 @@ public sealed class GameManager
         ShipLaserHitPoints = 1;
         MaxShipLaserPower = 50;
         ActualLaserPower = MaxShipLaserPower;
-        LaserPowerRegainInterval = 2.5f;
+        LaserPowerRegainInterval = 1f;
 
         EnemySinusStep = 0.01f;
         EnemySinusAmplitude = 0.25f;

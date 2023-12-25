@@ -8,14 +8,17 @@ public class FireControl : MonoBehaviour
 {
     [SerializeField]
     private GameObject Laser;
-    
+
+    [SerializeField]
+    private HealthBarManager healthBarManager;
+
     private float ActualLaserFrequence;
     private float LaserInterval;
     private float ActualLaserPowerRegainInterval;        
 
     //new input system
     private GameInput gameInput;
-    private InputAction fire;    
+    private InputAction fire;  
 
     private void OnEnable()
     {
@@ -33,7 +36,7 @@ public class FireControl : MonoBehaviour
     public void Start()
     {
         this.LaserInterval = 0;
-        this.ActualLaserPowerRegainInterval = 0;               
+        this.ActualLaserPowerRegainInterval = 0;            
     }
 
     public void Update()
@@ -43,7 +46,8 @@ public class FireControl : MonoBehaviour
         this.ActualLaserPowerRegainInterval += Time.deltaTime;
 
         this.FeuerFrei();
-        this.GainFirePower();               
+        this.GainFirePower();
+        this.healthBarManager.SetHealthValue();
     }
 
     private void FeuerFrei()
@@ -56,7 +60,7 @@ public class FireControl : MonoBehaviour
                transform.position.z), Quaternion.identity);
 
             GameManager.Instance.ActualLaserPower--;
-            this.LaserInterval = 0;
+            this.LaserInterval = 0;                
         }
     }
 

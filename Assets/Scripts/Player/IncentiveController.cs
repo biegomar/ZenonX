@@ -6,7 +6,7 @@ public static class IncentiveController
 {
     private static bool isFirstIncentive = false;
     private static bool isSecondIncentive = false;
-    private static bool isThirdIncentive = false;
+    private static bool isThirdIncentive = false;    
 
     public static void GiveIncentive()
     {       
@@ -19,7 +19,8 @@ public static class IncentiveController
         {
             isSecondIncentive = true;
             GameManager.Instance.MaxShipLaserPower = 75;
-            GameManager.Instance.ActualLaserPower = GameManager.Instance.MaxShipLaserPower;
+            GameManager.Instance.ActualLaserPower = GameManager.Instance.MaxShipLaserPower;            
+
         }
         else if (isSecondIncentive && !isThirdIncentive)
         {

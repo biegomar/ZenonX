@@ -14,7 +14,7 @@ public class LootMovement : MonoBehaviour
 
     public void Update()
     {
-        if (transform.position.y > 7)
+        if (transform.position.y > 30)
         {
             Destroy(gameObject);
         }
