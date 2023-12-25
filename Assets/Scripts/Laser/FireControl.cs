@@ -10,7 +10,7 @@ public class FireControl : MonoBehaviour
     private GameObject Laser;
 
     [SerializeField]
-    private HealthBarManager healthBarManager;
+    private AmmoBarManager healthBarManager;
 
     private float ActualLaserFrequence;
     private float LaserInterval;
