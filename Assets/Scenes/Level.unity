@@ -269,7 +269,7 @@ GameObject:
   - component: {fileID: 403530095}
   - component: {fileID: 403530097}
   m_Layer: 0
-  m_Name: Space
+  m_Name: Sky
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -516,11 +516,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 682745553}
-  - component: {fileID: 682745552}
   - component: {fileID: 682745554}
-  - component: {fileID: 682745556}
   - component: {fileID: 682745558}
   - component: {fileID: 682745557}
+  - component: {fileID: 682745552}
+  - component: {fileID: 682745556}
   m_Layer: 0
   m_Name: SpaceShip
   m_TagString: SpaceShip
@@ -924,7 +924,7 @@ GameObject:
   - component: {fileID: 1335738938}
   - component: {fileID: 1335738942}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

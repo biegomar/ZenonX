@@ -1,16 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class FireControl : MonoBehaviour
+public class FireController : MonoBehaviour
 {
     [SerializeField]
     private GameObject Laser;
 
     [SerializeField]
-    private AmmoBarManager healthBarManager;
+    private AmmoProgressBarController healthBarManager;
 
     private float ActualLaserFrequence;
     private float LaserInterval;
@@ -88,7 +85,8 @@ public class FireControl : MonoBehaviour
             >= .5f => GameManager.Instance.LaserPowerRegainInterval,
             >= .25f and < .5f => GameManager.Instance.LaserPowerRegainInterval / 2,
             >= .1f and < .25f => GameManager.Instance.LaserPowerRegainInterval / 3,
-            < .1f => GameManager.Instance.LaserPowerRegainInterval / 4
+            < .1f => GameManager.Instance.LaserPowerRegainInterval / 4,
+            _ => throw new System.NotImplementedException()
         };
     }
 

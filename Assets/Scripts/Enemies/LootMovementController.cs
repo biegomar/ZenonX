@@ -1,14 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class LootMovement : MonoBehaviour
+public class LootMovementController : MonoBehaviour
 {
+    [SerializeField]
+    private Rigidbody2D Rigidbody;
+
     private bool isInCollisionHandling = false;
 
     void Start()
-    {
-        var Rigidbody = GetComponent<Rigidbody2D>();
+    {    
         Rigidbody.AddForce(new Vector2(0.3f, 1f) * GameManager.Instance.ShipBoosterVelocity, ForceMode2D.Impulse);
     }
 

@@ -1,12 +1,11 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Assets.Scripts.Enemies;
 using Assets.Scripts.Enemies.MovementStrategies;
 using UnityEngine;
 
-public class EnemyMovement : MonoBehaviour
+public class EnemyMovementController : MonoBehaviour
 {
     private Vector2 startPosition;
     private IMovementStrategy activeMovementStrategy;

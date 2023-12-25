@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class GameOverManager : MonoBehaviour
+public class GameOverManagerController : MonoBehaviour
 {
     [SerializeField]
     private TextMeshProUGUI GameOverText;

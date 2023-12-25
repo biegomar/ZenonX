@@ -1,10 +1,7 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using Assets.Scripts.Enemies;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
@@ -67,92 +64,43 @@ public class EnemyController : MonoBehaviour
         var id = Guid.NewGuid();
         var gameObjects = new List<EnemyFlightFormationItem>();
 
-        var enemyItem = new EnemyFlightFormationItem
-        {
-            WaveId = id,
-            Health = 2,
-            Enemy = Instantiate(EnemyTemplate, new Vector3(
-               transform.position.x + posX,
-               transform.position.y,
-               transform.position.z), Quaternion.identity),
-            StartPosition = new Vector3(
-               transform.position.x + posX,
-               transform.position.y,
-               transform.position.z)
-        };
-
+        EnemyFlightFormationItem enemyItem = CreateNewEnemyItem(id, posX, 0);
         gameObjects.Add(enemyItem);
         this.Enemies.Add(enemyItem.Enemy.GetInstanceID(), enemyItem);
 
-        enemyItem = new EnemyFlightFormationItem
-        {
-            WaveId = id,
-            Health = 2,
-            Enemy = Instantiate(EnemyTemplate, new Vector3(
-               transform.position.x + posX,
-               transform.position.y + GameManager.Instance.EnemyDistance,
-               transform.position.z), Quaternion.identity),
-            StartPosition = new Vector3(
-               transform.position.x + posX,
-               transform.position.y + GameManager.Instance.EnemyDistance,
-               transform.position.z)
-        };
-
+        enemyItem = CreateNewEnemyItem(id, posX, 1);
         gameObjects.Add(enemyItem);
         this.Enemies.Add(enemyItem.Enemy.GetInstanceID(), enemyItem);
 
-        enemyItem = new EnemyFlightFormationItem
-        {
-            WaveId = id,
-            Health = 2,
-            Enemy = Instantiate(EnemyTemplate, new Vector3(
-               transform.position.x + posX,
-               transform.position.y + GameManager.Instance.EnemyDistance * 2,
-               transform.position.z), Quaternion.identity),
-            StartPosition = new Vector3(
-               transform.position.x + posX,
-               transform.position.y + GameManager.Instance.EnemyDistance * 2,
-               transform.position.z)
-        };
-
+        enemyItem = CreateNewEnemyItem(id, posX, 2);
         gameObjects.Add(enemyItem);
         this.Enemies.Add(enemyItem.Enemy.GetInstanceID(), enemyItem);
 
-        enemyItem = new EnemyFlightFormationItem
-        {
-            WaveId = id,
-            Health = 2,
-            Enemy = Instantiate(EnemyTemplate, new Vector3(
-               transform.position.x + posX,
-               transform.position.y + GameManager.Instance.EnemyDistance * 3,
-               transform.position.z), Quaternion.identity),
-            StartPosition = new Vector3(
-               transform.position.x + posX,
-               transform.position.y + GameManager.Instance.EnemyDistance * 3,
-               transform.position.z)
-        };
-
+        enemyItem = CreateNewEnemyItem(id, posX, 3);
         gameObjects.Add(enemyItem);
         this.Enemies.Add(enemyItem.Enemy.GetInstanceID(), enemyItem);
 
-        enemyItem = new EnemyFlightFormationItem
-        {
-            WaveId = id,
-            Health = 2,
-            Enemy = Instantiate(EnemyTemplate, new Vector3(
-               transform.position.x + posX,
-               transform.position.y + GameManager.Instance.EnemyDistance * 4,
-               transform.position.z), Quaternion.identity),
-            StartPosition = new Vector3(
-               transform.position.x + posX,
-               transform.position.y + GameManager.Instance.EnemyDistance * 4,
-               transform.position.z)
-        };
-
+        enemyItem = CreateNewEnemyItem(id, posX, 4);
         gameObjects.Add(enemyItem);
         this.Enemies.Add(enemyItem.Enemy.GetInstanceID(), enemyItem);
 
         this.EnemyWaves.Add(id, gameObjects);
+    }
+
+    private EnemyFlightFormationItem CreateNewEnemyItem(Guid id, float posX, float distance)
+    {
+        var vector = new Vector3(
+                       transform.position.x + posX,
+                       transform.position.y + GameManager.Instance.EnemyDistance * distance,
+                       transform.position.z);
+
+        return new EnemyFlightFormationItem
+        {
+            WaveId = id,
+            Health = 2,
+            Enemy = Instantiate(EnemyTemplate, vector, Quaternion.identity),
+            StartPosition = vector
+        };
     }
 
     public void SpawnLoot(Vector3 lastPosition)
