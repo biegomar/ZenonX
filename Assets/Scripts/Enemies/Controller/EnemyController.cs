@@ -35,27 +35,32 @@ public class EnemyController : MonoBehaviour
     {
         if (GameManager.Instance.IsGameRunning) 
         {
-            WaveTimer += Time.deltaTime;
-
-            if (!IsFirstWaveReleased && WaveTimer > 1f && WaveTimer < 1.1f)
-            {
-                this.SpawnWave(-7f, -2f);
-                IsFirstWaveReleased = true;
-            }
-
-            if (!IsSecondWaveReleased && WaveTimer > 2f && WaveTimer < 2.1f)
-            {
-                this.SpawnWave(-2f, 3f);
-                IsSecondWaveReleased = true;
-            }
-
-            if (!IsThirdWaveReleased && WaveTimer > 3f && WaveTimer < 3.1f)
-            {
-                this.SpawnWave(3f, 7f);
-                IsThirdWaveReleased = true;
-            }
+            this.SpawnWaveOne();
         }              
-    }    
+    } 
+    
+    private void SpawnWaveOne()
+    {
+        WaveTimer += Time.deltaTime;
+
+        if (!IsFirstWaveReleased && WaveTimer > 1f && WaveTimer < 1.1f)
+        {
+            this.SpawnWave(-7f, -2f);
+            IsFirstWaveReleased = true;
+        }
+
+        if (!IsSecondWaveReleased && WaveTimer > 2f && WaveTimer < 2.1f)
+        {
+            this.SpawnWave(-2f, 3f);
+            IsSecondWaveReleased = true;
+        }
+
+        if (!IsThirdWaveReleased && WaveTimer > 3f && WaveTimer < 3.1f)
+        {
+            this.SpawnWave(3f, 7f);
+            IsThirdWaveReleased = true;
+        }
+    }
 
     private void SpawnWave(float appearFrom, float appearTo)
     {
