@@ -12,22 +12,36 @@ public static class IncentiveController
     {       
         if (!isFirstIncentive)
         {
-            isFirstIncentive = true;
-            GameManager.Instance.Level1LaserFrequence = 0.2f;
+            GetHigherLaserFrequence();
         }
         else if (isFirstIncentive && !isSecondIncentive)
         {
-            isSecondIncentive = true;
-            GameManager.Instance.MaxShipLaserPower = 75;
-            GameManager.Instance.ActualLaserPower = GameManager.Instance.MaxShipLaserPower;            
-
+            GetMoreMaxHealthPoints();            
         }
         else if (isSecondIncentive && !isThirdIncentive)
         {
-            isSecondIncentive = true;
-            GameManager.Instance.MaxShipHealth += 5;
-            GameManager.Instance.ActualShipHealth = GameManager.Instance.MaxShipHealth;
+            GetMoreMaxLaserPower();
         }
 
+    }
+
+    private static void GetMoreMaxHealthPoints()
+    {
+        isSecondIncentive = true;
+        GameManager.Instance.MaxShipHealth += 5;
+        GameManager.Instance.ActualShipHealth = GameManager.Instance.MaxShipHealth;
+    }
+
+    private static void GetMoreMaxLaserPower()
+    {
+        isSecondIncentive = true;
+        GameManager.Instance.MaxShipLaserPower = 75;
+        GameManager.Instance.ActualLaserPower = GameManager.Instance.MaxShipLaserPower;
+    }
+
+    private static void GetHigherLaserFrequence()
+    {
+        isFirstIncentive = true;
+        GameManager.Instance.Level1LaserFrequence = 0.2f;
     }
 }

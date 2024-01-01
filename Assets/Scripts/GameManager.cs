@@ -6,12 +6,12 @@ public sealed class GameManager
 {
     private static readonly object lockObject = new object();
     private static GameManager instance = null;
-    private uint actualShipHealth;
+    private int actualShipHealth;
     private uint actualLaserPower;
 
     //Player
-    public uint MaxShipHealth { get; set; }
-    public uint ActualShipHealth { get => actualShipHealth; set => actualShipHealth = Math.Max(0,value); }
+    public int MaxShipHealth { get; set; }
+    public int ActualShipHealth { get => actualShipHealth; set => actualShipHealth = Math.Max(0,value); }
     public float ShipHorizontalSpeed { get; set; }
     public float ShipBoosterVelocity { get; set; }
     public float ShipLaserSpeed { get; set; }

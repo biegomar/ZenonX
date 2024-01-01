@@ -41,8 +41,11 @@ public class EnemyWaveOneFireController : MonoBehaviour
 
     private void Update()
     {
-        this.elapsedTimeSinceLastShot += Time.deltaTime;
-        this.FeuerFrei();
+        if (GameManager.Instance.IsGameRunning)
+        {
+            this.elapsedTimeSinceLastShot += Time.deltaTime;
+            this.FeuerFrei();
+        }            
     }
 
     private void FeuerFrei()

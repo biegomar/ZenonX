@@ -12,7 +12,7 @@ public class SpaceShipHealthController : MonoBehaviour
     {
         this.healthViewModel.SetHealthValue();
         
-        if (GameManager.Instance.ActualShipHealth == 0)
+        if (GameManager.Instance.ActualShipHealth <= 0)
         {
             GameManager.Instance.IsGameRunning = false;
         }

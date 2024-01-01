@@ -19,7 +19,7 @@ public class HealthViewModel : MonoBehaviour
         this.slider.value = percentage;
     }
 
-    private uint GetActualHealthValue()
+    private int GetActualHealthValue()
     {        
         return GameManager.Instance.ActualShipHealth;
     } 

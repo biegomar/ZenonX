@@ -17,6 +17,10 @@ public class LaserMovement : MonoBehaviour
             {
                 Destroy(gameObject);
             }
-        }        
+        }
+        else
+        {
+            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        }
     }
 }

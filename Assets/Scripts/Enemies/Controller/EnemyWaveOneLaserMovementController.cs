@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts.Enemies.MovementStrategies;
+using Assets.Scripts.Enemies;
 using UnityEngine;
 
 public class EnemyWaveOneLaserMovementController : MonoBehaviour
@@ -19,6 +21,25 @@ public class EnemyWaveOneLaserMovementController : MonoBehaviour
             {
                 Destroy(gameObject);
             }
+        }
+        else
+        {
+            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        }
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        var collisionObject = collision.gameObject;
+        switch (collisionObject.tag)
+        {
+            case "SpaceShip":
+                {
+                    GameManager.Instance.ActualShipHealth -= 1;
+
+                    Destroy(gameObject);
+                    break;
+                }
         }
     }
 }

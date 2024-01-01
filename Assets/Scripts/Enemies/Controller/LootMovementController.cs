@@ -20,7 +20,12 @@ public class LootMovementController : MonoBehaviour
             {
                 Destroy(gameObject);
             }
-        }        
+        } 
+        else
+        {
+            this.Rigidbody.velocity = Vector2.zero;
+            this.Rigidbody.gravityScale = 0;
+        }
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
