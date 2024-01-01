@@ -20,10 +20,8 @@ public class HealthViewModel : MonoBehaviour
     }
 
     private uint GetActualHealthValue()
-    {
-        this.slider.maxValue = GameManager.Instance.MaxShipHealth;
-
+    {        
         return GameManager.Instance.ActualShipHealth;
-    }
+    } 
 
 }

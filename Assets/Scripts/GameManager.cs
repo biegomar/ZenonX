@@ -21,11 +21,12 @@ public sealed class GameManager
     public float LaserPowerRegainInterval { get; set; }
 
     //Enemies    
-    public float EnemySinusStep { get; set; }
-    public float EnemySinusAmplitude { get; set; }
-    public float EnemyYStep { get; set; }
-    public float EnemyYSpeed { get; set; }
-    public float EnemyDistance { get; set; }
+    public float EnemyWaveOneSinusStep { get; set; }
+    public float EnemyWaveOneSinusAmplitude { get; set; }
+    public float EnemyWaveOneYStep { get; set; }
+    public float EnemyWaveOneYSpeed { get; set; }
+    public float EnemyWaveOneDistance { get; set; }
+    public float EnemyWaveOneLaserSpeed { get; set; }
 
     //Level 1
     public float Level1LaserFrequence { get; set; }
@@ -48,13 +49,14 @@ public sealed class GameManager
         ShipLaserHitPoints = 1;
         MaxShipLaserPower = 50;
         ActualLaserPower = MaxShipLaserPower;
-        LaserPowerRegainInterval = 1f;
+        LaserPowerRegainInterval = 2f;
 
-        EnemySinusStep = 0.01f;
-        EnemySinusAmplitude = 0.25f;
-        EnemyYStep = 0.03f;
-        EnemyYSpeed = 0.4f;
-        EnemyDistance = 0.5f;
+        EnemyWaveOneSinusStep = 0.01f;
+        EnemyWaveOneSinusAmplitude = 0.25f;
+        EnemyWaveOneYStep = 0.03f;
+        EnemyWaveOneYSpeed = 0.3f;
+        EnemyWaveOneDistance = 0.5f;
+        EnemyWaveOneLaserSpeed = 6.5f;
 
         Level1LaserFrequence = 0.4f;
 

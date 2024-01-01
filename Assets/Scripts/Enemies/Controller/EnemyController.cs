@@ -33,10 +33,7 @@ public class EnemyController : MonoBehaviour
 
     public void Update()
     {
-        if (GameManager.Instance.IsGameRunning) 
-        {
-            this.SpawnWaveOne();
-        }              
+        this.SpawnWaveOne();
     } 
     
     private void SpawnWaveOne()
@@ -45,13 +42,13 @@ public class EnemyController : MonoBehaviour
 
         if (!IsFirstWaveReleased && WaveTimer > 1f && WaveTimer < 1.1f)
         {
-            this.SpawnWave(-7f, -2f);
+            this.SpawnWave(-7f, -3f);
             IsFirstWaveReleased = true;
         }
 
         if (!IsSecondWaveReleased && WaveTimer > 2f && WaveTimer < 2.1f)
         {
-            this.SpawnWave(-2f, 3f);
+            this.SpawnWave(-2f, 2f);
             IsSecondWaveReleased = true;
         }
 
@@ -92,16 +89,16 @@ public class EnemyController : MonoBehaviour
         this.EnemyWaves.Add(waveId, gameObjects);
     }
 
-    private EnemyFlightFormationItem CreateNewEnemyItem(Guid id, float posX, float distance)
+    private EnemyFlightFormationItem CreateNewEnemyItem(Guid waveId, float posX, float distance)
     {
         var vector = new Vector3(
                        transform.position.x + posX,
-                       transform.position.y + GameManager.Instance.EnemyDistance * distance,
+                       transform.position.y + GameManager.Instance.EnemyWaveOneDistance * distance,
                        transform.position.z);
 
         return new EnemyFlightFormationItem
         {
-            WaveId = id,
+            WaveId = waveId,
             Health = 2,
             Enemy = Instantiate(EnemyTemplate, vector, Quaternion.identity),
             StartPosition = vector

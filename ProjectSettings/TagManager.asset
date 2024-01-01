@@ -11,6 +11,8 @@ TagManager:
   - PlayerLaser
   - Border
   - SpaceShip
+  - EnemyLaser
+  - EnemyWaveOne
   layers:
   - Default
   - TransparentFX

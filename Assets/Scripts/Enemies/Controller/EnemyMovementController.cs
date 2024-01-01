@@ -8,18 +8,23 @@ using UnityEngine;
 public class EnemyMovementController : MonoBehaviour
 {    
     private EnemyController enemyController;
+    private EnemyItem enemyItem;
     private Vector2 startPosition;
     private IMovementStrategy activeMovementStrategy;
     private const float hitInterval = 6f;
     private static float timeSinceLastHit = 0f;
 
     void Start()
-    {
-        GameObject go = GameObject.Find("Enemies");
+    {        
+        GameObject go = GameObject.Find("EnemyWaveOne");
         if (go != null)
         {
             this.enemyController = go.GetComponent<EnemyController>();
-            if (this.enemyController == null)
+            if (this.enemyController != null)
+            {
+                this.enemyItem = this.enemyController.Enemies[gameObject.GetInstanceID()];                
+            }
+            else
             {
                 Debug.Log("go.GetComponent<EnemyController>() is null");
             }
@@ -51,45 +56,41 @@ public class EnemyMovementController : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {        
-        var collisionObject = collision.gameObject;        
-        if (collisionObject.tag == "PlayerLaser")
+        var collisionObject = collision.gameObject;
+        switch (collisionObject.tag)
         {
-            var enemyItem = this.enemyController.Enemies[gameObject.GetInstanceID()];
-            if (enemyItem != null)
-            {
-                enemyItem.Health = enemyItem.Health - 1;
-                if (enemyItem.Health <= 0)
+            case "PlayerLaser":
                 {
-                    RemoveEnemyFromWave(enemyController.EnemyWaves);
+                    if (enemyItem != null)
+                    {
+                        enemyItem.Health = enemyItem.Health - 1;
+                        if (enemyItem.Health <= 0)
+                        {
+                            RemoveEnemyFromWave(enemyController.EnemyWaves);
 
-                    var lastPosition = transform.position;
+                            var lastPosition = transform.position;
 
-                    Destroy(gameObject);
+                            Destroy(gameObject);
 
-                    enemyController.SpawnLoot(lastPosition);
+                            enemyController.SpawnLoot(lastPosition);
 
-                    GameManager.Instance.Score++;
+                            GameManager.Instance.Score++;
+                        }
+                    }
+
+                    Destroy(collisionObject);
+                    break;
                 }
-            }
-
-            Destroy(collisionObject);
-        }
-
-        if (collisionObject.tag == "Border") 
-        {            
-            this.activeMovementStrategy = new DirectMovement(startPosition, gameObject);
-        }
-
-        if (collisionObject.tag == "SpaceShip")
-        {            
-            Debug.Log($"timeSinceLastHit: {timeSinceLastHit} with enemy: {gameObject.GetInstanceID()}");
-
-            if (timeSinceLastHit > hitInterval)
-            {
-                Debug.Log($"Hit SpaceShip, health points left: {GameManager.Instance.ActualShipHealth}");
-                GameManager.Instance.ActualShipHealth -= 5;
-                timeSinceLastHit = 0f;
-            }            
+            case "Border":
+                activeMovementStrategy = new DirectMovement(startPosition, gameObject);
+                break;
+            case "SpaceShip":
+                if (timeSinceLastHit > hitInterval)
+                {
+                    GameManager.Instance.ActualShipHealth -= 5;
+                    timeSinceLastHit = 0f;
+                }
+                break;
         }
     }
 
@@ -107,29 +108,13 @@ public class EnemyMovementController : MonoBehaviour
 
     private void TryToSwitchToSinusMovement()
     {
-        GameObject go = GameObject.Find("Enemies");
-        if (go != null)
-        {
-            var enemyController = go.GetComponent<EnemyController>();
-            if (enemyController != null)
-            {
-                var waveId = enemyController.EnemyWaves.Values.SelectMany(x => x).Where(x => x.Enemy == gameObject).Select(x => x.WaveId).SingleOrDefault();
+        var waveId = this.enemyController.EnemyWaves.Values.SelectMany(x => x).Where(x => x.Enemy == gameObject).Select(x => x.WaveId).SingleOrDefault();
 
-                if (waveId != null && !enemyController.EnemyWaves[waveId].Where(x => x.StartPosition.y != x.Enemy.transform.position.y).Any())
-                {
-                    this.startPosition = transform.position;
-                    this.activeMovementStrategy = new SinusMovement(this.startPosition);
-                }
-            }
-            else
-            {
-                Debug.Log("go.GetComponent<EnemyController>() is null");
-            }
-        }
-        else
+        if (waveId != null && !this.enemyController.EnemyWaves[waveId].Where(x => x.StartPosition.y != x.Enemy.transform.position.y).Any())
         {
-            Debug.Log("GameObject.Find(Enemies) is null");
-        }               
+            this.startPosition = transform.position;
+            this.activeMovementStrategy = new SinusMovement(this.startPosition);
+        }
     }
 
     private float CalculateNewXPosition()

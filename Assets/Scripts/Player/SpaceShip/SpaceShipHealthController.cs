@@ -7,13 +7,14 @@ public class SpaceShipHealthController : MonoBehaviour
     [SerializeField]
     private HealthViewModel healthViewModel;
 
-    void Update()
+
+    private void Update()
     {
         this.healthViewModel.SetHealthValue();
-
+        
         if (GameManager.Instance.ActualShipHealth == 0)
         {
             GameManager.Instance.IsGameRunning = false;
-        }       
+        }
     }
 }

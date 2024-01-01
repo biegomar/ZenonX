@@ -25,8 +25,8 @@ public static class IncentiveController
         else if (isSecondIncentive && !isThirdIncentive)
         {
             isSecondIncentive = true;
-            GameManager.Instance.MaxShipLaserPower = 75;
-            GameManager.Instance.ActualLaserPower = GameManager.Instance.MaxShipLaserPower;
+            GameManager.Instance.MaxShipHealth += 5;
+            GameManager.Instance.ActualShipHealth = GameManager.Instance.MaxShipHealth;
         }
 
     }
