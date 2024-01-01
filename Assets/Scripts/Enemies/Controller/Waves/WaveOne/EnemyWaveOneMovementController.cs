@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class EnemyMovementController : MonoBehaviour
 {    
-    private EnemyController enemyController;
+    private EnemyWaveOneSpawnController enemyController;
     private EnemyItem enemyItem;
     private Vector2 startPosition;
     private IMovementStrategy activeMovementStrategy;
@@ -19,7 +19,7 @@ public class EnemyMovementController : MonoBehaviour
         GameObject go = GameObject.Find("EnemyWaveOne");
         if (go != null)
         {
-            this.enemyController = go.GetComponent<EnemyController>();
+            this.enemyController = go.GetComponent<EnemyWaveOneSpawnController>();
             if (this.enemyController != null)
             {
                 this.enemyItem = this.enemyController.Enemies[gameObject.GetInstanceID()];                
@@ -66,7 +66,7 @@ public class EnemyMovementController : MonoBehaviour
                         enemyItem.Health = enemyItem.Health - 1;
                         if (enemyItem.Health <= 0)
                         {
-                            RemoveEnemyFromWave(enemyController.EnemyWaves);
+                            RemoveEnemyFromWave(enemyController.EnemyFlightFormation);
 
                             var lastPosition = transform.position;
 
@@ -108,9 +108,9 @@ public class EnemyMovementController : MonoBehaviour
 
     private void TryToSwitchToSinusMovement()
     {
-        var waveId = this.enemyController.EnemyWaves.Values.SelectMany(x => x).Where(x => x.Enemy == gameObject).Select(x => x.WaveId).SingleOrDefault();
+        var waveId = this.enemyController.EnemyFlightFormation.Values.SelectMany(x => x).Where(x => x.Enemy == gameObject).Select(x => x.WaveId).SingleOrDefault();
 
-        if (waveId != null && !this.enemyController.EnemyWaves[waveId].Where(x => x.StartPosition.y != x.Enemy.transform.position.y).Any())
+        if (waveId != null && !this.enemyController.EnemyFlightFormation[waveId].Where(x => x.StartPosition.y != x.Enemy.transform.position.y).Any())
         {
             this.startPosition = transform.position;
             this.activeMovementStrategy = new SinusMovement(this.startPosition);

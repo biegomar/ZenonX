@@ -9,7 +9,7 @@ public class EnemyWaveOneFireController : MonoBehaviour
     [SerializeField]
     private GameObject Laser;
 
-    private EnemyController enemyController;
+    private EnemyWaveOneSpawnController enemyController;
     private EnemyItem enemyItem;
     private float fireInterval;
     private float elapsedTimeSinceLastShot;
@@ -23,7 +23,7 @@ public class EnemyWaveOneFireController : MonoBehaviour
         GameObject go = GameObject.Find("EnemyWaveOne");
         if (go != null)
         {
-            this.enemyController = go.GetComponent<EnemyController>();
+            this.enemyController = go.GetComponent<EnemyWaveOneSpawnController>();
             if (this.enemyController != null)
             {
                 this.enemyItem = this.enemyController.Enemies[gameObject.GetInstanceID()];
@@ -55,7 +55,7 @@ public class EnemyWaveOneFireController : MonoBehaviour
             Instantiate(Laser, new Vector3(
                transform.position.x,
                transform.position.y - 0.3f,
-               transform.position.z), Quaternion.identity);
+               Laser.transform.position.z), Quaternion.identity);
             
             this.elapsedTimeSinceLastShot = 0;
         }
