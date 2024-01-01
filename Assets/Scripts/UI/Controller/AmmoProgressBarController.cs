@@ -13,13 +13,13 @@ public class AmmoProgressBarController : MonoBehaviour
         this.slider.maxValue = GameManager.Instance.MaxShipLaserPower;
     }
 
-    public void SetHealthValue()
+    public void SetAmmoValue()
     {
-        var percentage = this.GetActualHealthValue();
+        var percentage = this.GetActualaserPowerValue();
         this.slider.value = percentage;        
     }    
 
-    private float GetActualHealthValue()
+    private float GetActualaserPowerValue()
     {
         this.slider.maxValue = GameManager.Instance.MaxShipLaserPower;        
 

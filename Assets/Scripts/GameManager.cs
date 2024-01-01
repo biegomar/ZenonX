@@ -6,14 +6,18 @@ public sealed class GameManager
 {
     private static readonly object lockObject = new object();
     private static GameManager instance = null;
+    private uint actualShipHealth;
+    private uint actualLaserPower;
 
     //Player
+    public uint MaxShipHealth { get; set; }
+    public uint ActualShipHealth { get => actualShipHealth; set => actualShipHealth = Math.Max(0,value); }
     public float ShipHorizontalSpeed { get; set; }
     public float ShipBoosterVelocity { get; set; }
     public float ShipLaserSpeed { get; set; }
     public uint ShipLaserHitPoints { get; set; }
     public uint MaxShipLaserPower { get; set; }
-    public uint ActualLaserPower { get; set; }
+    public uint ActualLaserPower { get => actualLaserPower; set => actualLaserPower = Math.Max(0, value); }
     public float LaserPowerRegainInterval { get; set; }
 
     //Enemies    
@@ -36,6 +40,8 @@ public sealed class GameManager
     private GameManager()
     {
         // Setze Standardwerte
+        MaxShipHealth = 10;
+        ActualShipHealth = MaxShipHealth;
         ShipHorizontalSpeed = 7f;
         ShipBoosterVelocity = 5f;
         ShipLaserSpeed = 6.5f;

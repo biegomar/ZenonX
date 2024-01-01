@@ -47,7 +47,7 @@ public class FireController : MonoBehaviour
 
             this.FeuerFrei();
             this.GainFirePower();
-            this.healthBarManager.SetHealthValue();
+            this.healthBarManager.SetAmmoValue();
         }        
     }
 

@@ -8,7 +8,7 @@ using UnityEngine;
 namespace Assets.Scripts.Enemies
 {
     public class EnemyItem
-    {
+    {        
         public GameObject Enemy { get; set; }
         public Vector3 StartPosition { get; set; }
         public int Health { get; set; }

@@ -66,30 +66,30 @@ public class EnemyController : MonoBehaviour
     {
         var posX = UnityEngine.Random.Range(appearFrom, appearTo);
 
-        var id = Guid.NewGuid();
+        var waveId = Guid.NewGuid();
         var gameObjects = new List<EnemyFlightFormationItem>();
 
-        EnemyFlightFormationItem enemyItem = CreateNewEnemyItem(id, posX, 0);
+        EnemyFlightFormationItem enemyItem = CreateNewEnemyItem(waveId, posX, 0);
         gameObjects.Add(enemyItem);
         this.Enemies.Add(enemyItem.Enemy.GetInstanceID(), enemyItem);
 
-        enemyItem = CreateNewEnemyItem(id, posX, 1);
+        enemyItem = CreateNewEnemyItem(waveId, posX, 1);
         gameObjects.Add(enemyItem);
         this.Enemies.Add(enemyItem.Enemy.GetInstanceID(), enemyItem);
 
-        enemyItem = CreateNewEnemyItem(id, posX, 2);
+        enemyItem = CreateNewEnemyItem(waveId, posX, 2);
         gameObjects.Add(enemyItem);
         this.Enemies.Add(enemyItem.Enemy.GetInstanceID(), enemyItem);
 
-        enemyItem = CreateNewEnemyItem(id, posX, 3);
+        enemyItem = CreateNewEnemyItem(waveId, posX, 3);
         gameObjects.Add(enemyItem);
         this.Enemies.Add(enemyItem.Enemy.GetInstanceID(), enemyItem);
 
-        enemyItem = CreateNewEnemyItem(id, posX, 4);
+        enemyItem = CreateNewEnemyItem(waveId, posX, 4);
         gameObjects.Add(enemyItem);
         this.Enemies.Add(enemyItem.Enemy.GetInstanceID(), enemyItem);
 
-        this.EnemyWaves.Add(id, gameObjects);
+        this.EnemyWaves.Add(waveId, gameObjects);
     }
 
     private EnemyFlightFormationItem CreateNewEnemyItem(Guid id, float posX, float distance)
