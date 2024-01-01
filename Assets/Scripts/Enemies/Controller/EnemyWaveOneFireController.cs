@@ -16,9 +16,9 @@ public class EnemyWaveOneFireController : MonoBehaviour
 
     void Start()
     {
-        fireInterval = Random.Range(2f, 6f);
+        this.fireInterval = Random.Range(2f, 6f);
 
-        this.elapsedTimeSinceLastShot = fireInterval - 0.1f;
+        this.elapsedTimeSinceLastShot = this.fireInterval - (this.fireInterval * .5f);
 
         GameObject go = GameObject.Find("EnemyWaveOne");
         if (go != null)
