@@ -36,7 +36,7 @@ public static class IncentiveController
     {
         isSecondIncentive = true;
         GameManager.Instance.MaxShipLaserPower = 75;
-        GameManager.Instance.ActualLaserPower = GameManager.Instance.MaxShipLaserPower;
+        GameManager.Instance.ActualShipLaserPower = GameManager.Instance.MaxShipLaserPower;
     }
 
     private static void GetHigherLaserFrequence()

@@ -53,14 +53,14 @@ public class FireController : MonoBehaviour
 
     private void FeuerFrei()
     {
-        if (this.LaserInterval >= this.ActualLaserFrequence && GameManager.Instance.ActualLaserPower > 0 && this.IsFirePressed())
+        if (this.LaserInterval >= this.ActualLaserFrequence && GameManager.Instance.ActualShipLaserPower > 0 && this.IsFirePressed())
         {
             Instantiate(Laser, new Vector3(
                transform.position.x,
                transform.position.y + 0.3f,
                transform.position.z), Quaternion.identity);
 
-            GameManager.Instance.ActualLaserPower--;
+            GameManager.Instance.ActualShipLaserPower--;
             this.LaserInterval = 0;                
         }
     }
@@ -69,9 +69,9 @@ public class FireController : MonoBehaviour
     {
         if (this.ActualLaserPowerRegainInterval >= GetLaserPowerRegainIntervalHalfLife())
         {
-            if (GameManager.Instance.ActualLaserPower < GameManager.Instance.MaxShipLaserPower)
+            if (GameManager.Instance.ActualShipLaserPower < GameManager.Instance.MaxShipLaserPower)
             {
-                GameManager.Instance.ActualLaserPower++;
+                GameManager.Instance.ActualShipLaserPower++;
                 this.ActualLaserPowerRegainInterval = 0;
             }
         }                  
@@ -79,7 +79,7 @@ public class FireController : MonoBehaviour
 
     private float GetLaserPowerRegainIntervalHalfLife()
     {
-        var percentage = ((float)GameManager.Instance.ActualLaserPower / GameManager.Instance.MaxShipLaserPower);
+        var percentage = ((float)GameManager.Instance.ActualShipLaserPower / GameManager.Instance.MaxShipLaserPower);
         return percentage switch
         {
             >= .5f => GameManager.Instance.LaserPowerRegainInterval,

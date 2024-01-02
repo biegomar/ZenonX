@@ -14,7 +14,7 @@ public class UIController : MonoBehaviour
         if (GameManager.Instance.IsGameRunning)
         {
             ScoreText.text = $"Score: {GameManager.Instance.Score}";
-            //LaserPower.text = $"Laserpower: {GameManager.Instance.ActualLaserPower}/{GameManager.Instance.MaxShipLaserPower}";    
+            //LaserPower.text = $"Laserpower: {GameManager.Instance.ActualShipLaserPower}/{GameManager.Instance.MaxShipLaserPower}";    
         }
     }
 }

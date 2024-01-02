@@ -23,6 +23,6 @@ public class AmmoProgressBarController : MonoBehaviour
     {
         this.slider.maxValue = GameManager.Instance.MaxShipLaserPower;        
 
-        return (float)GameManager.Instance.ActualLaserPower;
+        return (float)GameManager.Instance.ActualShipLaserPower;
     }
 }
