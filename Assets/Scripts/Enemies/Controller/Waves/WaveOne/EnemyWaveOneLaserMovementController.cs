@@ -6,10 +6,12 @@ using UnityEngine;
 
 public class EnemyWaveOneLaserMovementController : MonoBehaviour
 {
+    private Rigidbody2D rigidBody;
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<Rigidbody2D>().velocity = Vector2.down * GameManager.Instance.EnemyWaveOneLaserSpeed;
+        this.rigidBody = GetComponent<Rigidbody2D>();
+        this.rigidBody.velocity = Vector2.down * GameManager.Instance.EnemyWaveOneLaserSpeed;
     }
 
     // Update is called once per frame
@@ -24,7 +26,7 @@ public class EnemyWaveOneLaserMovementController : MonoBehaviour
         }
         else
         {
-            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            this.rigidBody.velocity = Vector2.zero;
         }
     }
 
