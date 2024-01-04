@@ -9,6 +9,9 @@ public class FireController : MonoBehaviour
     [SerializeField]
     private AmmoProgressBarController healthBarManager;
 
+    [SerializeField]
+    private AudioSource laserSound;
+
     private float ActualLaserFrequence;
     private float LaserInterval;
     private float ActualLaserPowerRegainInterval;        
@@ -55,10 +58,12 @@ public class FireController : MonoBehaviour
     {
         if (this.LaserInterval >= this.ActualLaserFrequence && GameManager.Instance.ActualShipLaserPower > 0 && this.IsFirePressed())
         {
+            this.laserSound.Play();
+
             Instantiate(Laser, new Vector3(
                transform.position.x,
                transform.position.y + 0.3f,
-               transform.position.z), Quaternion.identity);
+               transform.position.z), Quaternion.identity);            
 
             GameManager.Instance.ActualShipLaserPower--;
             this.LaserInterval = 0;                

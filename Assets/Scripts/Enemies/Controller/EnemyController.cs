@@ -19,9 +19,17 @@ public class EnemyController : MonoBehaviour
 
     private void Update()
     {
-        if (this.actualWave != null && !this.actualWave.IsWaveSpawned) 
-        { 
-            this.actualWave.SpawnWave();
+        if (this.actualWave != null)
+        {
+            if (!this.actualWave.IsWaveSpawned)
+            {
+                this.actualWave.SpawnWave();
+            }
+
+            if (this.actualWave.IsWaveCompleted)
+            {
+
+            }
         }
     }
 }
