@@ -67,15 +67,11 @@ public class EnemyWaveOneMovementController : MonoBehaviour
                         enemyItem.Health = enemyItem.Health - 1;
                         if (enemyItem.Health <= 0)
                         {
-                            RemoveEnemyFromWave(enemyController.EnemyFlightFormation);
-
-                            var lastPosition = transform.position;
-
-                            Destroy(gameObject);
+                            var lastPosition = transform.position;                            
+                            
+                            RemoveEnemyAndScore();
 
                             enemyController.SpawnLoot(lastPosition);
-
-                            GameManager.Instance.Score++;
                         }
                     }
 
@@ -90,9 +86,22 @@ public class EnemyWaveOneMovementController : MonoBehaviour
                 {
                     GameManager.Instance.ActualShipHealth -= 5;
                     timeSinceLastHit = 0f;
+
+                    var lastPosition = transform.position;
+
+                    RemoveEnemyAndScore();
+
+                    enemyController.SpawnLoot(lastPosition);
                 }
                 break;
         }
+    }
+
+    private void RemoveEnemyAndScore()
+    {
+        RemoveEnemyFromWave(enemyController.EnemyFlightFormation);
+        Destroy(gameObject);
+        GameManager.Instance.Score++;
     }
 
     private void RemoveEnemyFromWave(IDictionary<Guid, IList<EnemyFlightFormationItem>> EnemyWaves)

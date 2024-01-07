@@ -111,7 +111,7 @@ public class EnemyWaveOneSpawnController : BaseWaveSpawnController
         return new EnemyFlightFormationItem
         {
             WaveId = waveId,
-            Health = 2,
+            Health = GameManager.Instance.EnemyWaveOneHealth,
             Enemy = Instantiate(EnemyTemplate, vector, Quaternion.identity),
             StartPosition = vector
         };

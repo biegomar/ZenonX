@@ -44,7 +44,7 @@ public class EnemyWaveTwoInteractionController : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.Instance.IsGameRunning)
+        if (GameManager.Instance.IsGameRunning && Time.deltaTime > 0f)
         {
             this.timeSinceAppearance += Time.deltaTime;
 
@@ -52,6 +52,11 @@ public class EnemyWaveTwoInteractionController : MonoBehaviour
 
             LetTheHammerFall();
             RayDebugOutput();
+
+            if (transform.position.y < -7)
+            {
+                RemoveEnemyAndScore(false);
+            }
         }            
     }
 
@@ -66,8 +71,8 @@ public class EnemyWaveTwoInteractionController : MonoBehaviour
                     {
                         isInCollisionHanding = true;
                         GameManager.Instance.ActualShipHealth -= 5;
+                        RemoveEnemyAndScore();
 
-                        Destroy(gameObject);
                         break;
                     }
                 case "PlayerLaser":
@@ -77,11 +82,7 @@ public class EnemyWaveTwoInteractionController : MonoBehaviour
                             enemyItem.Health = enemyItem.Health - 1;
                             if (enemyItem.Health <= 0)
                             {
-                                RemoveEnemyFromWave(enemyController.EnemyFlightFormation);
-
-                                Destroy(gameObject);
-
-                                GameManager.Instance.Score++;
+                                RemoveEnemyAndScore();
                             }
                         }
 
@@ -92,11 +93,24 @@ public class EnemyWaveTwoInteractionController : MonoBehaviour
         }        
     }
 
+    private void RemoveEnemyAndScore(bool reallyScore = true)
+    {
+        RemoveEnemyFromWave(enemyController.EnemyFlightFormation);
+        Destroy(gameObject);
+
+        if (reallyScore)
+        {
+            GameManager.Instance.Score++;
+        }
+        
+        enemyController.SpawnLoot(new Vector3(0,0,0));
+    }
+
     private void LetTheHammerFall()
     {
         if (hit.collider != null && hit.collider.gameObject.tag == "SpaceShip")
         {
-            this.rigidBody.gravityScale = 2;
+            this.rigidBody.gravityScale = 2.5f;
         }
     }
 

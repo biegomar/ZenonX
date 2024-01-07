@@ -11,6 +11,6 @@ namespace Assets.Scripts.Enemies
     {        
         public GameObject Enemy { get; set; }
         public Vector3 StartPosition { get; set; }
-        public int Health { get; set; }
+        public uint Health { get; set; }
     }
 }

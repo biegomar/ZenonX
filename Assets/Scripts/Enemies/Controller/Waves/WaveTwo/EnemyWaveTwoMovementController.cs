@@ -27,13 +27,7 @@ public class EnemyWaveTwoMovementController : MonoBehaviour
                   transform.position.z);
 
                 isTargetPositionReached = transform.position.y <= 5.6f;
-            }
-            
-
-            if (transform.position.y < -7)
-            {
-                Destroy(gameObject);
-            }
+            }                       
         }
         else
         {
