@@ -20,13 +20,16 @@ public sealed class GameManager
     public uint ActualShipLaserPower { get => actualLaserPower; set => actualLaserPower = Math.Max(0, value); }
     public float LaserPowerRegainInterval { get; set; }
 
-    //Enemies    
+    //Enemies - Wave One   
     public float EnemyWaveOneSinusStep { get; set; }
     public float EnemyWaveOneSinusAmplitude { get; set; }
     public float EnemyWaveOneYStep { get; set; }
     public float EnemyWaveOneYSpeed { get; set; }
     public float EnemyWaveOneDistance { get; set; }
     public float EnemyWaveOneLaserSpeed { get; set; }
+
+    //Enemies - Wave Two
+    public float EnemyWaveTwoDistance { get; set; }
 
     //Level 1
     public float Level1LaserFrequence { get; set; }
@@ -44,7 +47,9 @@ public sealed class GameManager
 
         InitializeShipValues();
 
-        InitializeEnemyWaveOneValues();        
+        InitializeEnemyWaveOneValues();
+
+        InitializeEnemyWaveTwoValues();
     }
 
     private void InitializeGameValues()
@@ -62,6 +67,11 @@ public sealed class GameManager
         EnemyWaveOneYSpeed = 0.25f;
         EnemyWaveOneDistance = 0.5f;
         EnemyWaveOneLaserSpeed = 6.5f;
+    }
+
+    private void InitializeEnemyWaveTwoValues()
+    {
+        EnemyWaveTwoDistance = 3.0f;
     }
 
     private void InitializeShipValues()

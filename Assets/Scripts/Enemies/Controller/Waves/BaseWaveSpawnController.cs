@@ -13,5 +13,7 @@ namespace Assets.Scripts.Enemies.Controller.Waves
         public bool IsWaveCompleted { get; set; }
 
         public abstract void SpawnWave();
+
+        public abstract void SpawnLoot(Vector3 lastPosition);
     }
 }

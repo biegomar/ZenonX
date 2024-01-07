@@ -2,10 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Assets.Scripts.Enemies;
+using Assets.Scripts.Enemies.Controller.Waves;
 using Assets.Scripts.Enemies.MovementStrategies;
 using UnityEngine;
 
-public class EnemyMovementController : MonoBehaviour
+public class EnemyWaveOneMovementController : MonoBehaviour
 {    
     private EnemyWaveOneSpawnController enemyController;
     private EnemyItem enemyItem;
@@ -38,7 +39,7 @@ public class EnemyMovementController : MonoBehaviour
         this.activeMovementStrategy = new SinusMovement(this.startPosition);
     }
 
-    void Update()
+    private void Update()
     {
         // use delta time for game pause here.
         if (GameManager.Instance.IsGameRunning && Time.deltaTime > 0f)

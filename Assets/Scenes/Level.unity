@@ -930,6 +930,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveControllers:
   - {fileID: 813776909}
+  - {fileID: 1264926320}
 --- !u!1 &682745551
 GameObject:
   m_ObjectHideFlags: 0
@@ -1119,7 +1120,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: c0c602d9833ac4646b0b8345941569c5, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -1536,7 +1537,7 @@ GameObject:
   - component: {fileID: 1264926320}
   m_Layer: 0
   m_Name: EnemyWaveTwo
-  m_TagString: Untagged
+  m_TagString: EnemyWaveTwo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1568,6 +1569,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f59a9dcc92014df4a918eff8cca393b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EnemyTemplate: {fileID: 8223685631401717535, guid: 95502fae46938694abd8560403048f78, type: 3}
 --- !u!1 &1309177013
 GameObject:
   m_ObjectHideFlags: 0

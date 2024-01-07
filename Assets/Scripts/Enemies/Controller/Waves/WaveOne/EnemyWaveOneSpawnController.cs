@@ -22,7 +22,7 @@ public class EnemyWaveOneSpawnController : BaseWaveSpawnController
     private bool IsSecondFormationReleased;
     private bool IsThirdFormationReleased;
 
-    public void Start()
+    private void Start()
     {
         this.IsWaveSpawned = false;
         this.IsWaveCompleted = false;
@@ -56,7 +56,7 @@ public class EnemyWaveOneSpawnController : BaseWaveSpawnController
         }
     }
 
-    public void SpawnLoot(Vector3 lastPosition)
+    public override void SpawnLoot(Vector3 lastPosition)
     {
         var deadWaves = new List<Guid>();
         foreach (var wave in EnemyFlightFormation)
