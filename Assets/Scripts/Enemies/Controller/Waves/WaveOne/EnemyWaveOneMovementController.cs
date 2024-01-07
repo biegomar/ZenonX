@@ -101,7 +101,7 @@ public class EnemyWaveOneMovementController : MonoBehaviour
     {
         RemoveEnemyFromWave(enemyController.EnemyFlightFormation);
         Destroy(gameObject);
-        GameManager.Instance.Score++;
+        GameManager.Instance.Score += GameManager.Instance.EnemyWaveOneScore;
     }
 
     private void RemoveEnemyFromWave(IDictionary<Guid, IList<EnemyFlightFormationItem>> EnemyWaves)

@@ -16,12 +16,9 @@ public class EnemyWaveTwoSpawnController : BaseWaveSpawnController
 
     private void Start()
     {
-        this.IsWaveSpawned = false;
-        this.IsWaveCompleted = false;
-
-        EnemyFlightFormation = new Dictionary<Guid, IList<EnemyFlightFormationItem>>();
-        Enemies = new Dictionary<int, EnemyItem>();
+        InitializeWave();
     }
+  
 
     public override void SpawnWave()
     {
@@ -75,6 +72,20 @@ public class EnemyWaveTwoSpawnController : BaseWaveSpawnController
         }
 
         this.RemoveDeadWaveFromDictionary(deadWaves);
+    }
+
+    public override void ResetWave()
+    {
+        InitializeWave();
+    }
+
+    private void InitializeWave()
+    {
+        this.IsWaveSpawned = false;
+        this.IsWaveCompleted = false;
+
+        EnemyFlightFormation = new Dictionary<Guid, IList<EnemyFlightFormationItem>>();
+        Enemies = new Dictionary<int, EnemyItem>();
     }
 
     private EnemyFlightFormationItem CreateNewEnemyItem(Guid waveId, Vector3 startPosition, byte distance)

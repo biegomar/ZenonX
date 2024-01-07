@@ -15,5 +15,7 @@ namespace Assets.Scripts.Enemies.Controller.Waves
         public abstract void SpawnWave();
 
         public abstract void SpawnLoot(Vector3 lastPosition);
+
+        public abstract void ResetWave();
     }
 }

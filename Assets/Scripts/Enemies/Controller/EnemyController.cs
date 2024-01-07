@@ -39,6 +39,7 @@ public class EnemyController : MonoBehaviour
                 else
                 {
                     this.actualWave = waveControllers[waveIndex];
+                    this.actualWave.ResetWave();
                     waveIndex++;
                 }                
             }

@@ -929,8 +929,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waveControllers:
+  - {fileID: 813776909}
   - {fileID: 1264926320}
   - {fileID: 813776909}
+  - {fileID: 1264926320}
 --- !u!1 &682745551
 GameObject:
   m_ObjectHideFlags: 0

@@ -28,10 +28,12 @@ public sealed class GameManager
     public float EnemyWaveOneDistance { get; set; }
     public float EnemyWaveOneLaserSpeed { get; set; }
     public uint EnemyWaveOneHealth { get; set; }
+    public uint EnemyWaveOneScore { get; set; }
 
     //Enemies - Wave Two
     public float EnemyWaveTwoDistance { get; set; }
     public uint EnemyWaveTwoHealth { get; set; }
+    public uint EnemyWaveTwoScore { get; set; }
 
     //Level 1
     public float Level1LaserFrequence { get; set; }
@@ -70,12 +72,14 @@ public sealed class GameManager
         EnemyWaveOneDistance = 0.5f;
         EnemyWaveOneLaserSpeed = 6.5f;
         EnemyWaveOneHealth = 2;
+        EnemyWaveOneScore = 10;
 }
 
     private void InitializeEnemyWaveTwoValues()
     {
         EnemyWaveTwoDistance = 3.0f;
         EnemyWaveTwoHealth = 2;
+        EnemyWaveTwoScore = 25;
     }
 
     private void InitializeShipValues()

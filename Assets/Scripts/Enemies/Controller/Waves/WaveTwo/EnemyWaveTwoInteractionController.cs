@@ -100,7 +100,7 @@ public class EnemyWaveTwoInteractionController : MonoBehaviour
 
         if (reallyScore)
         {
-            GameManager.Instance.Score++;
+            GameManager.Instance.Score += GameManager.Instance.EnemyWaveTwoScore;
         }
         
         enemyController.SpawnLoot(new Vector3(0,0,0));
