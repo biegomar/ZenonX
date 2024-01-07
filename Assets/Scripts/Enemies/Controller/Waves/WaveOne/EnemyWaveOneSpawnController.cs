@@ -21,6 +21,7 @@ public class EnemyWaveOneSpawnController : BaseWaveSpawnController
     private bool IsFirstFormationReleased;
     private bool IsSecondFormationReleased;
     private bool IsThirdFormationReleased;
+    private bool IsFourthFormationReleased;
 
     private void Start()
     {
@@ -37,20 +38,26 @@ public class EnemyWaveOneSpawnController : BaseWaveSpawnController
 
         if (!IsFirstFormationReleased && WaveTimer > 1f && WaveTimer < 1.1f)
         {
-            this.SpawnWave(-7f, -3f);
+            this.SpawnWave(-9.5f, -6.5f);
             IsFirstFormationReleased = true;
         }
 
         if (!IsSecondFormationReleased && WaveTimer > 2f && WaveTimer < 2.1f)
         {
-            this.SpawnWave(-2f, 2f);
+            this.SpawnWave(-4.5f, -1.5f);
             IsSecondFormationReleased = true;
         }
 
         if (!IsThirdFormationReleased && WaveTimer > 3f && WaveTimer < 3.1f)
         {
-            this.SpawnWave(3f, 7f);
-            IsThirdFormationReleased = true;
+            this.SpawnWave(0.5f, 3.5f);
+            IsThirdFormationReleased = true;            
+        }
+
+        if (!IsFourthFormationReleased && WaveTimer > 4f && WaveTimer < 4.1f)
+        {
+            this.SpawnWave(7f, 10f);
+            IsFourthFormationReleased = true;
 
             this.IsWaveSpawned = true;
         }
