@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class IncentiveController
+public static class IncentiveManager
 {
     private static bool isFirstIncentive = false;
     private static bool isSecondIncentive = false;

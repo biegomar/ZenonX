@@ -37,7 +37,7 @@ public class LootMovementController : MonoBehaviour
             {
                 isInCollisionHandling = true;
                 Destroy(gameObject);
-                IncentiveController.GiveIncentive();
+                IncentiveManager.GiveIncentive();
             }
         }
     }

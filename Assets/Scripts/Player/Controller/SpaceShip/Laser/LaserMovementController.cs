@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LaserMovement : MonoBehaviour
+public class LaserMovementController : MonoBehaviour
 {
+    private Rigidbody2D rigidBody;
+
     public void Start()
     {
-        GetComponent<Rigidbody2D>().velocity = Vector2.up * GameManager.Instance.ShipLaserSpeed;
+        rigidBody = GetComponent<Rigidbody2D>();
+        rigidBody.velocity = Vector2.up * GameManager.Instance.ShipLaserSpeed;
     }
 
     public void Update()
@@ -20,7 +23,7 @@ public class LaserMovement : MonoBehaviour
         }
         else
         {
-            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            rigidBody.velocity = Vector2.zero;
         }
     }
 }
