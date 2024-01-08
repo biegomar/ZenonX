@@ -120,6 +120,6 @@ public class SpaceShipMovementController : MonoBehaviour
 
     private float CalculateNewXPosition()
     {        
-        return Math.Min(9f, Math.Max(-9f, transform.position.x + this.move.ReadValue<Vector2>().x * GameManager.Instance.ShipHorizontalSpeed * Time.deltaTime));
+        return Math.Min(9.5f, Math.Max(-9.5f, transform.position.x + this.move.ReadValue<Vector2>().x * GameManager.Instance.ShipHorizontalSpeed * Time.deltaTime));
     }
 }

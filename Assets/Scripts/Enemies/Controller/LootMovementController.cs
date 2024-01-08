@@ -8,7 +8,7 @@ public class LootMovementController : MonoBehaviour
     private bool isInCollisionHandling = false;
 
     void Start()
-    {    
+    {
         Rigidbody.AddForce(new Vector2(transform.position.x > 0.0f ? -0.3f : 0.3f, 1f) * GameManager.Instance.ShipBoosterVelocity, ForceMode2D.Impulse);
     }
 
@@ -20,7 +20,7 @@ public class LootMovementController : MonoBehaviour
             {
                 Destroy(gameObject);
             }
-        } 
+        }
         else
         {
             this.Rigidbody.velocity = Vector2.zero;
@@ -31,7 +31,7 @@ public class LootMovementController : MonoBehaviour
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (!isInCollisionHandling)
-        {            
+        {
             var collisionObject = collision.gameObject;
             if (collisionObject.tag == "SpaceShip")
             {
@@ -39,6 +39,6 @@ public class LootMovementController : MonoBehaviour
                 Destroy(gameObject);
                 IncentiveController.GiveIncentive();
             }
-        }        
+        }
     }
 }
