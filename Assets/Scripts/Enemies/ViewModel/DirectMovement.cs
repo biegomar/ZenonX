@@ -14,15 +14,15 @@ namespace Assets.Scripts.Enemies.MovementStrategies
         private float duration = 7f;
         private float elapsedTime;
 
-        public DirectMovement(Vector2 initialPosition, GameObject gameObject, int count = 1)
+        public DirectMovement(Vector2 initialPosition, GameObject gameObject, bool isNegativexDirection)
         {
             this.startPosition = gameObject.transform.position;
-            DefineTargetPosition(initialPosition, count);            
+            DefineTargetPosition(initialPosition, isNegativexDirection);            
         }
 
-        private void DefineTargetPosition(Vector2 initialPosition, int count)
+        private void DefineTargetPosition(Vector2 initialPosition, bool isNegativexDirection)
         {
-            var factor = count % 2 == 0 ? 1 : -1;
+            var factor = isNegativexDirection ? 1 : -1;
 
             float newX = initialPosition.x switch
             {

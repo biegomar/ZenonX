@@ -7,13 +7,17 @@ using Assets.Scripts.Enemies.MovementStrategies;
 using UnityEngine;
 
 public class EnemyWaveOneMovementController : MonoBehaviour
-{    
-    private EnemyWaveOneSpawnController enemyController;
-    private EnemyItem enemyItem;
-    private Vector2 startPosition;
-    private IMovementStrategy activeMovementStrategy;
+{
     private const float hitInterval = 6f;
     private static float timeSinceLastHit = 0f;
+
+    private EnemyWaveOneSpawnController enemyController;
+    private EnemyFlightFormationItem enemyItem;
+    private Vector2 startPosition;
+    private IMovementStrategy activeMovementStrategy;    
+    
+    private bool isNegativeXDirection;
+
 
     void Start()
     {        
@@ -23,7 +27,8 @@ public class EnemyWaveOneMovementController : MonoBehaviour
             this.enemyController = go.GetComponent<EnemyWaveOneSpawnController>();
             if (this.enemyController != null)
             {
-                this.enemyItem = this.enemyController.Enemies[gameObject.GetInstanceID()];                
+                this.enemyItem = this.enemyController.Enemies[gameObject.GetInstanceID()];
+                this.isNegativeXDirection = this.enemyController.EnemyFlightFormationNegativeDirection[this.enemyItem.WaveId];
             }
             else
             {
@@ -79,7 +84,8 @@ public class EnemyWaveOneMovementController : MonoBehaviour
                     break;
                 }
             case "Border":
-                activeMovementStrategy = new DirectMovement(startPosition, gameObject);
+                activeMovementStrategy = new DirectMovement(startPosition, gameObject, this.isNegativeXDirection);
+                this.isNegativeXDirection = !this.isNegativeXDirection;
                 break;
             case "SpaceShip":
                 if (timeSinceLastHit > hitInterval)

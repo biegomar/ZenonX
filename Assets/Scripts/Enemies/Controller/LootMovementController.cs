@@ -9,7 +9,7 @@ public class LootMovementController : MonoBehaviour
 
     void Start()
     {    
-        Rigidbody.AddForce(new Vector2(0.3f, 1f) * GameManager.Instance.ShipBoosterVelocity, ForceMode2D.Impulse);
+        Rigidbody.AddForce(new Vector2(transform.position.x > 0.0f ? -0.3f : 0.3f, 1f) * GameManager.Instance.ShipBoosterVelocity, ForceMode2D.Impulse);
     }
 
     public void Update()

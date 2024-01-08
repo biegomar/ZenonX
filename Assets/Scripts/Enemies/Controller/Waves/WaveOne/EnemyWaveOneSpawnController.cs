@@ -15,7 +15,8 @@ public class EnemyWaveOneSpawnController : BaseWaveSpawnController
     private GameObject LootTemplate;
 
     public IDictionary<Guid, IList<EnemyFlightFormationItem>> EnemyFlightFormation;
-    public IDictionary<int, EnemyItem> Enemies;
+    public IDictionary<Guid, bool> EnemyFlightFormationNegativeDirection;
+    public IDictionary<int, EnemyFlightFormationItem> Enemies;
 
     private float WaveTimer;
     private bool IsFirstFormationReleased;
@@ -34,25 +35,25 @@ public class EnemyWaveOneSpawnController : BaseWaveSpawnController
 
         if (!IsFirstFormationReleased && WaveTimer > 1f && WaveTimer < 1.1f)
         {
-            this.SpawnWave(-9.5f, -6.5f);
+            this.SpawnWave(-9.5f, -6.5f, false);
             IsFirstFormationReleased = true;
         }
 
         if (!IsSecondFormationReleased && WaveTimer > 2f && WaveTimer < 2.1f)
         {
-            this.SpawnWave(-4.5f, -1.5f);
+            this.SpawnWave(-4.5f, -1.5f, UnityEngine.Random.Range(0, 2) == 0);
             IsSecondFormationReleased = true;
         }
 
         if (!IsThirdFormationReleased && WaveTimer > 3f && WaveTimer < 3.1f)
         {
-            this.SpawnWave(0.5f, 3.5f);
+            this.SpawnWave(0.5f, 3.5f, UnityEngine.Random.Range(0, 2) == 0);
             IsThirdFormationReleased = true;            
         }
 
         if (!IsFourthFormationReleased && WaveTimer > 4f && WaveTimer < 4.1f)
         {
-            this.SpawnWave(7f, 10f);
+            this.SpawnWave(6f, 9f, true);
             IsFourthFormationReleased = true;
 
             this.IsWaveSpawned = true;
@@ -91,11 +92,12 @@ public class EnemyWaveOneSpawnController : BaseWaveSpawnController
         this.IsThirdFormationReleased = false;
         this.IsFourthFormationReleased = false;
 
-        EnemyFlightFormation = new Dictionary<Guid, IList<EnemyFlightFormationItem>>();
-        Enemies = new Dictionary<int, EnemyItem>();
+        this.EnemyFlightFormation = new Dictionary<Guid, IList<EnemyFlightFormationItem>>();
+        this.EnemyFlightFormationNegativeDirection = new Dictionary<Guid, bool>();
+        this.Enemies = new Dictionary<int, EnemyFlightFormationItem>();
     }
 
-    private void SpawnWave(float appearFrom, float appearTo)
+    private Guid SpawnWave(float appearFrom, float appearTo, bool isNegativeXDirection)
     {
         var posX = UnityEngine.Random.Range(appearFrom, appearTo);
 
@@ -123,6 +125,9 @@ public class EnemyWaveOneSpawnController : BaseWaveSpawnController
         this.Enemies.Add(enemyItem.Enemy.GetInstanceID(), enemyItem);
 
         this.EnemyFlightFormation.Add(waveId, gameObjects);
+        this.EnemyFlightFormationNegativeDirection.Add(waveId, isNegativeXDirection);
+
+        return waveId;
     }
 
     private EnemyFlightFormationItem CreateNewEnemyItem(Guid waveId, float posX, float distance)
