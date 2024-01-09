@@ -42,6 +42,6 @@ public static class IncentiveManager
     private static void GetHigherLaserFrequence()
     {
         isFirstIncentive = true;
-        GameManager.Instance.Level1LaserFrequence = 0.2f;
+        GameManager.Instance.ShipLaserFrequency /= 2;
     }
 }

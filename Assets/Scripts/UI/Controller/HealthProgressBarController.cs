@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthViewModel : MonoBehaviour
+public class HealthProgressBarController : MonoBehaviour
 {
     [SerializeField]
     private Slider slider;

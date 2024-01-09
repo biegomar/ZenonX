@@ -15,10 +15,12 @@ public sealed class GameManager
     public float ShipHorizontalSpeed { get; set; }
     public float ShipBoosterVelocity { get; set; }
     public float ShipLaserSpeed { get; set; }
+    public float ShipLaserFrequency { get; set; }
     public uint ShipLaserHitPoints { get; set; }
     public uint MaxShipLaserPower { get; set; }
     public uint ActualShipLaserPower { get => actualLaserPower; set => actualLaserPower = Math.Max(0, value); }
     public float LaserPowerRegainInterval { get; set; }
+    public bool IsShipShieldActive { get; set; }
 
     //Enemies - Wave One   
     public float EnemyWaveOneSinusStep { get; set; }
@@ -35,16 +37,13 @@ public sealed class GameManager
     public uint EnemyWaveTwoHealth { get; set; }
     public uint EnemyWaveTwoScore { get; set; }
 
-    //Level 1
-    public float Level1LaserFrequence { get; set; }
-
     //Score
     public uint Score { get; set; }
 
     //Game states
     public bool IsGameRunning { get; set; }
 
-    // Privater Konstruktor, um Instanziierung von außen zu verhindern
+    // Privater Konstruktor, um Instanziierung von auï¿½en zu verhindern
     private GameManager()
     {
         InitializeGameValues();
@@ -58,7 +57,6 @@ public sealed class GameManager
 
     private void InitializeGameValues()
     {
-        Level1LaserFrequence = 0.4f;
         Score = 0;
         IsGameRunning = true;
     }
@@ -93,9 +91,11 @@ public sealed class GameManager
         MaxShipLaserPower = 50;
         ActualShipLaserPower = MaxShipLaserPower;
         LaserPowerRegainInterval = 2f;
+        ShipLaserFrequency = 0.4f;
+        IsShipShieldActive = false;
     }
 
-    // Öffentliche Methode, um die Instanz abzurufen
+    // ï¿½ffentliche Methode, um die Instanz abzurufen
     public static GameManager Instance
     {
         get

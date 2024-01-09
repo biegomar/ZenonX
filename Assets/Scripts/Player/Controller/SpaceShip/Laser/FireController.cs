@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class FireController : MonoBehaviour
 {
@@ -7,7 +8,7 @@ public class FireController : MonoBehaviour
     private GameObject Laser;
 
     [SerializeField]
-    private AmmoProgressBarController healthBarManager;
+    private AmmoProgressBarController ammoProgressBarController;
 
     [SerializeField]
     private AudioSource laserSound;
@@ -44,13 +45,13 @@ public class FireController : MonoBehaviour
         // use delta time for game pause here.
         if (GameManager.Instance.IsGameRunning && Time.deltaTime > 0f)
         {
-            this.ActualLaserFrequence = GameManager.Instance.Level1LaserFrequence;
+            this.ActualLaserFrequence = GameManager.Instance.ShipLaserFrequency;
             this.LaserInterval += Time.deltaTime;
             this.ActualLaserPowerRegainInterval += Time.deltaTime;
 
             this.FeuerFrei();
             this.GainFirePower();
-            this.healthBarManager.SetAmmoValue();
+            this.ammoProgressBarController.SetAmmoValue();
         }        
     }
 

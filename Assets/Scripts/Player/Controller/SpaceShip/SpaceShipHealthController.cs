@@ -1,15 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class SpaceShipHealthController : MonoBehaviour
 {
     [SerializeField]
-    private HealthViewModel healthViewModel;
+    private HealthProgressBarController healthProgressBarController;
     
     private void Update()
     {
-        this.healthViewModel.SetHealthValue();
+        this.healthProgressBarController.SetHealthValue();
         
         if (GameManager.Instance.ActualShipHealth <= 0)
         {
