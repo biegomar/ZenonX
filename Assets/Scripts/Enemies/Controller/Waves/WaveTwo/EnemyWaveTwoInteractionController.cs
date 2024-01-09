@@ -12,8 +12,10 @@ public class EnemyWaveTwoInteractionController : MonoBehaviour
     private EnemyItem enemyItem;
 
     private const float rayLength = 9.7f;
+    private const float translate = 0.5f;
 
-    private RaycastHit2D hit;
+    private RaycastHit2D leftHit;
+    private RaycastHit2D rightHit;
     private Rigidbody2D rigidBody;
     private float timeSinceAppearance;
 
@@ -48,7 +50,11 @@ public class EnemyWaveTwoInteractionController : MonoBehaviour
         {
             this.timeSinceAppearance += Time.deltaTime;
 
-            hit = Physics2D.Raycast(transform.position + Vector3.down * .3f, Vector3.down, rayLength);
+            var position = transform.position;
+            var leftOrigin = new Vector3(position.x - translate, position.y, position.z);
+            var rightOrigin = new Vector3(position.x + translate, position.y, position.z);
+            leftHit = Physics2D.Raycast(leftOrigin + Vector3.down * .3f, Vector3.down, rayLength);
+            rightHit = Physics2D.Raycast(rightOrigin + Vector3.down * .3f, Vector3.down, rayLength);
 
             LetTheHammerFall();
             RayDebugOutput();
@@ -116,7 +122,10 @@ public class EnemyWaveTwoInteractionController : MonoBehaviour
 
     private void LetTheHammerFall()
     {
-        if (hit.collider != null && (hit.collider.gameObject.CompareTag("SpaceShip") || hit.collider.gameObject.CompareTag("SpaceShipShield")))
+        if ((leftHit.collider != null 
+            && (leftHit.collider.gameObject.CompareTag("SpaceShip") || leftHit.collider.gameObject.CompareTag("SpaceShipShield")))
+            || (rightHit.collider != null 
+                && (rightHit.collider.gameObject.CompareTag("SpaceShip") || rightHit.collider.gameObject.CompareTag("SpaceShipShield"))))
         {
             this.rigidBody.gravityScale = 2.5f;
         }
@@ -136,7 +145,14 @@ public class EnemyWaveTwoInteractionController : MonoBehaviour
 
     private void RayDebugOutput()
     {
-        Color debugColor = hit.collider != null ? Color.green : Color.red;
-        Debug.DrawRay(transform.position + Vector3.down * .3f, Vector2.down * rayLength, debugColor, 0.01f, true);
+        var position = transform.position;
+        var leftOrigin = new Vector3(position.x - translate, position.y, position.z);
+        var rightOrigin = new Vector3(position.x + translate, position.y, position.z);
+        
+        Color debugColorLeft = leftHit.collider != null ? Color.green : Color.red;
+        Debug.DrawRay(leftOrigin + Vector3.down * .3f, Vector2.down * rayLength, debugColorLeft, 0.01f, true);
+        
+        Color debugColorRight = rightHit.collider != null ? Color.green : Color.red;
+        Debug.DrawRay(rightOrigin + Vector3.down * .3f, Vector2.down * rayLength, debugColorRight, 0.01f, true);
     }
 }
