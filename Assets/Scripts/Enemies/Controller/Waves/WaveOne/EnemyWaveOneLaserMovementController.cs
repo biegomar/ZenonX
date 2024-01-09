@@ -42,6 +42,13 @@ public class EnemyWaveOneLaserMovementController : MonoBehaviour
                     Destroy(gameObject);
                     break;
                 }
+            case "SpaceShipShield":
+            {
+                GameManager.Instance.ActualShieldHealth -= 1;
+
+                Destroy(gameObject);
+                break;
+            }
         }
     }
 }

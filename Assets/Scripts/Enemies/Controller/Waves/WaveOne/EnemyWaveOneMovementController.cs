@@ -100,6 +100,19 @@ public class EnemyWaveOneMovementController : MonoBehaviour
                     enemyController.SpawnLoot(lastPosition);
                 }
                 break;
+            case "SpaceShipShield":
+                if (timeSinceLastHit > hitInterval)
+                {
+                    GameManager.Instance.ActualShieldHealth -= 5;
+                    timeSinceLastHit = 0f;
+
+                    var lastPosition = transform.position;
+
+                    RemoveEnemyAndScore();
+
+                    enemyController.SpawnLoot(lastPosition);
+                }
+                break;
         }
     }
 

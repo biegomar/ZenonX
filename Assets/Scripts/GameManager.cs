@@ -7,11 +7,12 @@ public sealed class GameManager
     private static readonly object lockObject = new object();
     private static GameManager instance = null;
     private int actualShipHealth;
+    private int actualShieldHealth;
     private uint actualLaserPower;
 
     //Player
     public int MaxShipHealth { get; set; }
-    public int ActualShipHealth { get => actualShipHealth; set => actualShipHealth = Math.Max(0,value); }
+    public int ActualShieldHealth { get => actualShieldHealth; set => actualShieldHealth = Math.Max(0,value); }
     public float ShipHorizontalSpeed { get; set; }
     public float ShipBoosterVelocity { get; set; }
     public float ShipLaserSpeed { get; set; }
@@ -20,7 +21,11 @@ public sealed class GameManager
     public uint MaxShipLaserPower { get; set; }
     public uint ActualShipLaserPower { get => actualLaserPower; set => actualLaserPower = Math.Max(0, value); }
     public float LaserPowerRegainInterval { get; set; }
+    
+    //Player extensions
     public bool IsShipShieldActive { get; set; }
+    public int ActualShipHealth { get => actualShipHealth; set => actualShipHealth = Math.Max(0,value); }
+    public int MaxShieldHealth { get; set; }
 
     //Enemies - Wave One   
     public float EnemyWaveOneSinusStep { get; set; }
@@ -43,7 +48,7 @@ public sealed class GameManager
     //Game states
     public bool IsGameRunning { get; set; }
 
-    // Privater Konstruktor, um Instanziierung von au�en zu verhindern
+    // Privater Konstruktor, um Instanziierung von außen zu verhindern
     private GameManager()
     {
         InitializeGameValues();
@@ -84,11 +89,13 @@ public sealed class GameManager
     {
         MaxShipHealth = 10;
         ActualShipHealth = MaxShipHealth;
+        MaxShieldHealth = 5;
+        ActualShieldHealth = MaxShieldHealth;
         ShipHorizontalSpeed = 7f;
         ShipBoosterVelocity = 5f;
         ShipLaserSpeed = 6.5f;
         ShipLaserHitPoints = 1;
-        MaxShipLaserPower = 50;
+        MaxShipLaserPower = 30;
         ActualShipLaserPower = MaxShipLaserPower;
         LaserPowerRegainInterval = 2f;
         ShipLaserFrequency = 0.4f;

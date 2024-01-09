@@ -79,7 +79,7 @@ public class EnemyWaveTwoInteractionController : MonoBehaviour
                     {
                         if (enemyItem != null)
                         {
-                            enemyItem.Health = enemyItem.Health - 1;
+                            enemyItem.Health -= 1;
                             if (enemyItem.Health <= 0)
                             {
                                 RemoveEnemyAndScore();
@@ -89,6 +89,14 @@ public class EnemyWaveTwoInteractionController : MonoBehaviour
                         Destroy(collisionObject);
                         break;
                     }
+                case "SpaceShipShield":
+                {
+                    isInCollisionHanding = true;
+                    GameManager.Instance.ActualShieldHealth -= 5;
+                    RemoveEnemyAndScore();
+
+                    break;
+                }
             }
         }        
     }
@@ -108,7 +116,7 @@ public class EnemyWaveTwoInteractionController : MonoBehaviour
 
     private void LetTheHammerFall()
     {
-        if (hit.collider != null && hit.collider.gameObject.tag == "SpaceShip")
+        if (hit.collider != null && (hit.collider.gameObject.CompareTag("SpaceShip") || hit.collider.gameObject.CompareTag("SpaceShipShield")))
         {
             this.rigidBody.gravityScale = 2.5f;
         }

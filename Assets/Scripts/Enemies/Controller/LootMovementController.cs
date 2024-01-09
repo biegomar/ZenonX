@@ -5,10 +5,12 @@ public class LootMovementController : MonoBehaviour
     [SerializeField]
     private Rigidbody2D Rigidbody;
 
+    private IncentiveManager incentiveManager;
     private bool isInCollisionHandling = false;
 
     void Start()
     {
+        this.incentiveManager = new IncentiveManager();
         Rigidbody.AddForce(new Vector2(transform.position.x > 0.0f ? -0.3f : 0.3f, 1f) * GameManager.Instance.ShipBoosterVelocity, ForceMode2D.Impulse);
     }
 
@@ -33,11 +35,11 @@ public class LootMovementController : MonoBehaviour
         if (!isInCollisionHandling)
         {
             var collisionObject = collision.gameObject;
-            if (collisionObject.tag == "SpaceShip")
+            if (collisionObject.CompareTag("SpaceShip"))
             {
                 isInCollisionHandling = true;
                 Destroy(gameObject);
-                IncentiveManager.GiveIncentive();
+                incentiveManager.GiveIncentive();
             }
         }
     }

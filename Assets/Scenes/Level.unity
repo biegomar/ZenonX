@@ -948,6 +948,7 @@ GameObject:
   - component: {fileID: 682745552}
   - component: {fileID: 682745556}
   - component: {fileID: 682745559}
+  - component: {fileID: 682745561}
   - component: {fileID: 682745560}
   m_Layer: 0
   m_Name: SpaceShip
@@ -984,7 +985,7 @@ Transform:
   - {fileID: 1696145563}
   - {fileID: 1642328650}
   - {fileID: 1468638491}
-  - {fileID: 1906644435}
+  - {fileID: 1293265500}
   m_Father: {fileID: 517775654}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &682745554
@@ -1208,6 +1209,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &682745561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 682745551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f04812483d1478543885a24226d1f9df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Shield: {fileID: 1293265499}
 --- !u!1 &804224035
 GameObject:
   m_ObjectHideFlags: 0
@@ -1573,6 +1587,87 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyTemplate: {fileID: 8223685631401717535, guid: 95502fae46938694abd8560403048f78, type: 3}
+--- !u!1 &1293265499
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1293265500}
+  - component: {fileID: 1293265501}
+  - component: {fileID: 1293265502}
+  m_Layer: 0
+  m_Name: Shield
+  m_TagString: SpaceShipShield
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1293265500
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1293265499}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1906644435}
+  m_Father: {fileID: 682745553}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1293265501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1293265499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15a1ba49ab2646944ab0a6e6d01c8535, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!58 &1293265502
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1293265499}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.1}
+  serializedVersion: 2
+  m_Radius: 0.755
 --- !u!1 &1309177013
 GameObject:
   m_ObjectHideFlags: 0
@@ -1903,7 +1998,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1395011989}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!1 &1456201528
 GameObject:
   m_ObjectHideFlags: 0
@@ -2405,11 +2500,19 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 682745553}
+    m_TransformParent: {fileID: 1293265500}
     m_Modifications:
     - target: {fileID: 491008380797443977, guid: 9123b7a8bd1bd07489b5e0868f0fef5a, type: 3}
       propertyPath: m_Name
       value: SpaceShipShield
+      objectReference: {fileID: 0}
+    - target: {fileID: 491008380797443977, guid: 9123b7a8bd1bd07489b5e0868f0fef5a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 491008380797443977, guid: 9123b7a8bd1bd07489b5e0868f0fef5a, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 2722863742540037380, guid: 9123b7a8bd1bd07489b5e0868f0fef5a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2417,7 +2520,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2722863742540037380, guid: 9123b7a8bd1bd07489b5e0868f0fef5a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.19999981
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 2722863742540037380, guid: 9123b7a8bd1bd07489b5e0868f0fef5a, type: 3}
       propertyPath: m_LocalPosition.z
