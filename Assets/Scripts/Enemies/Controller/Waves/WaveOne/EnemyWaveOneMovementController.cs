@@ -123,11 +123,11 @@ public class EnemyWaveOneMovementController : MonoBehaviour
         GameManager.Instance.Score += GameManager.Instance.EnemyWaveOneScore;
     }
 
-    private void RemoveEnemyFromWave(IDictionary<Guid, IList<EnemyFlightFormationItem>> EnemyWaves)
+    private void RemoveEnemyFromWave(IDictionary<Guid, IList<EnemyFlightFormationItem>> enemyWaves)
     {
-        foreach (var wave in EnemyWaves)
+        foreach (var wave in enemyWaves)
         {
-            var enemyFlightFormationItem = wave.Value.Where(item => item.Enemy == gameObject).FirstOrDefault();
+            var enemyFlightFormationItem = wave.Value.FirstOrDefault(item => item.Enemy == gameObject);
             if (enemyFlightFormationItem != null)
             {
                 wave.Value.Remove(enemyFlightFormationItem);

@@ -98,7 +98,7 @@ public sealed class GameManager
         MaxShipLaserPower = 30;
         ActualShipLaserPower = MaxShipLaserPower;
         LaserPowerRegainInterval = 2f;
-        ShipLaserFrequency = 0.4f;
+        ShipLaserFrequency = 0.6f;
         IsShipShieldActive = false;
     }
 
