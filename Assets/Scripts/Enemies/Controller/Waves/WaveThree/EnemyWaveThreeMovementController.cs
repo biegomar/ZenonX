@@ -30,8 +30,8 @@ public class EnemyWaveThreeMovementController : MonoBehaviour
         {
             Debug.Log("GameObject.Find(Enemies) is null");
         }
-        
-        this.activeMovementStrategy = new XPingPongMovement(transform.position);
+
+        this.activeMovementStrategy = new XPingPongLerpMovement(this.enemyItem.StartPosition);
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
@@ -66,7 +66,9 @@ public class EnemyWaveThreeMovementController : MonoBehaviour
                 CalculateNewXPosition(),
                 CalculateNewYPosition(),
                 transform.position.z);
-        }        
+        }
+
+        TryToSwitchToXPingPongMovement();
     }
     
     private void RemoveEnemyAndScore()
@@ -96,5 +98,16 @@ public class EnemyWaveThreeMovementController : MonoBehaviour
     private float CalculateNewYPosition()
     {        
         return this.activeMovementStrategy.CalculateNewYPosition(gameObject);
+    }
+    
+    private void TryToSwitchToXPingPongMovement()
+    {
+        if (this.activeMovementStrategy.GetType() != typeof(XPingPongMovement))
+        {
+            if (Math.Abs(transform.position.x - this.enemyItem.StartPosition.x) < 0.03f)
+            {
+                this.activeMovementStrategy = new XPingPongMovement(this.enemyItem.StartPosition);
+            } 
+        }
     }
 }

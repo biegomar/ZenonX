@@ -114,7 +114,7 @@ public class EnemyWaveThreeSpawnController : BaseWaveSpawnController
 
     private void AddLeftFormationItem(Guid waveId, int distance, List<EnemyFlightFormationItem> gameObjects)
     {
-        EnemyFlightFormationItem enemyItem = CreateNewEnemyItem(waveId, startPositionLeft, distance);
+        EnemyFlightFormationItem enemyItem = CreateNewEnemyItem(waveId, startPositionLeft, 2 * Vector2.left, distance);
         gameObjects.Add(enemyItem);
         this.Enemies.Add(enemyItem.Enemy.GetInstanceID(), enemyItem);
     }
@@ -122,16 +122,21 @@ public class EnemyWaveThreeSpawnController : BaseWaveSpawnController
     private void AddRightFormationItem(Guid waveId, int distance, List<EnemyFlightFormationItem> gameObjects)
     {
         EnemyFlightFormationItem enemyItem;
-        enemyItem = CreateNewEnemyItem(waveId, startPositionRight, distance);
+        enemyItem = CreateNewEnemyItem(waveId, startPositionRight,2 * Vector2.right, distance);
         gameObjects.Add(enemyItem);
         this.Enemies.Add(enemyItem.Enemy.GetInstanceID(), enemyItem);
     }
 
-    private EnemyFlightFormationItem CreateNewEnemyItem(Guid waveId, Vector2 startPosition, float distance)
+    private EnemyFlightFormationItem CreateNewEnemyItem(Guid waveId, Vector2 startPosition, Vector2 lerpCorrector, float distance)
     {
-        var vector = new Vector3(
+        var startVector = new Vector3(
             startPosition.x,
             startPosition.y - distance,
+            0);
+        
+        var vector = new Vector3(
+            startPosition.x + lerpCorrector.x,
+            startPosition.y + lerpCorrector.y - distance,
             0);
 
         return new EnemyFlightFormationItem
@@ -139,7 +144,7 @@ public class EnemyWaveThreeSpawnController : BaseWaveSpawnController
             WaveId = waveId,
             Health = GameManager.Instance.EnemyWaveThreeHealth,
             Enemy = Instantiate(EnemyTemplate, vector, Quaternion.identity),
-            StartPosition = vector
+            StartPosition = startVector
         };
     }
     private void RemoveDeadWaveFromDictionary(IEnumerable<Guid> deadWaves)
