@@ -6,43 +6,40 @@ using System.Threading.Tasks;
 using UnityEngine;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
-namespace Assets.Scripts.Enemies.MovementStrategies
+internal class SinusMovement : IMovementStrategy
 {
-    internal class SinusMovement : IMovementStrategy
+    private float initialX;
+    private const int sinusMultiplier = 2;
+    private double activeSinus;
+
+    public SinusMovement(Vector2 initialPosition)
     {
-        private float initialX;
-        private const int sinusMultiplier = 2;
-        private double activeSinus;
+        this.initialX = initialPosition.x;
+    }
 
-        public SinusMovement(Vector2 initialPosition)
+    public float CalculateNewXPosition(GameObject gameObject)
+    {
+        if (gameObject.transform.position.y < 5)
         {
-            this.initialX = initialPosition.x;
-        }
+            var result = this.initialX + (float)Math.Sin(activeSinus) * GameManager.Instance.EnemyWaveOneSinusAmplitude;
 
-        public float CalculateNewXPosition(GameObject gameObject)
-        {
-            if (gameObject.transform.position.y < 5)
+            if (activeSinus < Math.PI * sinusMultiplier)
             {
-                var result = this.initialX + (float)Math.Sin(activeSinus) * GameManager.Instance.EnemyWaveOneSinusAmplitude;
-
-                if (activeSinus < Math.PI * sinusMultiplier)
-                {
-                    activeSinus += GameManager.Instance.EnemyWaveOneSinusStep;
-                }
-                else
-                {
-                    activeSinus = 0d;
-                }
-
-                return result;
+                activeSinus += GameManager.Instance.EnemyWaveOneSinusStep;
+            }
+            else
+            {
+                activeSinus = 0d;
             }
 
-            return gameObject.transform.position.x;
+            return result;
         }
 
-        public float CalculateNewYPosition(GameObject gameObject)
-        {
-            return (gameObject.transform.position.y - GameManager.Instance.EnemyWaveOneYStep * GameManager.Instance.EnemyWaveOneYSpeed);
-        }
+        return gameObject.transform.position.x;
+    }
+
+    public float CalculateNewYPosition(GameObject gameObject)
+    {
+        return (gameObject.transform.position.y - GameManager.Instance.EnemyWaveOneYStep * GameManager.Instance.EnemyWaveOneYSpeed);
     }
 }

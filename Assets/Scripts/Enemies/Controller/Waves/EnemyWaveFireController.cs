@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using Assets.Scripts.Enemies;
-using Assets.Scripts.Enemies.MovementStrategies;
 using UnityEngine;
 
 public class EnemyWaveOneFireController : MonoBehaviour

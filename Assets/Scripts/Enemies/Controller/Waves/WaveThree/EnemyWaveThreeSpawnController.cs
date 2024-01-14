@@ -1,61 +1,58 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Assets.Scripts.Enemies;
 using Assets.Scripts.Enemies.Controller.Waves;
 using UnityEngine;
 
-public class EnemyWaveOneSpawnController : BaseWaveSpawnController
+public class EnemyWaveThreeSpawnController : BaseWaveSpawnController
 {
     [SerializeField]
     private GameObject EnemyTemplate;
 
     [SerializeField]
     private GameObject LootTemplate;
-
+    
     public IDictionary<Guid, IList<EnemyFlightFormationItem>> EnemyFlightFormation;
-    public IDictionary<Guid, bool> EnemyFlightFormationNegativeDirection;
     public IDictionary<int, EnemyFlightFormationItem> Enemies;
 
+    private Vector2 startPositionLeft;
+    private Vector2 startPositionRight;
+    
     private float WaveTimer;
     private bool IsFirstFormationReleased;
     private bool IsSecondFormationReleased;
     private bool IsThirdFormationReleased;
-    private bool IsFourthFormationReleased;
 
     private void Start()
     {
+        this.startPositionLeft = new Vector2(-9.5f, 5.5f);
+        this.startPositionRight = new Vector2(9.5f, 4.5f);
+        
         InitializeWave();
-    }    
-
+    } 
+    
     public override void SpawnWave()
     {
         WaveTimer += Time.deltaTime;
-
-        if (!IsFirstFormationReleased && WaveTimer > 1f && WaveTimer < 1.1f)
+        
+        if (!this.IsFirstFormationReleased && WaveTimer > 1f && WaveTimer < 1.1f)
         {
-            this.SpawnWave(-9.5f, -6.5f, false);
+            this.SpawnWaveInternal();
             IsFirstFormationReleased = true;
         }
-
-        if (!IsSecondFormationReleased && WaveTimer > 2f && WaveTimer < 2.1f)
+        
+        if (!this.IsSecondFormationReleased && WaveTimer > 2f && WaveTimer < 2.1f)
         {
-            this.SpawnWave(-4.5f, -1.5f, UnityEngine.Random.Range(0, 2) == 0);
+            this.SpawnWaveInternal();
             IsSecondFormationReleased = true;
         }
-
-        if (!IsThirdFormationReleased && WaveTimer > 3f && WaveTimer < 3.1f)
+        
+        if (!this.IsThirdFormationReleased && WaveTimer > 3f && WaveTimer < 3.1f)
         {
-            this.SpawnWave(0.5f, 3.5f, UnityEngine.Random.Range(0, 2) == 0);
-            IsThirdFormationReleased = true;            
-        }
-
-        if (!IsFourthFormationReleased && WaveTimer > 4f && WaveTimer < 4.1f)
-        {
-            this.SpawnWave(6f, 9f, true);
-            IsFourthFormationReleased = true;
-
+            this.SpawnWaveInternal();
+            IsThirdFormationReleased = true;
+            
             this.IsWaveSpawned = true;
         }
     }
@@ -90,60 +87,61 @@ public class EnemyWaveOneSpawnController : BaseWaveSpawnController
         this.IsFirstFormationReleased = false;
         this.IsSecondFormationReleased = false;
         this.IsThirdFormationReleased = false;
-        this.IsFourthFormationReleased = false;
 
         this.EnemyFlightFormation = new Dictionary<Guid, IList<EnemyFlightFormationItem>>();
-        this.EnemyFlightFormationNegativeDirection = new Dictionary<Guid, bool>();
         this.Enemies = new Dictionary<int, EnemyFlightFormationItem>();
     }
 
-    private void SpawnWave(float appearFrom, float appearTo, bool isNegativeXDirection)
+    private void SpawnWaveInternal()
     {
-        var posX = UnityEngine.Random.Range(appearFrom, appearTo);
-
         var waveId = Guid.NewGuid();
         var gameObjects = new List<EnemyFlightFormationItem>();
-
-        EnemyFlightFormationItem enemyItem = CreateNewEnemyItem(waveId, posX, 0);
-        gameObjects.Add(enemyItem);
-        this.Enemies.Add(enemyItem.Enemy.GetInstanceID(), enemyItem);
-
-        enemyItem = CreateNewEnemyItem(waveId, posX, 1);
-        gameObjects.Add(enemyItem);
-        this.Enemies.Add(enemyItem.Enemy.GetInstanceID(), enemyItem);
-
-        enemyItem = CreateNewEnemyItem(waveId, posX, 2);
-        gameObjects.Add(enemyItem);
-        this.Enemies.Add(enemyItem.Enemy.GetInstanceID(), enemyItem);
-
-        enemyItem = CreateNewEnemyItem(waveId, posX, 3);
-        gameObjects.Add(enemyItem);
-        this.Enemies.Add(enemyItem.Enemy.GetInstanceID(), enemyItem);
-
-        enemyItem = CreateNewEnemyItem(waveId, posX, 4);
-        gameObjects.Add(enemyItem);
-        this.Enemies.Add(enemyItem.Enemy.GetInstanceID(), enemyItem);
+        var distance = 0;
+        
+        AddLeftFormationItem(waveId, distance, gameObjects);
+        AddRightFormationItem(waveId, distance, gameObjects);
+        distance += 2;
+        
+        AddLeftFormationItem(waveId, distance, gameObjects);
+        AddRightFormationItem(waveId, distance, gameObjects);
+        distance += 2;
+        
+        AddLeftFormationItem(waveId, distance, gameObjects);
+        AddRightFormationItem(waveId, distance, gameObjects);
 
         this.EnemyFlightFormation.Add(waveId, gameObjects);
-        this.EnemyFlightFormationNegativeDirection.Add(waveId, isNegativeXDirection);
     }
 
-    private EnemyFlightFormationItem CreateNewEnemyItem(Guid waveId, float posX, float distance)
+    private void AddLeftFormationItem(Guid waveId, int distance, List<EnemyFlightFormationItem> gameObjects)
+    {
+        EnemyFlightFormationItem enemyItem = CreateNewEnemyItem(waveId, startPositionLeft, distance);
+        gameObjects.Add(enemyItem);
+        this.Enemies.Add(enemyItem.Enemy.GetInstanceID(), enemyItem);
+    }
+
+    private void AddRightFormationItem(Guid waveId, int distance, List<EnemyFlightFormationItem> gameObjects)
+    {
+        EnemyFlightFormationItem enemyItem;
+        enemyItem = CreateNewEnemyItem(waveId, startPositionRight, distance);
+        gameObjects.Add(enemyItem);
+        this.Enemies.Add(enemyItem.Enemy.GetInstanceID(), enemyItem);
+    }
+
+    private EnemyFlightFormationItem CreateNewEnemyItem(Guid waveId, Vector2 startPosition, float distance)
     {
         var vector = new Vector3(
-                       transform.position.x + posX,
-                       transform.position.y + GameManager.Instance.EnemyWaveOneDistance * distance,
-                       transform.position.z);
+            startPosition.x,
+            startPosition.y - distance,
+            0);
 
         return new EnemyFlightFormationItem
         {
             WaveId = waveId,
-            Health = GameManager.Instance.EnemyWaveOneHealth,
+            Health = GameManager.Instance.EnemyWaveThreeHealth,
             Enemy = Instantiate(EnemyTemplate, vector, Quaternion.identity),
             StartPosition = vector
         };
     }
-
     private void RemoveDeadWaveFromDictionary(IEnumerable<Guid> deadWaves)
     {
         foreach (var wave in deadWaves)
@@ -156,6 +154,4 @@ public class EnemyWaveOneSpawnController : BaseWaveSpawnController
             }
         }
     }
-
-
 }

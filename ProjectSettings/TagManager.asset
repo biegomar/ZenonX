@@ -15,6 +15,7 @@ TagManager:
   - EnemyWaveOne
   - EnemyWaveTwo
   - SpaceShipShield
+  - EnemyWaveThree
   layers:
   - Default
   - TransparentFX

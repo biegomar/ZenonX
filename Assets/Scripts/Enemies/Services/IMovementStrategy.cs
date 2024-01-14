@@ -5,11 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Assets.Scripts.Enemies.MovementStrategies
+internal interface IMovementStrategy
 {
-    internal interface IMovementStrategy
-    {
-        float CalculateNewXPosition(GameObject gameObject);
-        float CalculateNewYPosition(GameObject gameObject);
-    }
+    float CalculateNewXPosition(GameObject gameObject);
+    float CalculateNewYPosition(GameObject gameObject);
 }

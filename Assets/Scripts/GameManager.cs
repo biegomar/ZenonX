@@ -27,13 +27,15 @@ public sealed class GameManager
     public int ActualShipHealth { get => actualShipHealth; set => actualShipHealth = Math.Max(0,value); }
     public int MaxShieldHealth { get; set; }
 
+    //Enemies - general
+    public float EnemyWaveLaserSpeed { get; set; }
+    
     //Enemies - Wave One   
     public float EnemyWaveOneSinusStep { get; set; }
     public float EnemyWaveOneSinusAmplitude { get; set; }
     public float EnemyWaveOneYStep { get; set; }
     public float EnemyWaveOneYSpeed { get; set; }
     public float EnemyWaveOneDistance { get; set; }
-    public float EnemyWaveOneLaserSpeed { get; set; }
     public uint EnemyWaveOneHealth { get; set; }
     public uint EnemyWaveOneScore { get; set; }
 
@@ -41,6 +43,11 @@ public sealed class GameManager
     public float EnemyWaveTwoDistance { get; set; }
     public uint EnemyWaveTwoHealth { get; set; }
     public uint EnemyWaveTwoScore { get; set; }
+    
+    //Enemies - Wave Three
+    public uint EnemyWaveThreeHealth { get; set; }
+    public uint EnemyWaveThreeScore { get; set; }
+    public float EnemyWaveThreeYBaseSpeed { get; set; }
 
     //Score
     public uint Score { get; set; }
@@ -58,6 +65,8 @@ public sealed class GameManager
         InitializeEnemyWaveOneValues();
 
         InitializeEnemyWaveTwoValues();
+
+        InitializeEnemyWaveThreeValues();
     }
 
     private void InitializeGameValues()
@@ -73,7 +82,7 @@ public sealed class GameManager
         EnemyWaveOneYStep = 0.03f;
         EnemyWaveOneYSpeed = 0.25f;
         EnemyWaveOneDistance = 0.5f;
-        EnemyWaveOneLaserSpeed = 6.5f;
+        EnemyWaveLaserSpeed = 6.5f;
         EnemyWaveOneHealth = 2;
         EnemyWaveOneScore = 10;
 }
@@ -83,6 +92,13 @@ public sealed class GameManager
         EnemyWaveTwoDistance = 3.0f;
         EnemyWaveTwoHealth = 2;
         EnemyWaveTwoScore = 25;
+    }
+    
+    private void InitializeEnemyWaveThreeValues()
+    {
+        EnemyWaveThreeHealth = 2;
+        EnemyWaveThreeScore = 25;
+        EnemyWaveThreeYBaseSpeed = 3f;
     }
 
     private void InitializeShipValues()
