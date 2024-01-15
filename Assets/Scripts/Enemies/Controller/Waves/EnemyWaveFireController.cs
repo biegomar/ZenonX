@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Assets.Scripts.Enemies;
 using UnityEngine;
 
-public class EnemyWaveOneFireController : MonoBehaviour
+public class EnemyWaveFireController : MonoBehaviour
 {
     [SerializeField]
     private GameObject Laser;

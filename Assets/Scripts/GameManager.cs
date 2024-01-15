@@ -48,6 +48,11 @@ public sealed class GameManager
     public uint EnemyWaveThreeHealth { get; set; }
     public uint EnemyWaveThreeScore { get; set; }
     public float EnemyWaveThreeYBaseSpeed { get; set; }
+    
+    //Enemies - Wave Four
+    public uint EnemyWaveFourHealth { get; set; }
+    public uint EnemyWaveFourScore { get; set; }
+    public float EnemyWaveFourSpeed { get; set; }
 
     //Score
     public uint Score { get; set; }
@@ -67,10 +72,13 @@ public sealed class GameManager
         InitializeEnemyWaveTwoValues();
 
         InitializeEnemyWaveThreeValues();
+
+        InitializeEnemyWaveFourValues();
     }
 
     private void InitializeGameValues()
     {
+        EnemyWaveLaserSpeed = 6.5f;
         Score = 0;
         IsGameRunning = true;
     }
@@ -82,7 +90,6 @@ public sealed class GameManager
         EnemyWaveOneYStep = 0.03f;
         EnemyWaveOneYSpeed = 0.25f;
         EnemyWaveOneDistance = 0.5f;
-        EnemyWaveLaserSpeed = 6.5f;
         EnemyWaveOneHealth = 2;
         EnemyWaveOneScore = 10;
 }
@@ -99,6 +106,13 @@ public sealed class GameManager
         EnemyWaveThreeHealth = 2;
         EnemyWaveThreeScore = 25;
         EnemyWaveThreeYBaseSpeed = 3f;
+    }
+    
+    private void InitializeEnemyWaveFourValues()
+    {
+        EnemyWaveFourHealth = 2;
+        EnemyWaveFourScore = 25;
+        EnemyWaveFourSpeed = 1.5f;
     }
 
     private void InitializeShipValues()
