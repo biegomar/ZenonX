@@ -39,8 +39,8 @@ public class EnemyWaveFourMovementController : MonoBehaviour
         // use delta time for game pause here.
         if (GameManager.Instance.IsGameRunning && Time.deltaTime > 0f)
         {
-            if ((!this.enemyItem.Flag && transform.position.x > 12) ||
-                (this.enemyItem.Flag && transform.position.x < -12))
+            if ((!this.enemyItem.Flag && transform.position.x > 9) ||
+                (this.enemyItem.Flag && transform.position.x < -9))
             {
                 this.RemoveEnemyAndScore(false);
                 enemyController.SpawnLoot(new Vector3(0,0,-11f));

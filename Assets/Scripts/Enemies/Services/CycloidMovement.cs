@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class CycloidMovement : IMovementStrategy
 {
-    private const float radius = 1.0f;
+    private const float radius = .8f;
     private const float distanceFromOrigin = 3.0f;
 
     private float arc = 2.3f;

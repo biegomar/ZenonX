@@ -37,8 +37,8 @@ public class EnemyWaveFourSpawnController : BaseWaveSpawnController
     
     private void Start()
     {
-        this.startPositionLeft = new Vector3(-11.5f, .5f, 0);
-        this.startPositionRight = new Vector3(10.5f, .5f, 0);
+        this.startPositionLeft = new Vector3(-7.5f, .5f, 0);
+        this.startPositionRight = new Vector3(7.5f, .5f, 0);
         
         this.FormationOneWaveId = Guid.NewGuid();
         this.FormationTwoWaveId = Guid.NewGuid();
