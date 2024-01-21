@@ -35,7 +35,7 @@ public class LootMovementController : MonoBehaviour
         if (!isInCollisionHandling)
         {
             var collisionObject = collision.gameObject;
-            if (collisionObject.CompareTag("SpaceShip"))
+            if (collisionObject.CompareTag("Player"))
             {
                 isInCollisionHandling = true;
                 Destroy(gameObject);

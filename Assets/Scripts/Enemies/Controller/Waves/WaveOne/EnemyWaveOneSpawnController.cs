@@ -34,25 +34,25 @@ public class EnemyWaveOneSpawnController : BaseWaveSpawnController
 
         if (!IsFirstFormationReleased && WaveTimer > 1f && WaveTimer < 1.1f)
         {
-            this.SpawnWave(-9.5f, -6.5f, false);
+            this.SpawnWave(-7f, -5f, false);
             IsFirstFormationReleased = true;
         }
 
         if (!IsSecondFormationReleased && WaveTimer > 2f && WaveTimer < 2.1f)
         {
-            this.SpawnWave(-4.5f, -1.5f, UnityEngine.Random.Range(0, 2) == 0);
+            this.SpawnWave(-4f, -2f, UnityEngine.Random.Range(0, 2) == 0);
             IsSecondFormationReleased = true;
         }
 
         if (!IsThirdFormationReleased && WaveTimer > 3f && WaveTimer < 3.1f)
         {
-            this.SpawnWave(0.5f, 3.5f, UnityEngine.Random.Range(0, 2) == 0);
+            this.SpawnWave(-1f, 1f, UnityEngine.Random.Range(0, 2) == 0);
             IsThirdFormationReleased = true;            
         }
 
         if (!IsFourthFormationReleased && WaveTimer > 4f && WaveTimer < 4.1f)
         {
-            this.SpawnWave(6f, 9f, true);
+            this.SpawnWave(2f, 5f, true);
             IsFourthFormationReleased = true;
 
             this.IsWaveSpawned = true;

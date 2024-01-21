@@ -67,6 +67,7 @@ public class EnemyWaveOneMovementController : MonoBehaviour
                 {
                     if (enemyItem != null)
                     {
+                        Destroy(collisionObject);
                         enemyItem.Health = enemyItem.Health - 1;
                         if (enemyItem.Health <= 0)
                         {
@@ -77,15 +78,14 @@ public class EnemyWaveOneMovementController : MonoBehaviour
                             enemyController.SpawnLoot(lastPosition);
                         }
                     }
-
-                    Destroy(collisionObject);
+                    
                     break;
                 }
             case "Border":
                 activeMovementStrategy = new DirectMovement(startPosition, gameObject, this.isNegativeXDirection);
                 this.isNegativeXDirection = !this.isNegativeXDirection;
                 break;
-            case "SpaceShip":
+            case "Player":
                 if (timeSinceLastHit > hitInterval)
                 {
                     GameManager.Instance.ActualShipHealth -= 5;

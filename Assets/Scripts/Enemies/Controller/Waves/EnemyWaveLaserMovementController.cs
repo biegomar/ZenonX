@@ -30,7 +30,7 @@ public class EnemyWaveOneLaserMovementController : MonoBehaviour
         var collisionObject = collision.gameObject;
         switch (collisionObject.tag)
         {
-            case "SpaceShip":
+            case "Player":
                 {
                     GameManager.Instance.ActualShipHealth -= 1;
 

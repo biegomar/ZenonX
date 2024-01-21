@@ -73,7 +73,7 @@ public class EnemyWaveTwoInteractionController : MonoBehaviour
             var collisionObject = collision.gameObject;
             switch (collisionObject.tag)
             {
-                case "SpaceShip":
+                case "Player":
                     {
                         isInCollisionHanding = true;
                         GameManager.Instance.ActualShipHealth -= 5;
@@ -123,9 +123,9 @@ public class EnemyWaveTwoInteractionController : MonoBehaviour
     private void LetTheHammerFall()
     {
         if ((leftHit.collider != null 
-            && (leftHit.collider.gameObject.CompareTag("SpaceShip") || leftHit.collider.gameObject.CompareTag("SpaceShipShield")))
+            && (leftHit.collider.gameObject.CompareTag("Player") || leftHit.collider.gameObject.CompareTag("SpaceShipShield")))
             || (rightHit.collider != null 
-                && (rightHit.collider.gameObject.CompareTag("SpaceShip") || rightHit.collider.gameObject.CompareTag("SpaceShipShield"))))
+                && (rightHit.collider.gameObject.CompareTag("Player") || rightHit.collider.gameObject.CompareTag("SpaceShipShield"))))
         {
             this.rigidBody.gravityScale = 2.5f;
         }
