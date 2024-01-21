@@ -161,3 +161,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3008df2e02542de4297d907b51825c5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  laserDisappearYPosition: 4

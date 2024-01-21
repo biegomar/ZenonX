@@ -989,6 +989,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70169dd8d0037a74481d5d3d316f134f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerRightBorder: 6.8
+  playerLeftBorder: -6.8
 --- !u!4 &682745553
 Transform:
   m_ObjectHideFlags: 0

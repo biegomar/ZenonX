@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class LaserMovementController : MonoBehaviour
 {
+    [SerializeField] 
+    private float laserDisappearYPosition;
+    
     private Rigidbody2D rigidBody;
 
     public void Start()
@@ -14,7 +17,7 @@ public class LaserMovementController : MonoBehaviour
     {
         if (GameManager.Instance.IsGameRunning)
         {
-            if (transform.position.y > 6)
+            if (transform.position.y > laserDisappearYPosition)
             {
                 Destroy(gameObject);
             }

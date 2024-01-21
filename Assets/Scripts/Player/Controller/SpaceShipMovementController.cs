@@ -2,9 +2,16 @@ using System;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class SpaceShipMovementController : MonoBehaviour
 {
+    [SerializeField]
+    private float playerRightBorder;
+    
+    [SerializeField] 
+    private float playerLeftBorder;
+    
     //Sprites
     private GameObject ship;
     private GameObject shipRight;
@@ -35,9 +42,7 @@ public class SpaceShipMovementController : MonoBehaviour
         this.move.Disable();
         this.boost.Disable();
     }
-
-
-    // Start is called before the first frame update
+    
     void Start()
     {
         isShipBoosted = false;
@@ -47,8 +52,7 @@ public class SpaceShipMovementController : MonoBehaviour
         shipRight = GameObject.FindGameObjectsWithTag("Right").First();
         ship = GameObject.FindGameObjectsWithTag("Unmoved").First();
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         // use delta time for game pause here.        
@@ -63,7 +67,7 @@ public class SpaceShipMovementController : MonoBehaviour
     public void OnTriggerEnter2D(Collider2D collision)
     {        
         var collisionObject = collision.gameObject;
-        if (collisionObject.tag == "Border")
+        if (collisionObject.CompareTag("Border"))
         {            
             this.Rigidbody.velocity = Vector2.zero;
             this.Rigidbody.isKinematic = true;
@@ -120,6 +124,6 @@ public class SpaceShipMovementController : MonoBehaviour
 
     private float CalculateNewXPosition()
     {        
-        return Math.Min(9.5f, Math.Max(-9.5f, transform.position.x + this.move.ReadValue<Vector2>().x * GameManager.Instance.ShipHorizontalSpeed * Time.deltaTime));
+        return Math.Min(this.playerRightBorder, Math.Max(this.playerLeftBorder, transform.position.x + this.move.ReadValue<Vector2>().x * GameManager.Instance.ShipHorizontalSpeed * Time.deltaTime));
     }
 }
