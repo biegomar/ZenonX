@@ -96,7 +96,7 @@ public sealed class GameManager
 
     private void InitializeEnemyWaveTwoValues()
     {
-        EnemyWaveTwoDistance = 3.0f;
+        EnemyWaveTwoDistance = 2.0f;
         EnemyWaveTwoHealth = 2;
         EnemyWaveTwoScore = 25;
     }

@@ -7,7 +7,7 @@ using UnityEngine;
 
 internal class StraightLerpMovement : IMovementStrategy
 {
-    private const float targetPositionY = 5.6f;        
+    private const float targetPositionY = 2.5f;        
     private const float duration = 2.3f;
 
     private Vector2 targetPosition;

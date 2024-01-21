@@ -24,7 +24,7 @@ public class EnemyWaveTwoMovementController : MonoBehaviour
                   CalculateNewYPosition(),
                   transform.position.z);
 
-                isTargetPositionReached = transform.position.y <= 5.6f;
+                isTargetPositionReached = transform.position.y <= 3.5f;
             }                       
         }
         else
