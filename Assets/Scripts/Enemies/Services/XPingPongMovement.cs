@@ -2,7 +2,7 @@
 
 public class XPingPongMovement : IMovementStrategy
 {
-    private const float pingPongLength = 19f;
+    private const float pingPongLength = 13f;
     
     private readonly Vector2 startPosition;
     private float pingPongSpeed;

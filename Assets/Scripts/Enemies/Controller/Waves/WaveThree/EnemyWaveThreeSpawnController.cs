@@ -25,8 +25,8 @@ public class EnemyWaveThreeSpawnController : BaseWaveSpawnController
 
     private void Start()
     {
-        this.startPositionLeft = new Vector2(-9.5f, 5.5f);
-        this.startPositionRight = new Vector2(9.5f, 4.5f);
+        this.startPositionLeft = new Vector2(-6.5f, 3.5f);
+        this.startPositionRight = new Vector2(6.5f, 2.5f);
         
         InitializeWave();
     } 
