@@ -1,11 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraController : MonoBehaviour
+namespace Camera.Controller
 {
-    void Start()
+    public class CameraController : MonoBehaviour
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        void Start()
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
     }
 }

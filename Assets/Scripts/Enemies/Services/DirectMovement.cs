@@ -1,50 +1,48 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
-internal class DirectMovement : IMovementStrategy
+namespace Enemies.Services
 {
-    private Vector2 startPosition;
-    private Vector2 targetPosition;
-    private float duration = 7f;
-    private float elapsedTime;
-
-    public DirectMovement(Vector2 initialPosition, GameObject gameObject, bool isNegativexDirection)
+    internal class DirectMovement : IMovementStrategy
     {
-        this.startPosition = gameObject.transform.position;
-        DefineTargetPosition(initialPosition, isNegativexDirection);            
-    }
+        private Vector2 startPosition;
+        private Vector2 targetPosition;
+        private float duration = 7f;
+        private float elapsedTime;
 
-    private void DefineTargetPosition(Vector2 initialPosition, bool isNegativexDirection)
-    {
-        var factor = isNegativexDirection ? 1 : -1;
-
-        float newX = initialPosition.x switch
+        public DirectMovement(Vector2 initialPosition, GameObject gameObject, bool isNegativexDirection)
         {
-            < 0 => initialPosition.x - (2f * factor),
-            >= 0 => initialPosition.x + (2f * factor),
-            _ => initialPosition.x,
-        };
+            this.startPosition = gameObject.transform.position;
+            DefineTargetPosition(initialPosition, isNegativexDirection);            
+        }
 
-        this.targetPosition = new Vector2(newX, initialPosition.y);            
-    }
+        private void DefineTargetPosition(Vector2 initialPosition, bool isNegativexDirection)
+        {
+            var factor = isNegativexDirection ? 1 : -1;
 
-    public float CalculateNewXPosition(GameObject gameObject)
-    {
-        this.elapsedTime += Time.deltaTime;
+            float newX = initialPosition.x switch
+            {
+                < 0 => initialPosition.x - (2f * factor),
+                >= 0 => initialPosition.x + (2f * factor),
+                _ => initialPosition.x,
+            };
 
-        var vec = Vector2.Lerp(this.startPosition, this.targetPosition, this.elapsedTime / this.duration);
+            this.targetPosition = new Vector2(newX, initialPosition.y);            
+        }
 
-        return vec.x;
-    }
+        public float CalculateNewXPosition(GameObject gameObject)
+        {
+            this.elapsedTime += Time.deltaTime;
 
-    public float CalculateNewYPosition(GameObject gameObject)
-    {
-        var vec = Vector2.Lerp(this.startPosition, this.targetPosition, this.elapsedTime / this.duration);
+            var vec = Vector2.Lerp(this.startPosition, this.targetPosition, this.elapsedTime / this.duration);
 
-        return vec.y;
+            return vec.x;
+        }
+
+        public float CalculateNewYPosition(GameObject gameObject)
+        {
+            var vec = Vector2.Lerp(this.startPosition, this.targetPosition, this.elapsedTime / this.duration);
+
+            return vec.y;
+        }
     }
 }

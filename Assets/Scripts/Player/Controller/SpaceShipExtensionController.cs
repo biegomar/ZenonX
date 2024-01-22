@@ -1,22 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class SpaceShipExtensionController : MonoBehaviour
+namespace Player.Controller
 {
-    [SerializeField] 
-    private GameObject Shield;
-
-    void Update()
+    public class SpaceShipExtensionController : MonoBehaviour
     {
-        if (GameManager.Instance.IsShipShieldActive && !this.Shield.activeSelf)
-        {
-            Shield.SetActive(true);
-        }
+        [SerializeField] 
+        private GameObject Shield;
 
-        if (!GameManager.Instance.IsShipShieldActive && this.Shield.activeSelf)
+        void Update()
         {
-            Shield.SetActive(false);
+            if (GameManager.Instance.IsShipShieldActive && !this.Shield.activeSelf)
+            {
+                Shield.SetActive(true);
+            }
+
+            if (!GameManager.Instance.IsShipShieldActive && this.Shield.activeSelf)
+            {
+                Shield.SetActive(false);
+            }
         }
     }
 }

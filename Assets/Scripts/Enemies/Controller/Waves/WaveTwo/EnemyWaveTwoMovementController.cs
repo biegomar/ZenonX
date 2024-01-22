@@ -1,50 +1,52 @@
-using System.Collections;
-using System.Collections.Generic;
+using Enemies.Services;
 using UnityEngine;
 
-public class EnemyWaveTwoMovementController : MonoBehaviour
-{    
-    private IMovementStrategy activeMovementStrategy;
-    private bool isTargetPositionReached = false;
+namespace Enemies.Controller.Waves.WaveTwo
+{
+    public class EnemyWaveTwoMovementController : MonoBehaviour
+    {    
+        private IMovementStrategy activeMovementStrategy;
+        private bool isTargetPositionReached = false;
 
-    private void Start()
-    {        
-        this.activeMovementStrategy = new StraightLerpMovement(transform.position);    
-    }
-
-    void Update()
-    {
-        // use delta time for game pause here.
-        if (GameManager.Instance.IsGameRunning && Time.deltaTime > 0f)
-        {
-            if (!isTargetPositionReached)
-            {
-                transform.position = new Vector3(
-                  CalculateNewXPosition(),
-                  CalculateNewYPosition(),
-                  transform.position.z);
-
-                isTargetPositionReached = transform.position.y <= 3.5f;
-            }                       
+        private void Start()
+        {        
+            this.activeMovementStrategy = new StraightLerpMovement(transform.position);    
         }
-        else
+
+        void Update()
         {
-            var rigidBody = GetComponent<Rigidbody2D>();
-            if (rigidBody != null)
+            // use delta time for game pause here.
+            if (GameManager.Instance.IsGameRunning && Time.deltaTime > 0f)
             {
-                rigidBody.velocity = Vector2.zero;
+                if (!isTargetPositionReached)
+                {
+                    transform.position = new Vector3(
+                        CalculateNewXPosition(),
+                        CalculateNewYPosition(),
+                        transform.position.z);
+
+                    isTargetPositionReached = transform.position.y <= 3.5f;
+                }                       
             }
+            else
+            {
+                var rigidBody = GetComponent<Rigidbody2D>();
+                if (rigidBody != null)
+                {
+                    rigidBody.velocity = Vector2.zero;
+                }
             
+            }
         }
-    }
 
-    private float CalculateNewXPosition()
-    {
-        return this.activeMovementStrategy.CalculateNewXPosition(gameObject);
-    }
+        private float CalculateNewXPosition()
+        {
+            return this.activeMovementStrategy.CalculateNewXPosition(gameObject);
+        }
 
-    private float CalculateNewYPosition()
-    {
-        return this.activeMovementStrategy.CalculateNewYPosition(gameObject);
+        private float CalculateNewYPosition()
+        {
+            return this.activeMovementStrategy.CalculateNewYPosition(gameObject);
+        }
     }
 }

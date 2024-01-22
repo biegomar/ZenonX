@@ -1,62 +1,63 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class IncentiveManager
+namespace Player.Services
 {
-    private readonly IDictionary<byte, Action> incentives;
-    private const byte LaserFrequencyIndex = 4;
-
-    public IncentiveManager()
+    public class IncentiveManager
     {
-        this.incentives = new Dictionary<byte, Action>();
+        private readonly IDictionary<byte, Action> incentives;
+        private const byte LaserFrequencyIndex = 4;
+
+        public IncentiveManager()
+        {
+            this.incentives = new Dictionary<byte, Action>();
         
-        this.incentives.Add(1, this.GetMoreMaxLaserPower);
-        this.incentives.Add(2, this.GetMoreMaxHealthPoints);
-        this.incentives.Add(3, this.GetSpaceShipShield);
-        this.incentives.Add(LaserFrequencyIndex, this.GetHigherLaserFrequence);
-    }
+            this.incentives.Add(1, this.GetMoreMaxLaserPower);
+            this.incentives.Add(2, this.GetMoreMaxHealthPoints);
+            this.incentives.Add(3, this.GetSpaceShipShield);
+            this.incentives.Add(LaserFrequencyIndex, this.GetHigherLaserFrequence);
+        }
     
-    public void GiveIncentive()
-    {
-        byte index;
-        do
+        public void GiveIncentive()
         {
-            index = (byte)UnityEngine.Random.Range(1, this.incentives.Count+1);    
-        } while (!this.incentives.ContainsKey(index));
+            byte index;
+            do
+            {
+                index = (byte)UnityEngine.Random.Range(1, this.incentives.Count+1);    
+            } while (!this.incentives.ContainsKey(index));
         
-        this.incentives[index].Invoke();
-    }
-
-    private void GetMoreMaxHealthPoints()
-    {
-        GameManager.Instance.MaxShipHealth += 1;
-        GameManager.Instance.ActualShipHealth = GameManager.Instance.MaxShipHealth;
-    }
-
-    private void GetMoreMaxLaserPower()
-    {
-        GameManager.Instance.MaxShipLaserPower += 5;
-        GameManager.Instance.ActualShipLaserPower = GameManager.Instance.MaxShipLaserPower;
-    }
-
-    private void GetHigherLaserFrequence()
-    {
-        GameManager.Instance.ShipLaserFrequency /= 2;
-        if (GameManager.Instance.ShipLaserFrequency <= 0.1f)
-        {
-            this.incentives.Remove(LaserFrequencyIndex);
-        }
-    }
-
-    private void GetSpaceShipShield()
-    {
-        if (!GameManager.Instance.IsShipShieldActive)
-        {
-            GameManager.Instance.IsShipShieldActive = true;
+            this.incentives[index].Invoke();
         }
 
-        GameManager.Instance.ActualShieldHealth = GameManager.Instance.MaxShieldHealth;
+        private void GetMoreMaxHealthPoints()
+        {
+            GameManager.Instance.MaxShipHealth += 1;
+            GameManager.Instance.ActualShipHealth = GameManager.Instance.MaxShipHealth;
+        }
+
+        private void GetMoreMaxLaserPower()
+        {
+            GameManager.Instance.MaxShipLaserPower += 5;
+            GameManager.Instance.ActualShipLaserPower = GameManager.Instance.MaxShipLaserPower;
+        }
+
+        private void GetHigherLaserFrequence()
+        {
+            GameManager.Instance.ShipLaserFrequency /= 2;
+            if (GameManager.Instance.ShipLaserFrequency <= 0.1f)
+            {
+                this.incentives.Remove(LaserFrequencyIndex);
+            }
+        }
+
+        private void GetSpaceShipShield()
+        {
+            if (!GameManager.Instance.IsShipShieldActive)
+            {
+                GameManager.Instance.IsShipShieldActive = true;
+            }
+
+            GameManager.Instance.ActualShieldHealth = GameManager.Instance.MaxShieldHealth;
+        }
     }
 }

@@ -1,45 +1,49 @@
+using Player.Services;
 using UnityEngine;
 
-public class LootMovementController : MonoBehaviour
+namespace Enemies.Controller
 {
-    [SerializeField]
-    private Rigidbody2D Rigidbody;
-
-    private IncentiveManager incentiveManager;
-    private bool isInCollisionHandling = false;
-
-    void Start()
+    public class LootMovementController : MonoBehaviour
     {
-        this.incentiveManager = new IncentiveManager();
-        Rigidbody.AddForce(new Vector2(transform.position.x > 0.0f ? -0.3f : 0.3f, 1f) * GameManager.Instance.ShipBoosterVelocity, ForceMode2D.Impulse);
-    }
+        [SerializeField]
+        private Rigidbody2D Rigidbody;
 
-    public void Update()
-    {
-        if (GameManager.Instance.IsGameRunning)
+        private IncentiveManager incentiveManager;
+        private bool isInCollisionHandling = false;
+
+        void Start()
         {
-            if (transform.position.y > 30)
+            this.incentiveManager = new IncentiveManager();
+            Rigidbody.AddForce(new Vector2(transform.position.x > 0.0f ? -0.3f : 0.3f, 1f) * GameManager.Instance.ShipBoosterVelocity, ForceMode2D.Impulse);
+        }
+
+        public void Update()
+        {
+            if (GameManager.Instance.IsGameRunning)
             {
-                Destroy(gameObject);
+                if (transform.position.y > 30)
+                {
+                    Destroy(gameObject);
+                }
+            }
+            else
+            {
+                this.Rigidbody.velocity = Vector2.zero;
+                this.Rigidbody.gravityScale = 0;
             }
         }
-        else
-        {
-            this.Rigidbody.velocity = Vector2.zero;
-            this.Rigidbody.gravityScale = 0;
-        }
-    }
 
-    public void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (!isInCollisionHandling)
+        public void OnTriggerEnter2D(Collider2D collision)
         {
-            var collisionObject = collision.gameObject;
-            if (collisionObject.CompareTag("Player"))
+            if (!isInCollisionHandling)
             {
-                isInCollisionHandling = true;
-                Destroy(gameObject);
-                incentiveManager.GiveIncentive();
+                var collisionObject = collision.gameObject;
+                if (collisionObject.CompareTag("Player"))
+                {
+                    isInCollisionHandling = true;
+                    Destroy(gameObject);
+                    incentiveManager.GiveIncentive();
+                }
             }
         }
     }

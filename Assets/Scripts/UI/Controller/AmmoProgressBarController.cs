@@ -1,28 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AmmoProgressBarController : MonoBehaviour
+namespace UI.Controller
 {
-    [SerializeField]
-    private Slider slider;
-
-    private void Start()
+    public class AmmoProgressBarController : MonoBehaviour
     {
-        this.slider.maxValue = GameManager.Instance.MaxShipLaserPower;
-    }
+        [SerializeField]
+        private Slider slider;
 
-    public void SetAmmoValue()
-    {
-        var percentage = this.GetActualLaserPowerValue();
-        this.slider.value = percentage;        
-    }    
+        private void Start()
+        {
+            this.slider.maxValue = GameManager.Instance.MaxShipLaserPower;
+        }
 
-    private float GetActualLaserPowerValue()
-    {
-        this.slider.maxValue = GameManager.Instance.MaxShipLaserPower;        
+        public void SetAmmoValue()
+        {
+            var percentage = this.GetActualLaserPowerValue();
+            this.slider.value = percentage;        
+        }    
 
-        return (float)GameManager.Instance.ActualShipLaserPower;
+        private float GetActualLaserPowerValue()
+        {
+            this.slider.maxValue = GameManager.Instance.MaxShipLaserPower;        
+
+            return (float)GameManager.Instance.ActualShipLaserPower;
+        }
     }
 }

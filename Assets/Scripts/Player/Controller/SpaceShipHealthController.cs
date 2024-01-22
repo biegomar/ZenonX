@@ -1,20 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
+using UI.Controller;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-public class SpaceShipHealthController : MonoBehaviour
+namespace Player.Controller
 {
-    [SerializeField]
-    private HealthProgressBarController healthProgressBarController;
-    
-    private void Update()
+    public class SpaceShipHealthController : MonoBehaviour
     {
-        this.healthProgressBarController.SetHealthValue();
-        
-        if (GameManager.Instance.ActualShipHealth <= 0)
+        [SerializeField]
+        private HealthProgressBarController healthProgressBarController;
+    
+        private void Update()
         {
-            GameManager.Instance.IsGameRunning = false;
+            this.healthProgressBarController.SetHealthValue();
+        
+            if (GameManager.Instance.ActualShipHealth <= 0)
+            {
+                GameManager.Instance.IsGameRunning = false;
+            }
         }
     }
 }

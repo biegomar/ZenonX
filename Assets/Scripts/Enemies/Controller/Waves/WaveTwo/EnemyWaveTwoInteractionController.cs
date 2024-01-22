@@ -1,79 +1,79 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Assets.Scripts.Enemies;
+using Enemies.Model;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class EnemyWaveTwoInteractionController : MonoBehaviour
+namespace Enemies.Controller.Waves.WaveTwo
 {
-    private EnemyWaveTwoSpawnController enemyController;
-    private EnemyItem enemyItem;
-
-    private const float rayLength = 9.7f;
-    private const float translate = 0.5f;
-
-    private RaycastHit2D leftHit;
-    private RaycastHit2D rightHit;
-    private Rigidbody2D rigidBody;
-    private float timeSinceAppearance;
-
-    private bool isInCollisionHanding = false;
-
-    private void Start()
+    public class EnemyWaveTwoInteractionController : MonoBehaviour
     {
-        this.rigidBody = GetComponent<Rigidbody2D>();
+        private EnemyWaveTwoSpawnController enemyController;
+        private EnemyItem enemyItem;
 
-        GameObject go = GameObject.Find("EnemyWaveTwo");
-        if (go != null)
+        private const float rayLength = 9.7f;
+        private const float translate = 0.5f;
+
+        private RaycastHit2D leftHit;
+        private RaycastHit2D rightHit;
+        private Rigidbody2D rigidBody;
+        private float timeSinceAppearance;
+
+        private bool isInCollisionHanding = false;
+
+        private void Start()
         {
-            this.enemyController = go.GetComponent<EnemyWaveTwoSpawnController>();
-            if (this.enemyController != null)
+            this.rigidBody = GetComponent<Rigidbody2D>();
+
+            GameObject go = GameObject.Find("EnemyWaveTwo");
+            if (go != null)
             {
-                this.enemyItem = this.enemyController.Enemies[gameObject.GetInstanceID()];
+                this.enemyController = go.GetComponent<EnemyWaveTwoSpawnController>();
+                if (this.enemyController != null)
+                {
+                    this.enemyItem = this.enemyController.Enemies[gameObject.GetInstanceID()];
+                }
+                else
+                {
+                    Debug.Log("go.GetComponent<EnemyController>() is null");
+                }
             }
             else
             {
-                Debug.Log("go.GetComponent<EnemyController>() is null");
+                Debug.Log("GameObject.Find(Enemies) is null");
             }
         }
-        else
+
+        private void Update()
         {
-            Debug.Log("GameObject.Find(Enemies) is null");
+            if (GameManager.Instance.IsGameRunning && Time.deltaTime > 0f)
+            {
+                this.timeSinceAppearance += Time.deltaTime;
+
+                var position = transform.position;
+                var leftOrigin = new Vector3(position.x - translate, position.y, position.z);
+                var rightOrigin = new Vector3(position.x + translate, position.y, position.z);
+                leftHit = Physics2D.Raycast(leftOrigin + Vector3.down * .3f, Vector3.down, rayLength);
+                rightHit = Physics2D.Raycast(rightOrigin + Vector3.down * .3f, Vector3.down, rayLength);
+
+                LetTheHammerFall();
+                RayDebugOutput();
+
+                if (transform.position.y < -7)
+                {
+                    RemoveEnemyAndScore(false);
+                }
+            }            
         }
-    }
 
-    private void Update()
-    {
-        if (GameManager.Instance.IsGameRunning && Time.deltaTime > 0f)
+        public void OnTriggerEnter2D(Collider2D collision)
         {
-            this.timeSinceAppearance += Time.deltaTime;
-
-            var position = transform.position;
-            var leftOrigin = new Vector3(position.x - translate, position.y, position.z);
-            var rightOrigin = new Vector3(position.x + translate, position.y, position.z);
-            leftHit = Physics2D.Raycast(leftOrigin + Vector3.down * .3f, Vector3.down, rayLength);
-            rightHit = Physics2D.Raycast(rightOrigin + Vector3.down * .3f, Vector3.down, rayLength);
-
-            LetTheHammerFall();
-            RayDebugOutput();
-
-            if (transform.position.y < -7)
+            if (!isInCollisionHanding && this.timeSinceAppearance > 1.0f)
             {
-                RemoveEnemyAndScore(false);
-            }
-        }            
-    }
-
-    public void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (!isInCollisionHanding && this.timeSinceAppearance > 1.0f)
-        {
-            var collisionObject = collision.gameObject;
-            switch (collisionObject.tag)
-            {
-                case "Player":
+                var collisionObject = collision.gameObject;
+                switch (collisionObject.tag)
+                {
+                    case "Player":
                     {
                         isInCollisionHanding = true;
                         GameManager.Instance.ActualShipHealth -= 5;
@@ -81,7 +81,7 @@ public class EnemyWaveTwoInteractionController : MonoBehaviour
 
                         break;
                     }
-                case "PlayerLaser":
+                    case "PlayerLaser":
                     {
                         if (enemyItem != null)
                         {
@@ -95,64 +95,65 @@ public class EnemyWaveTwoInteractionController : MonoBehaviour
                         Destroy(collisionObject);
                         break;
                     }
-                case "SpaceShipShield":
-                {
-                    isInCollisionHanding = true;
-                    GameManager.Instance.ActualShieldHealth -= 5;
-                    RemoveEnemyAndScore();
+                    case "SpaceShipShield":
+                    {
+                        isInCollisionHanding = true;
+                        GameManager.Instance.ActualShieldHealth -= 5;
+                        RemoveEnemyAndScore();
 
-                    break;
+                        break;
+                    }
+                }
+            }        
+        }
+
+        private void RemoveEnemyAndScore(bool reallyScore = true)
+        {
+            RemoveEnemyFromWave(enemyController.EnemyFlightFormation);
+            Destroy(gameObject);
+
+            if (reallyScore)
+            {
+                GameManager.Instance.Score += GameManager.Instance.EnemyWaveTwoScore;
+            }
+        
+            enemyController.SpawnLoot(new Vector3(0,0,0));
+        }
+
+        private void LetTheHammerFall()
+        {
+            if ((leftHit.collider != null 
+                 && (leftHit.collider.gameObject.CompareTag("Player") || leftHit.collider.gameObject.CompareTag("SpaceShipShield")))
+                || (rightHit.collider != null 
+                    && (rightHit.collider.gameObject.CompareTag("Player") || rightHit.collider.gameObject.CompareTag("SpaceShipShield"))))
+            {
+                this.rigidBody.gravityScale = 2.5f;
+            }
+        }
+
+        private void RemoveEnemyFromWave(IDictionary<Guid, IList<EnemyFlightFormationItem>> EnemyWaves)
+        {
+            foreach (var wave in EnemyWaves)
+            {
+                var enemyFlightFormationItem = wave.Value.Where(item => item.Enemy == gameObject).FirstOrDefault();
+                if (enemyFlightFormationItem != null)
+                {
+                    wave.Value.Remove(enemyFlightFormationItem);
                 }
             }
-        }        
-    }
-
-    private void RemoveEnemyAndScore(bool reallyScore = true)
-    {
-        RemoveEnemyFromWave(enemyController.EnemyFlightFormation);
-        Destroy(gameObject);
-
-        if (reallyScore)
-        {
-            GameManager.Instance.Score += GameManager.Instance.EnemyWaveTwoScore;
         }
-        
-        enemyController.SpawnLoot(new Vector3(0,0,0));
-    }
 
-    private void LetTheHammerFall()
-    {
-        if ((leftHit.collider != null 
-            && (leftHit.collider.gameObject.CompareTag("Player") || leftHit.collider.gameObject.CompareTag("SpaceShipShield")))
-            || (rightHit.collider != null 
-                && (rightHit.collider.gameObject.CompareTag("Player") || rightHit.collider.gameObject.CompareTag("SpaceShipShield"))))
+        private void RayDebugOutput()
         {
-            this.rigidBody.gravityScale = 2.5f;
-        }
-    }
-
-    private void RemoveEnemyFromWave(IDictionary<Guid, IList<EnemyFlightFormationItem>> EnemyWaves)
-    {
-        foreach (var wave in EnemyWaves)
-        {
-            var enemyFlightFormationItem = wave.Value.Where(item => item.Enemy == gameObject).FirstOrDefault();
-            if (enemyFlightFormationItem != null)
-            {
-                wave.Value.Remove(enemyFlightFormationItem);
-            }
-        }
-    }
-
-    private void RayDebugOutput()
-    {
-        var position = transform.position;
-        var leftOrigin = new Vector3(position.x - translate, position.y, position.z);
-        var rightOrigin = new Vector3(position.x + translate, position.y, position.z);
+            var position = transform.position;
+            var leftOrigin = new Vector3(position.x - translate, position.y, position.z);
+            var rightOrigin = new Vector3(position.x + translate, position.y, position.z);
         
-        Color debugColorLeft = leftHit.collider != null ? Color.green : Color.red;
-        Debug.DrawRay(leftOrigin + Vector3.down * .3f, Vector2.down * rayLength, debugColorLeft, 0.01f, true);
+            Color debugColorLeft = leftHit.collider != null ? Color.green : Color.red;
+            Debug.DrawRay(leftOrigin + Vector3.down * .3f, Vector2.down * rayLength, debugColorLeft, 0.01f, true);
         
-        Color debugColorRight = rightHit.collider != null ? Color.green : Color.red;
-        Debug.DrawRay(rightOrigin + Vector3.down * .3f, Vector2.down * rayLength, debugColorRight, 0.01f, true);
+            Color debugColorRight = rightHit.collider != null ? Color.green : Color.red;
+            Debug.DrawRay(rightOrigin + Vector3.down * .3f, Vector2.down * rayLength, debugColorRight, 0.01f, true);
+        }
     }
 }

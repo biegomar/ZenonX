@@ -1,44 +1,48 @@
 using System.Collections.Generic;
 using System.Linq;
+using Enemies.Controller.Waves;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+namespace Enemies.Controller
 {
-    [SerializeField]
-    private List<BaseWaveSpawnController> waveControllers;
-
-    private BaseWaveSpawnController actualWave;
-
-    private int waveIndex = 1;
-    private bool allWavesSpawned = false;
-
-    private void Start()
+    public class EnemyController : MonoBehaviour
     {
-        this.actualWave = waveControllers.FirstOrDefault();        
-    }
+        [SerializeField]
+        private List<BaseWaveSpawnController> waveControllers;
 
-    private void Update()
-    {
-        if (this.actualWave != null && !allWavesSpawned)
+        private BaseWaveSpawnController actualWave;
+
+        private int waveIndex = 1;
+        private bool allWavesSpawned = false;
+
+        private void Start()
         {
-            if (!this.actualWave.IsWaveSpawned)
-            {
-                this.actualWave.SpawnWave();
-            }
-
-            if (this.actualWave.IsWaveCompleted)
-            {
-                if (waveIndex == waveControllers.Count())
-                {
-                    this.allWavesSpawned = true;
-                }
-                else
-                {
-                    this.actualWave = waveControllers[waveIndex];
-                    this.actualWave.ResetWave();
-                    waveIndex++;
-                }                
-            }
+            this.actualWave = waveControllers.FirstOrDefault();        
         }
-    }    
+
+        private void Update()
+        {
+            if (this.actualWave != null && !allWavesSpawned)
+            {
+                if (!this.actualWave.IsWaveSpawned)
+                {
+                    this.actualWave.SpawnWave();
+                }
+
+                if (this.actualWave.IsWaveCompleted)
+                {
+                    if (waveIndex == waveControllers.Count())
+                    {
+                        this.allWavesSpawned = true;
+                    }
+                    else
+                    {
+                        this.actualWave = waveControllers[waveIndex];
+                        this.actualWave.ResetWave();
+                        waveIndex++;
+                    }                
+                }
+            }
+        }    
+    }
 }

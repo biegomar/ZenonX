@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
-internal interface IMovementStrategy
+namespace Enemies.Services
 {
-    float CalculateNewXPosition(GameObject gameObject);
-    float CalculateNewYPosition(GameObject gameObject);
+    internal interface IMovementStrategy
+    {
+        float CalculateNewXPosition(GameObject gameObject);
+        float CalculateNewYPosition(GameObject gameObject);
+    }
 }

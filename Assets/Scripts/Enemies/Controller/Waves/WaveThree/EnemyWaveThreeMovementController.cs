@@ -1,113 +1,116 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Assets.Scripts.Enemies;
+using Enemies.Model;
+using Enemies.Services;
 using UnityEngine;
 
-public class EnemyWaveThreeMovementController : MonoBehaviour
+namespace Enemies.Controller.Waves.WaveThree
 {
-    private EnemyWaveThreeSpawnController enemyController;
-    private EnemyFlightFormationItem enemyItem;
-    private IMovementStrategy activeMovementStrategy;  
+    public class EnemyWaveThreeMovementController : MonoBehaviour
+    {
+        private EnemyWaveThreeSpawnController enemyController;
+        private EnemyFlightFormationItem enemyItem;
+        private IMovementStrategy activeMovementStrategy;  
     
-    void Start()
-    {        
-        GameObject go = GameObject.Find("EnemyWaveThree");
-        if (go != null)
-        {
-            this.enemyController = go.GetComponent<EnemyWaveThreeSpawnController>();
-            if (this.enemyController != null)
+        void Start()
+        {        
+            GameObject go = GameObject.Find("EnemyWaveThree");
+            if (go != null)
             {
-                this.enemyItem = this.enemyController.Enemies[gameObject.GetInstanceID()];
+                this.enemyController = go.GetComponent<EnemyWaveThreeSpawnController>();
+                if (this.enemyController != null)
+                {
+                    this.enemyItem = this.enemyController.Enemies[gameObject.GetInstanceID()];
+                }
+                else
+                {
+                    Debug.Log("go.GetComponent<EnemyController>() is null");
+                }
             }
             else
             {
-                Debug.Log("go.GetComponent<EnemyController>() is null");
+                Debug.Log("GameObject.Find(Enemies) is null");
             }
+
+            this.activeMovementStrategy = new XPingPongLerpMovement(this.enemyItem.StartPosition);
         }
-        else
+
+        public void OnTriggerEnter2D(Collider2D collision)
         {
-            Debug.Log("GameObject.Find(Enemies) is null");
-        }
-
-        this.activeMovementStrategy = new XPingPongLerpMovement(this.enemyItem.StartPosition);
-    }
-
-    public void OnTriggerEnter2D(Collider2D collision)
-    {
-        var collisionObject = collision.gameObject;
+            var collisionObject = collision.gameObject;
         
-        if (collisionObject.CompareTag("PlayerLaser"))
-        {
-            if (enemyItem != null)
+            if (collisionObject.CompareTag("PlayerLaser"))
             {
-                enemyItem.Health -= 1;
-                if (enemyItem.Health <= 0)
+                if (enemyItem != null)
                 {
-                    var lastPosition = transform.position;
+                    enemyItem.Health -= 1;
+                    if (enemyItem.Health <= 0)
+                    {
+                        var lastPosition = transform.position;
 
-                    RemoveEnemyAndScore();
+                        RemoveEnemyAndScore();
 
-                    enemyController.SpawnLoot(lastPosition);
+                        enemyController.SpawnLoot(lastPosition);
+                    }
                 }
+
+                Destroy(collisionObject);
+            }
+        }
+
+        private void Update()
+        {
+            // use delta time for game pause here.
+            if (GameManager.Instance.IsGameRunning && Time.deltaTime > 0f)
+            {
+                transform.position = new Vector3(
+                    CalculateNewXPosition(),
+                    CalculateNewYPosition(),
+                    transform.position.z);
             }
 
-            Destroy(collisionObject);
+            TryToSwitchToXPingPongMovement();
         }
-    }
-
-    private void Update()
-    {
-        // use delta time for game pause here.
-        if (GameManager.Instance.IsGameRunning && Time.deltaTime > 0f)
-        {
-            transform.position = new Vector3(
-                CalculateNewXPosition(),
-                CalculateNewYPosition(),
-                transform.position.z);
-        }
-
-        TryToSwitchToXPingPongMovement();
-    }
     
-    private void RemoveEnemyAndScore()
-    {
-        RemoveEnemyFromWave(enemyController.EnemyFlightFormation);
-        Destroy(gameObject);
-        GameManager.Instance.Score += GameManager.Instance.EnemyWaveThreeScore;
-    }
-
-    private void RemoveEnemyFromWave(IDictionary<Guid, IList<EnemyFlightFormationItem>> enemyWaves)
-    {
-        foreach (var wave in enemyWaves)
+        private void RemoveEnemyAndScore()
         {
-            var enemyFlightFormationItem = wave.Value.FirstOrDefault(item => item.Enemy == gameObject);
-            if (enemyFlightFormationItem != null)
+            RemoveEnemyFromWave(enemyController.EnemyFlightFormation);
+            Destroy(gameObject);
+            GameManager.Instance.Score += GameManager.Instance.EnemyWaveThreeScore;
+        }
+
+        private void RemoveEnemyFromWave(IDictionary<Guid, IList<EnemyFlightFormationItem>> enemyWaves)
+        {
+            foreach (var wave in enemyWaves)
             {
-                wave.Value.Remove(enemyFlightFormationItem);
-            }                                   
+                var enemyFlightFormationItem = wave.Value.FirstOrDefault(item => item.Enemy == gameObject);
+                if (enemyFlightFormationItem != null)
+                {
+                    wave.Value.Remove(enemyFlightFormationItem);
+                }                                   
+            }
         }
-    }
     
-    private float CalculateNewXPosition()
-    {
-        return this.activeMovementStrategy.CalculateNewXPosition(gameObject);        
-    }
-
-    private float CalculateNewYPosition()
-    {        
-        return this.activeMovementStrategy.CalculateNewYPosition(gameObject);
-    }
-    
-    private void TryToSwitchToXPingPongMovement()
-    {
-        if (this.activeMovementStrategy.GetType() != typeof(XPingPongMovement))
+        private float CalculateNewXPosition()
         {
-            if (Math.Abs(transform.position.x - this.enemyItem.StartPosition.x) < 0.03f)
+            return this.activeMovementStrategy.CalculateNewXPosition(gameObject);        
+        }
+
+        private float CalculateNewYPosition()
+        {        
+            return this.activeMovementStrategy.CalculateNewYPosition(gameObject);
+        }
+    
+        private void TryToSwitchToXPingPongMovement()
+        {
+            if (this.activeMovementStrategy.GetType() != typeof(XPingPongMovement))
             {
-                this.activeMovementStrategy = new XPingPongMovement(this.enemyItem.StartPosition);
-            } 
+                if (Math.Abs(transform.position.x - this.enemyItem.StartPosition.x) < 0.03f)
+                {
+                    this.activeMovementStrategy = new XPingPongMovement(this.enemyItem.StartPosition);
+                } 
+            }
         }
     }
 }

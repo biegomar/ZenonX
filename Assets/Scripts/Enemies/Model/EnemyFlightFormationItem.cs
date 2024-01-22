@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Assets.Scripts.Enemies
+namespace Enemies.Model
 {
     public class EnemyFlightFormationItem : EnemyItem
     {

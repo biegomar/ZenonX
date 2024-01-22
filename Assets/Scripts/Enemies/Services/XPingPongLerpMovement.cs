@@ -1,24 +1,27 @@
 ﻿using UnityEngine;
 
-public class XPingPongLerpMovement : IMovementStrategy
+namespace Enemies.Services
 {
-    private readonly Vector2 targetPosition;
-    private const float duration = 4.0f;
-
-    public XPingPongLerpMovement(Vector2 targetPosition)
+    public class XPingPongLerpMovement : IMovementStrategy
     {
-        this.targetPosition = targetPosition;
-    }
+        private readonly Vector2 targetPosition;
+        private const float duration = 4.0f;
+
+        public XPingPongLerpMovement(Vector2 targetPosition)
+        {
+            this.targetPosition = targetPosition;
+        }
     
-    public float CalculateNewXPosition(GameObject gameObject)
-    {
-        var vec = Vector2.Lerp(gameObject.transform.position, this.targetPosition, duration * Time.deltaTime);
+        public float CalculateNewXPosition(GameObject gameObject)
+        {
+            var vec = Vector2.Lerp(gameObject.transform.position, this.targetPosition, duration * Time.deltaTime);
 
-        return vec.x;
-    }
+            return vec.x;
+        }
 
-    public float CalculateNewYPosition(GameObject gameObject)
-    {
-        return this.targetPosition.y;
+        public float CalculateNewYPosition(GameObject gameObject)
+        {
+            return this.targetPosition.y;
+        }
     }
 }

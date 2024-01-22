@@ -1,20 +1,23 @@
 using TMPro;
 using UnityEngine;
 
-public class UIController : MonoBehaviour
+namespace UI.Controller
 {
-    [SerializeField]
-    private TextMeshProUGUI ScoreText;
-
-    [SerializeField]
-    private TextMeshProUGUI LaserPower;
-
-    void Update()
+    public class UIController : MonoBehaviour
     {
-        if (GameManager.Instance.IsGameRunning)
+        [SerializeField]
+        private TextMeshProUGUI ScoreText;
+
+        [SerializeField]
+        private TextMeshProUGUI LaserPower;
+
+        void Update()
         {
-            ScoreText.text = $"Score: {GameManager.Instance.Score}";
-            //LaserPower.text = $"Laserpower: {GameManager.Instance.ActualShipLaserPower}/{GameManager.Instance.MaxShipLaserPower}";    
+            if (GameManager.Instance.IsGameRunning)
+            {
+                ScoreText.text = $"Score: {GameManager.Instance.Score}";
+                //LaserPower.text = $"Laserpower: {GameManager.Instance.ActualShipLaserPower}/{GameManager.Instance.MaxShipLaserPower}";    
+            }
         }
     }
 }

@@ -2,72 +2,75 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class GameOverManagerController : MonoBehaviour
+namespace UI.Controller
 {
-    [SerializeField]
-    private TextMeshProUGUI GameOverText;
-
-    //new input system
-    private GameInput gameInput;
-    private InputAction quit;
-    private InputAction pause;
-
-    private bool IsGamePaused;
-
-    private void OnEnable()
+    public class GameOverManagerController : MonoBehaviour
     {
-        this.GameOverText.text = string.Empty;
+        [SerializeField]
+        private TextMeshProUGUI GameOverText;
 
-        this.gameInput = new GameInput();
-        this.quit = this.gameInput.Game.Quit;       
-        this.pause = this.gameInput.Game.Pause;
+        //new input system
+        private GameInput gameInput;
+        private InputAction quit;
+        private InputAction pause;
 
-        this.quit.Enable();        
-        this.pause.Enable();
+        private bool IsGamePaused;
 
-        this.IsGamePaused = false;
-    }
-
-    private void OnDisable()
-    {
-        this.quit.Disable();  
-        this.pause.Disable();
-    }
-
-    private void Update()
-    {
-        this.CheckForGamePause();
-
-        if (this.IsGamePaused)
+        private void OnEnable()
         {
-            Time.timeScale = 0f;
-        }
-        else
-        {
-            Time.timeScale = 1f;
+            this.GameOverText.text = string.Empty;
+
+            this.gameInput = new GameInput();
+            this.quit = this.gameInput.Game.Quit;       
+            this.pause = this.gameInput.Game.Pause;
+
+            this.quit.Enable();        
+            this.pause.Enable();
+
+            this.IsGamePaused = false;
         }
 
-        if (!GameManager.Instance.IsGameRunning)
-        {                        
-            this.GameOverText.text = "Game Over!";
+        private void OnDisable()
+        {
+            this.quit.Disable();  
+            this.pause.Disable();
+        }
 
-            if (this.IsQuitPressed())
+        private void Update()
+        {
+            this.CheckForGamePause();
+
+            if (this.IsGamePaused)
             {
-                Application.Quit();
+                Time.timeScale = 0f;
             }
-        }   
-    }
+            else
+            {
+                Time.timeScale = 1f;
+            }
 
-    private bool IsQuitPressed()
-    {
-        return this.quit.triggered;
-    }
+            if (!GameManager.Instance.IsGameRunning)
+            {                        
+                this.GameOverText.text = "Game Over!";
 
-    private void CheckForGamePause()
-    {
-        if (this.pause.triggered) 
+                if (this.IsQuitPressed())
+                {
+                    Application.Quit();
+                }
+            }   
+        }
+
+        private bool IsQuitPressed()
         {
-            this.IsGamePaused = !this.IsGamePaused;
+            return this.quit.triggered;
+        }
+
+        private void CheckForGamePause()
+        {
+            if (this.pause.triggered) 
+            {
+                this.IsGamePaused = !this.IsGamePaused;
+            }
         }
     }
 }

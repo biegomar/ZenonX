@@ -1,45 +1,43 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 
-internal class SinusMovement : IMovementStrategy
+namespace Enemies.Services
 {
-    private float initialX;
-    private const int sinusMultiplier = 2;
-    private double activeSinus;
-
-    public SinusMovement(Vector2 initialPosition)
+    internal class SinusMovement : IMovementStrategy
     {
-        this.initialX = initialPosition.x;
-    }
+        private float initialX;
+        private const int sinusMultiplier = 2;
+        private double activeSinus;
 
-    public float CalculateNewXPosition(GameObject gameObject)
-    {
-        if (gameObject.transform.position.y < 5)
+        public SinusMovement(Vector2 initialPosition)
         {
-            var result = this.initialX + (float)Math.Sin(activeSinus) * GameManager.Instance.EnemyWaveOneSinusAmplitude;
-
-            if (activeSinus < Math.PI * sinusMultiplier)
-            {
-                activeSinus += GameManager.Instance.EnemyWaveOneSinusStep;
-            }
-            else
-            {
-                activeSinus = 0d;
-            }
-
-            return result;
+            this.initialX = initialPosition.x;
         }
 
-        return gameObject.transform.position.x;
-    }
+        public float CalculateNewXPosition(GameObject gameObject)
+        {
+            if (gameObject.transform.position.y < 5)
+            {
+                var result = this.initialX + (float)Math.Sin(activeSinus) * GameManager.Instance.EnemyWaveOneSinusAmplitude;
 
-    public float CalculateNewYPosition(GameObject gameObject)
-    {
-        return (gameObject.transform.position.y - GameManager.Instance.EnemyWaveOneYStep * GameManager.Instance.EnemyWaveOneYSpeed);
+                if (activeSinus < Math.PI * sinusMultiplier)
+                {
+                    activeSinus += GameManager.Instance.EnemyWaveOneSinusStep;
+                }
+                else
+                {
+                    activeSinus = 0d;
+                }
+
+                return result;
+            }
+
+            return gameObject.transform.position.x;
+        }
+
+        public float CalculateNewYPosition(GameObject gameObject)
+        {
+            return (gameObject.transform.position.y - GameManager.Instance.EnemyWaveOneYStep * GameManager.Instance.EnemyWaveOneYSpeed);
+        }
     }
 }

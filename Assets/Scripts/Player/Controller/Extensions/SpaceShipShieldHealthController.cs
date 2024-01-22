@@ -1,14 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class SpaceShipShieldHealthController : MonoBehaviour
+namespace Player.Controller.Extensions
 {
-    void Update()
+    public class SpaceShipShieldHealthController : MonoBehaviour
     {
-        if (GameManager.Instance.ActualShieldHealth <= 0f)
+        void Update()
         {
-            GameManager.Instance.IsShipShieldActive = false;
+            if (GameManager.Instance.ActualShieldHealth <= 0f)
+            {
+                GameManager.Instance.IsShipShieldActive = false;
+            }
         }
     }
 }

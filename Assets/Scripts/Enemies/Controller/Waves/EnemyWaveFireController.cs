@@ -1,48 +1,48 @@
-using System.Collections;
-using System.Collections.Generic;
-using Assets.Scripts.Enemies;
 using UnityEngine;
 
-public class EnemyWaveFireController : MonoBehaviour
+namespace Enemies.Controller.Waves
 {
-    [SerializeField]
-    private GameObject Laser;
+    public class EnemyWaveFireController : MonoBehaviour
+    {
+        [SerializeField]
+        private GameObject Laser;
 
-    [SerializeField]
-    private AudioSource laserSound;
+        [SerializeField]
+        private AudioSource laserSound;
     
-    private float fireInterval;
-    private float elapsedTimeSinceLastShot;
+        private float fireInterval;
+        private float elapsedTimeSinceLastShot;
 
-    void Start()
-    {
-        this.fireInterval = Random.Range(2f, 6f);
-        this.elapsedTimeSinceLastShot = this.fireInterval - (this.fireInterval * .5f);
-        this.laserSound.enabled = true;
-    }
-
-    private void Update()
-    {
-        if (GameManager.Instance.IsGameRunning)
+        void Start()
         {
-            this.elapsedTimeSinceLastShot += Time.deltaTime;
-            this.FeuerFrei();
-        }            
-    }
-
-    private void FeuerFrei()
-    {
-        if (this.elapsedTimeSinceLastShot >= this.fireInterval)
-        {
-            this.laserSound.Play();
-
-            Instantiate(Laser, new Vector3(
-               transform.position.x,
-               transform.position.y - 0.3f,
-               Laser.transform.position.z), Quaternion.identity);
-            
-            this.elapsedTimeSinceLastShot = 0;
+            this.fireInterval = Random.Range(2f, 6f);
+            this.elapsedTimeSinceLastShot = this.fireInterval - (this.fireInterval * .5f);
+            this.laserSound.enabled = true;
         }
-    }
 
+        private void Update()
+        {
+            if (GameManager.Instance.IsGameRunning)
+            {
+                this.elapsedTimeSinceLastShot += Time.deltaTime;
+                this.FeuerFrei();
+            }            
+        }
+
+        private void FeuerFrei()
+        {
+            if (this.elapsedTimeSinceLastShot >= this.fireInterval)
+            {
+                this.laserSound.Play();
+
+                Instantiate(Laser, new Vector3(
+                    transform.position.x,
+                    transform.position.y - 0.3f,
+                    Laser.transform.position.z), Quaternion.identity);
+            
+                this.elapsedTimeSinceLastShot = 0;
+            }
+        }
+
+    }
 }
