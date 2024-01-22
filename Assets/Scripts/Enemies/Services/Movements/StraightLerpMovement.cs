@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Enemies.Services
+namespace Enemies.Services.Movements
 {
     internal class StraightLerpMovement : IMovementStrategy
     {

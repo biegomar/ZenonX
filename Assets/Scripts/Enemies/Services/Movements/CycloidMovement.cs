@@ -2,7 +2,7 @@
 using Enemies.Model;
 using UnityEngine;
 
-namespace Enemies.Services
+namespace Enemies.Services.Movements
 {
     public class CycloidMovement : IMovementStrategy
     {

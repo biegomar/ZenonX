@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Enemies.Services
+namespace Enemies.Services.Movements
 {
     internal class SinusMovement : IMovementStrategy
     {

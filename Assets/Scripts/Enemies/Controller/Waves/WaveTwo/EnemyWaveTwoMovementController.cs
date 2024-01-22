@@ -1,4 +1,5 @@
 using Enemies.Services;
+using Enemies.Services.Movements;
 using UnityEngine;
 
 namespace Enemies.Controller.Waves.WaveTwo
