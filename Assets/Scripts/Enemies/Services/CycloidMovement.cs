@@ -1,4 +1,5 @@
 ﻿using System;
+using Assets.Scripts.Enemies;
 using UnityEngine;
 
 public class CycloidMovement : IMovementStrategy
@@ -9,17 +10,17 @@ public class CycloidMovement : IMovementStrategy
     private float arc = 2.3f;
     
     private readonly Vector2 startPosition;
-    private readonly bool isNegative;
+    private readonly EnemyFlightFormationItem item;
 
-    public CycloidMovement(Vector2 initialPosition, bool isNegative=false)
+    public CycloidMovement(Vector2 initialPosition, EnemyFlightFormationItem item)
     {
         this.startPosition = initialPosition;
-        this.isNegative = isNegative;
+        this.item = item;
     }
         
     public float CalculateNewXPosition(GameObject gameObject)
     {
-        if (this.isNegative)
+        if (this.item.Flag)
         {
             this.arc -= Time.deltaTime * GameManager.Instance.EnemyWaveFourSpeed;    
         }

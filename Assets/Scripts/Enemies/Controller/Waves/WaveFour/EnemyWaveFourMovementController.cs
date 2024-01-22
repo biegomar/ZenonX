@@ -31,7 +31,7 @@ public class EnemyWaveFourMovementController : MonoBehaviour
             Debug.Log("GameObject.Find(Enemies) is null");
         }
 
-        this.activeMovementStrategy = new CycloidMovement(this.enemyItem.StartPosition, this.enemyItem.Flag);    
+        this.activeMovementStrategy = new CycloidMovement(this.enemyItem.StartPosition, this.enemyItem);    
     }
     
     private void Update()
@@ -42,8 +42,9 @@ public class EnemyWaveFourMovementController : MonoBehaviour
             if ((!this.enemyItem.Flag && transform.position.x > 9) ||
                 (this.enemyItem.Flag && transform.position.x < -9))
             {
-                this.RemoveEnemyAndScore(false);
-                enemyController.SpawnLoot(new Vector3(0,0,-11f));
+                this.enemyItem.Flag = !this.enemyItem.Flag;
+                //this.RemoveEnemyAndScore(false);
+                //enemyController.SpawnLoot(new Vector3(0,0,-11f));
             }
             else
             {
