@@ -8,9 +8,6 @@ namespace Enemies.Controller.Waves.WaveTwo
 {
     public class EnemyWaveTwoSpawnController : BaseWaveSpawnController
     {
-        [SerializeField]
-        private GameObject EnemyTemplate;
-
         public IDictionary<Guid, IList<EnemyFlightFormationItem>> EnemyFlightFormation;
         public IDictionary<int, EnemyItem> Enemies;
 
@@ -18,8 +15,7 @@ namespace Enemies.Controller.Waves.WaveTwo
         {
             InitializeWave();
         }
-  
-
+        
         public override void SpawnWave()
         {
             var startPosition = new Vector3(-6.0f, 5.5f, 0f);        
@@ -97,7 +93,7 @@ namespace Enemies.Controller.Waves.WaveTwo
 
             return new EnemyFlightFormationItem
             {
-                WaveId = waveId,
+                FormationId = waveId,
                 Health = GameManager.Instance.EnemyWaveTwoHealth,
                 Enemy = Instantiate(EnemyTemplate, vector, Quaternion.identity),
                 StartPosition = vector

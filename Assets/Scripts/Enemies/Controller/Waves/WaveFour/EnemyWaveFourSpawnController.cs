@@ -8,12 +8,6 @@ namespace Enemies.Controller.Waves.WaveFour
 {
     public class EnemyWaveFourSpawnController : BaseWaveSpawnController
     {
-        [SerializeField]
-        private GameObject EnemyTemplate;
-
-        [SerializeField]
-        private GameObject LootTemplate;
-
         private const float releaseTimespan = 0.2f;
         private float lastReleaseTimeStampForFirstFormation;
         private float lastReleaseTimeStampForSecondFormation;
@@ -21,7 +15,6 @@ namespace Enemies.Controller.Waves.WaveFour
         private byte numberOfReleasedItemsInSecondFormation;
 
         public IDictionary<Guid, IList<EnemyFlightFormationItem>> EnemyFlightFormation;
-        public IDictionary<int, EnemyFlightFormationItem> Enemies;
         private IList<EnemyFlightFormationItem> gameObjectsOfFirstFormation;
         private IList<EnemyFlightFormationItem> gameObjectsOfSecondFormation;
     
@@ -185,7 +178,7 @@ namespace Enemies.Controller.Waves.WaveFour
         {
             return new EnemyFlightFormationItem
             {
-                WaveId = waveId,
+                FormationId = waveId,
                 Flag = isNegative,
                 Health = GameManager.Instance.EnemyWaveOneHealth,
                 Enemy = Instantiate(EnemyTemplate, startPosition, Quaternion.identity),

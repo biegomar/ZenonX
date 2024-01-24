@@ -8,14 +8,7 @@ namespace Enemies.Controller.Waves.WaveThree
 {
     public class EnemyWaveThreeSpawnController : BaseWaveSpawnController
     {
-        [SerializeField]
-        private GameObject EnemyTemplate;
-
-        [SerializeField]
-        private GameObject LootTemplate;
-    
         public IDictionary<Guid, IList<EnemyFlightFormationItem>> EnemyFlightFormation;
-        public IDictionary<int, EnemyFlightFormationItem> Enemies;
 
         private Vector2 startPositionLeft;
         private Vector2 startPositionRight;
@@ -142,7 +135,7 @@ namespace Enemies.Controller.Waves.WaveThree
 
             return new EnemyFlightFormationItem
             {
-                WaveId = waveId,
+                FormationId = waveId,
                 Health = GameManager.Instance.EnemyWaveThreeHealth,
                 Enemy = Instantiate(EnemyTemplate, vector, Quaternion.identity),
                 StartPosition = startVector
