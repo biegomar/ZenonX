@@ -10,9 +10,7 @@ namespace Enemies.Services.Formations
         public override KeyValuePair<Guid, IList<EnemyFlightFormationItem>> SpawnFormation(Vector3 startPoint, Vector3 transitionRangeFrom, Vector3 transitionRangeTo, Vector3 distance, bool flag = true)
         {
             var posX = UnityEngine.Random.Range(transitionRangeFrom.x, transitionRangeTo.x);
-
             
-
             var formationId = Guid.NewGuid();
             var gameObjects = new List<EnemyFlightFormationItem>();
 

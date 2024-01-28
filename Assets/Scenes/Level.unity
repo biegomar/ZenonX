@@ -901,52 +901,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 547590781}
   m_CullTransparentMesh: 1
---- !u!1 &576531883
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 576531885}
-  - component: {fileID: 576531884}
-  m_Layer: 0
-  m_Name: SnakeFormation
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &576531884
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 576531883}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c6ecd51b2cb4b0089e0a095f1d2a87d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyTemplate: {fileID: 2875307575560752331, guid: 3617ccc85d382e341b4db384d18a75e6, type: 3}
-  enemyHealthPoints: 2
---- !u!4 &576531885
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 576531883}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.8163247, y: -1.08329, z: -0.18094535}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &583505307
 GameObject:
   m_ObjectHideFlags: 0
@@ -1371,7 +1325,7 @@ MonoBehaviour:
   EnemyTemplate: {fileID: 2875307575560752331, guid: 3617ccc85d382e341b4db384d18a75e6, type: 3}
   LootTemplate: {fileID: 1254729175944713818, guid: 212741ee5c0f30f448546515006bcd28, type: 3}
   enemyFormations:
-  - {fileID: 576531884}
+  - {fileID: 318144727806801554, guid: 937474d9b89d6c546a481cad28686395, type: 3}
 --- !u!1 &946882446
 GameObject:
   m_ObjectHideFlags: 0
@@ -2760,4 +2714,3 @@ SceneRoots:
   - {fileID: 444834147}
   - {fileID: 682745553}
   - {fileID: 1335738941}
-  - {fileID: 576531885}
