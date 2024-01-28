@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public sealed class GameManager
+public sealed class GameManager : MonoBehaviour
 {
     private static readonly object lockObject = new object();
-    private static GameManager instance = null;
+    public static GameManager Instance = null;
     private int actualShipHealth;
     private int actualShieldHealth;
     private uint actualLaserPower;
@@ -60,8 +60,25 @@ public sealed class GameManager
     //Game states
     public bool IsGameRunning { get; set; }
 
-    // Privater Konstruktor, um Instanziierung von außen zu verhindern
-    private GameManager()
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
+        DontDestroyOnLoad(this);
+    }
+
+    private void Start()
+    {
+        Initialize();
+    }
+
+    public void Initialize()
     {
         InitializeGameValues();
 
@@ -130,25 +147,6 @@ public sealed class GameManager
         LaserPowerRegainInterval = 2f;
         ShipLaserFrequency = 0.6f;
         IsShipShieldActive = false;
-    }
-
-    // �ffentliche Methode, um die Instanz abzurufen
-    public static GameManager Instance
-    {
-        get
-        {
-            if (instance == null)
-            {
-                lock (lockObject)
-                {
-                    if (instance == null)
-                    {
-                        instance = new GameManager();
-                    }
-                }
-            }
-            return instance;
-        }
     }
 }
 

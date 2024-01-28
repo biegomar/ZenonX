@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 namespace UI.Controller
 {
@@ -55,7 +56,7 @@ namespace UI.Controller
 
                 if (this.IsQuitPressed())
                 {
-                    Application.Quit();
+                    SceneManager.LoadScene(0);
                 }
             }   
         }
