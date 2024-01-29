@@ -4,7 +4,6 @@ using UnityEngine;
 
 public sealed class GameManager : MonoBehaviour
 {
-    private static readonly object lockObject = new object();
     public static GameManager Instance = null;
     private int actualShipHealth;
     private int actualShieldHealth;
@@ -66,10 +65,9 @@ public sealed class GameManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-        else
-        {
-            Instance = this;
-        }
+        
+        Instance = this;
+        
         DontDestroyOnLoad(this);
     }
 
@@ -103,7 +101,7 @@ public sealed class GameManager : MonoBehaviour
     private void InitializeEnemyWaveOneValues()
     {
         EnemyWaveOneSinusStep = 0.01f;
-        EnemyWaveOneSinusAmplitude = 0.25f;
+        EnemyWaveOneSinusAmplitude = 0.35f;
         EnemyWaveOneYStep = 0.03f;
         EnemyWaveOneYSpeed = 0.25f;
         EnemyWaveOneDistance = 0.5f;

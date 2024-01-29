@@ -20,7 +20,6 @@ namespace Enemies.Controller.Waves.WaveOne
     
         private bool isNegativeXDirection;
 
-
         void Start()
         {        
             GameObject go = GameObject.Find("EnemyWaveOne");
@@ -139,12 +138,15 @@ namespace Enemies.Controller.Waves.WaveOne
 
         private void TryToSwitchToSinusMovement()
         {
-            var waveId = this.enemyController.EnemyFlightFormation.Values.SelectMany(x => x).Where(x => x.Enemy == gameObject).Select(x => x.FormationId).SingleOrDefault();
-
-            if (waveId != null && !this.enemyController.EnemyFlightFormation[waveId].Where(x => x.StartPosition.y != x.Enemy.transform.position.y).Any())
+            if (this.activeMovementStrategy.GetType() != typeof(SinusMovement))
             {
-                this.startPosition = transform.position;
-                this.activeMovementStrategy = new SinusMovement(this.startPosition);
+                var waveId = this.enemyController.EnemyFlightFormation.Values.SelectMany(x => x).Where(x => x.Enemy == gameObject).Select(x => x.FormationId).SingleOrDefault();
+
+                if (waveId != null && !this.enemyController.EnemyFlightFormation[waveId].Any(x => x.StartPosition.y != x.Enemy.transform.position.y))
+                {
+                    this.startPosition = transform.position;
+                    this.activeMovementStrategy = new SinusMovement(this.startPosition);
+                }   
             }
         }
 

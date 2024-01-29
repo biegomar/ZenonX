@@ -20,7 +20,7 @@ namespace Enemies.Controller
             this.actualWave = waveControllers.FirstOrDefault();        
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             if (this.actualWave != null && !allWavesSpawned)
             {

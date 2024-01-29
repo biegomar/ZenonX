@@ -83,7 +83,6 @@ namespace Enemies.Controller.Waves.WaveOne
                     EnemyFlightFormationNegativeDirection.Add(formation.Key, true);
                     formation.Value.ToList().ForEach(x => this.Enemies.Add(x.Enemy.GetInstanceID(), x));
                     this.EnemyFlightFormation.Add(formation);
-                    IsFourthFormationReleased = true;
 
                     this.IsWaveSpawned = true;
                 }

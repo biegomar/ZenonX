@@ -7,6 +7,7 @@ public class MenuController : MonoBehaviour
 {
     public void StartGame()
     {
+        GameManager.Instance.Initialize();
         SceneManager.LoadScene(1);
     }
 

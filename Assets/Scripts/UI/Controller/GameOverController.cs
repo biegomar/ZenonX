@@ -53,12 +53,12 @@ namespace UI.Controller
             if (!GameManager.Instance.IsGameRunning)
             {                        
                 this.GameOverText.text = "Game Over!";
-
-                if (this.IsQuitPressed())
-                {
-                    SceneManager.LoadScene(0);
-                }
             }   
+            
+            if (this.IsQuitPressed())
+            {
+                SceneManager.LoadScene(0);
+            }
         }
 
         private bool IsQuitPressed()
