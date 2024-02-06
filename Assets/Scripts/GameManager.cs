@@ -14,7 +14,6 @@ public sealed class GameManager : MonoBehaviour
     public int ActualShieldHealth { get => actualShieldHealth; set => actualShieldHealth = Math.Max(0,value); }
     public float ShipHorizontalSpeed { get; set; }
     public float ShipBoosterVelocity { get; set; }
-    public float ShipLaserSpeed { get; set; }
     public float ShipLaserFrequency { get; set; }
     public uint ShipLaserHitPoints { get; set; }
     public uint MaxShipLaserPower { get; set; }
@@ -136,7 +135,6 @@ public sealed class GameManager : MonoBehaviour
         ActualShieldHealth = MaxShieldHealth;
         ShipHorizontalSpeed = 7f;
         ShipBoosterVelocity = 5f;
-        ShipLaserSpeed = 6.5f;
         ShipLaserHitPoints = 1;
         MaxShipLaserPower = 30;
         ActualShipLaserPower = MaxShipLaserPower;

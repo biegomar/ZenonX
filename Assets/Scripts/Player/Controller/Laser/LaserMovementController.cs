@@ -6,13 +6,15 @@ namespace Player.Controller.Laser
     {
         [SerializeField] 
         private float laserDisappearYPosition;
-    
+        [SerializeField]
+        private float laserSpeed; 
+        
         private Rigidbody2D rigidBody;
 
         public void Start()
         {
             rigidBody = GetComponent<Rigidbody2D>();
-            rigidBody.velocity = Vector2.up * GameManager.Instance.ShipLaserSpeed;
+            rigidBody.velocity = Vector2.up * laserSpeed;
         }
 
         public void Update()
