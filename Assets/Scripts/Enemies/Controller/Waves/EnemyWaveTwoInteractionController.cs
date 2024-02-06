@@ -25,7 +25,7 @@ namespace Enemies.Controller.Waves.WaveTwo
         {
             this.rigidBody = GetComponent<Rigidbody2D>();
 
-            GameObject go = GameObject.Find("EnemyWaveTwo");
+            GameObject go = GameObject.FindGameObjectWithTag("EnemyWaveTwo");
             if (go != null)
             {
                 this.enemyController = go.GetComponent<WaveSpawnController>();

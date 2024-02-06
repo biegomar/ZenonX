@@ -21,8 +21,8 @@ namespace Enemies.Controller.Waves.WaveOne
         private bool isSinusWaveYDirectionPositiv;
 
         void Start()
-        {        
-            GameObject go = GameObject.Find("WaveOne");
+        {
+            GameObject go = GameObject.FindGameObjectWithTag("EnemyWaveOne");
             if (go != null)
             {
                 this.enemyController = go.GetComponent<WaveSpawnController>();

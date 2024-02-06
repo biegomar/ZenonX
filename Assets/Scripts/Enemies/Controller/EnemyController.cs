@@ -59,7 +59,7 @@ namespace Enemies.Controller
                         }       
                     }
                 }
-                else
+                else if (this.actualWave.IsWaveCompleted)
                 {
                     if (this.waveIndex >= this.waveControllers.Count)
                     {
@@ -69,8 +69,13 @@ namespace Enemies.Controller
                     else
                     {
                         this.actualWave = waveControllers[waveIndex];
+                        if (this.actualWave != null)
+                        {
+                            this.timer = this.actualWave.formationSpawnDistanceTime;
+                            this.actualFormation = this.actualWave.enemyFormations.FirstOrDefault();
+                        }
                         waveIndex++;
-                    }    
+                    }   
                 }
             }
         }    

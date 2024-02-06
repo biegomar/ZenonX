@@ -24,8 +24,6 @@ namespace Enemies.Controller.Waves
         
         private float WaveTimer;
         
-        
-
         private void Start()
         {
             InitializeWave();
