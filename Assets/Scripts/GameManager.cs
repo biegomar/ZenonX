@@ -32,7 +32,6 @@ public sealed class GameManager : MonoBehaviour
     //Enemies - Wave One   
     public float EnemyWaveOneSinusStep { get; set; }
     public float EnemyWaveOneSinusAmplitude { get; set; }
-    public float EnemyWaveOneYStep { get; set; }
     public float EnemyWaveOneYSpeed { get; set; }
     public float EnemyWaveOneDistance { get; set; }
     public uint EnemyWaveOneHealth { get; set; }
@@ -101,9 +100,8 @@ public sealed class GameManager : MonoBehaviour
     private void InitializeEnemyWaveOneValues()
     {
         EnemyWaveOneSinusStep = 0.01f;
-        EnemyWaveOneSinusAmplitude = 0.35f;
-        EnemyWaveOneYStep = 0.03f;
-        EnemyWaveOneYSpeed = 0.25f;
+        EnemyWaveOneSinusAmplitude = .25f;
+        EnemyWaveOneYSpeed = 2f;
         EnemyWaveOneDistance = 0.5f;
         EnemyWaveOneHealth = 2;
         EnemyWaveOneScore = 10;

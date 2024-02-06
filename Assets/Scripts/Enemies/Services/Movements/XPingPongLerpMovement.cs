@@ -11,15 +11,13 @@ namespace Enemies.Services.Movements
         {
             this.targetPosition = targetPosition;
         }
-    
-        public float CalculateNewXPosition(GameObject gameObject)
-        {
-            var vec = Vector2.Lerp(gameObject.transform.position, this.targetPosition, duration * Time.deltaTime);
 
-            return vec.x;
+        public float CalculateNewXPosition(GameObject gameObject, bool isRightMovement)
+        {
+            return Vector2.Lerp(gameObject.transform.position, this.targetPosition, duration * Time.deltaTime).x;
         }
 
-        public float CalculateNewYPosition(GameObject gameObject)
+        public float CalculateNewYPosition(GameObject gameObject, bool isUpMovement)
         {
             return this.targetPosition.y;
         }

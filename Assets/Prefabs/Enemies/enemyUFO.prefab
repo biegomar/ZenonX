@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 8523665968469120268}
   - component: {fileID: 2621623257388109733}
   - component: {fileID: 5242274841035417936}
+  - component: {fileID: 360462834534914234}
   - component: {fileID: 6425252566134067661}
   - component: {fileID: -220551554603107197}
-  - component: {fileID: 360462834534914234}
   m_Layer: 0
   m_Name: enemyUFO
   m_TagString: Enemy
@@ -100,6 +100,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8278b824a7a65ea4a9f44d3384b8f6f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &360462834534914234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2875307575560752331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baeda0c6928581445ae0c245bd1334db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Laser: {fileID: 2476658944661735969, guid: e96253fd8acee52428e1d8b564139944, type: 3}
+  laserSound: {fileID: -220551554603107197}
 --- !u!58 &6425252566134067661
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -150,7 +164,7 @@ AudioSource:
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
-  Mute: 0
+  Mute: 1
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
@@ -231,17 +245,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &360462834534914234
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2875307575560752331}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: baeda0c6928581445ae0c245bd1334db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Laser: {fileID: 2476658944661735969, guid: e96253fd8acee52428e1d8b564139944, type: 3}
-  laserSound: {fileID: -220551554603107197}

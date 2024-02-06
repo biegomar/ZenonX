@@ -29,7 +29,7 @@ namespace Enemies.Services.Movements
             this.targetPosition = new Vector2(newX, initialPosition.y);            
         }
 
-        public float CalculateNewXPosition(GameObject gameObject)
+        public float CalculateNewXPosition(GameObject gameObject, bool isRightMovement)
         {
             this.elapsedTime += Time.deltaTime;
 
@@ -38,7 +38,7 @@ namespace Enemies.Services.Movements
             return vec.x;
         }
 
-        public float CalculateNewYPosition(GameObject gameObject)
+        public float CalculateNewYPosition(GameObject gameObject, bool isUpMovement)
         {
             var vec = Vector2.Lerp(this.startPosition, this.targetPosition, this.elapsedTime / this.duration);
 

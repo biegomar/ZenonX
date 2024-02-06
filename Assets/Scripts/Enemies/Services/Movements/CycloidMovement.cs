@@ -17,10 +17,10 @@ namespace Enemies.Services.Movements
         public CycloidMovement(Vector2 initialPosition, EnemyFlightFormationItem item)
         {
             this.startPosition = initialPosition;
-            this.item = item;
+            this.item = item;            
         }
-        
-        public float CalculateNewXPosition(GameObject gameObject)
+
+        public float CalculateNewXPosition(GameObject gameObject, bool isRightMovement)
         {
             if (this.item.Flag)
             {
@@ -31,16 +31,16 @@ namespace Enemies.Services.Movements
                 this.arc += Time.deltaTime * GameManager.Instance.EnemyWaveFourSpeed;    
             }
         
-            var x = radius * arc - distanceFromOrigin * Math.Sin(arc);
+            var x = radius * arc - distanceFromOrigin * Mathf.Sin(arc);
         
-            return this.startPosition.x + (float)x; 
+            return this.startPosition.x + x; 
         }
 
-        public float CalculateNewYPosition(GameObject gameObject)
+        public float CalculateNewYPosition(GameObject gameObject, bool isUpMovement)
         {
-            var y = radius - distanceFromOrigin * Math.Cos(arc);
+            var y = radius - distanceFromOrigin * Mathf.Cos(arc);
 
-            return this.startPosition.y + (float)y;
+            return this.startPosition.y + y;
         }
     }
 }

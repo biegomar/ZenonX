@@ -14,16 +14,14 @@ namespace Enemies.Services.Movements
             this.DefineTargetPosition(startPosition);
         }
 
-        public float CalculateNewXPosition(GameObject gameObject)
-        {                        
+        public float CalculateNewXPosition(GameObject gameObject, bool isRightMovement)
+        {
             return gameObject.transform.position.x;
         }
 
-        public float CalculateNewYPosition(GameObject gameObject)
+        public float CalculateNewYPosition(GameObject gameObject, bool isUpMovement)
         {
-            var vec = Vector2.Lerp(gameObject.transform.position, this.targetPosition, duration * Time.deltaTime);
-
-            return vec.y;
+            return Vector2.Lerp(gameObject.transform.position, this.targetPosition, duration * Time.deltaTime).y;
         }
 
         private void DefineTargetPosition(Vector2 initialPosition)

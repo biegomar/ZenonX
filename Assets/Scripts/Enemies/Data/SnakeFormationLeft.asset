@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 416c4a2dd5ddcee4ca42b77a01b43bb8, type: 3}
+  m_Name: SnakeFormationLeft
+  m_EditorClassIdentifier: 
+  EnemyTemplate: {fileID: 2875307575560752331, guid: 3617ccc85d382e341b4db384d18a75e6, type: 3}
+  EnemyHealthPoints: 2
+  StartPoint: {x: 0, y: 4.5, z: 0}
+  TransitionRangeFrom: {x: -7, y: 0, z: 0}
+  TransitionRangeTo: {x: -5, y: 0, z: 0}
+  Distance: {x: 0, y: 0.6, z: 0}
+  Flag: 0
