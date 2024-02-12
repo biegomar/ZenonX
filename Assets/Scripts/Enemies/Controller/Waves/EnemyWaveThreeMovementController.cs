@@ -16,7 +16,7 @@ namespace Enemies.Controller.Waves.WaveThree
     
         void Start()
         {        
-            GameObject go = GameObject.Find("EnemyWaveThree");
+            GameObject go = GameObject.FindGameObjectWithTag("EnemyWaveThree");
             if (go != null)
             {
                 this.enemyController = go.GetComponent<WaveSpawnController>();
@@ -37,7 +37,7 @@ namespace Enemies.Controller.Waves.WaveThree
             this.activeMovementStrategy = new XPingPongLerpMovement(this.enemyItem.StartPosition);
         }
 
-        public void OnTriggerEnter2D(Collider2D collision)
+        private void OnTriggerEnter2D(Collider2D collision)
         {
             var collisionObject = collision.gameObject;
         
