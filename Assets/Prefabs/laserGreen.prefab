@@ -162,4 +162,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laserDisappearYPosition: 4
-  laserSpeed: 7
+  laserSpeed: 8

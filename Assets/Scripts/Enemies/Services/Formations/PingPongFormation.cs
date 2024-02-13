@@ -11,14 +11,33 @@ namespace Enemies.Services.Formations
         {
             var formationId = Guid.NewGuid();
             var gameObjects = new List<EnemyFlightFormationItem>();
+            var initialDistance = new Vector3(this.enemyFormationData.Distance.x,
+                this.enemyFormationData.Distance.y, this.enemyFormationData.Distance.z);
 
             for (int i = 0; i < 3; i++)
             {
+                this.enemyFormationData.Distance = new Vector3(i % 2 == 0 ? initialDistance.x: -initialDistance.x, initialDistance.y * (i+1), initialDistance.z);
                 EnemyFlightFormationItem enemyItem = this.CreateNewEnemyItem(formationId);
                 gameObjects.Add(enemyItem);
             }
+
+            this.enemyFormationData.Distance = initialDistance;
             
             return new KeyValuePair<Guid, IList<EnemyFlightFormationItem>>(formationId, gameObjects);
+        }
+        
+        protected override EnemyFlightFormationItem CreateNewEnemyItem(Guid formationId)
+        {
+            var startVector = this.enemyFormationData.StartPoint + this.enemyFormationData.Distance;
+            var vector = startVector.x < 0 ? startVector + 2 * Vector3.left : startVector + 2 * Vector3.right;
+
+            return new EnemyFlightFormationItem
+            {
+                FormationId = formationId,
+                Health = this.enemyFormationData.EnemyHealthPoints,
+                Enemy = Instantiate(this.enemyFormationData.EnemyTemplate, vector, Quaternion.identity),
+                StartPosition = startVector
+            };
         }
     }
 }

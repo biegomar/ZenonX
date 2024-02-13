@@ -129,7 +129,7 @@ public sealed class GameManager : MonoBehaviour
 
     private void InitializeShipValues()
     {
-        MaxShipHealth = 10;
+        MaxShipHealth = 15;
         ActualShipHealth = MaxShipHealth;
         MaxShieldHealth = 5;
         ActualShieldHealth = MaxShieldHealth;
@@ -139,7 +139,7 @@ public sealed class GameManager : MonoBehaviour
         MaxShipLaserPower = 30;
         ActualShipLaserPower = MaxShipLaserPower;
         LaserPowerRegainInterval = 2f;
-        ShipLaserFrequency = 0.6f;
+        ShipLaserFrequency = 0.5f;
         IsShipShieldActive = false;
     }
 }

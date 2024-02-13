@@ -12,7 +12,7 @@ namespace Enemies.Services.Formations
         
         public abstract KeyValuePair<Guid, IList<EnemyFlightFormationItem>> SpawnFormation();
         
-        protected EnemyFlightFormationItem CreateNewEnemyItem(Guid formationId)
+        protected virtual EnemyFlightFormationItem CreateNewEnemyItem(Guid formationId)
         {
             var vector = this.enemyFormationData.StartPoint + this.enemyFormationData.Distance;
 

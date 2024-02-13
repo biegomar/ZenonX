@@ -21,6 +21,8 @@ namespace Enemies.Services.Formations
                 gameObjects.Add(enemyItem);
             }
             
+            this.enemyFormationData.Distance = initialDistance;
+            
             return new KeyValuePair<Guid, IList<EnemyFlightFormationItem>>(formationId, gameObjects);
         }
     }
