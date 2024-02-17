@@ -50,6 +50,7 @@ public sealed class GameManager : MonoBehaviour
     public uint EnemyWaveFourHealth { get; set; }
     public uint EnemyWaveFourScore { get; set; }
     public float EnemyWaveFourSpeed { get; set; }
+    public float EnemyWaveFourTimeDistanceBeforeMovement { get; set; }
 
     //Score
     public uint Score { get; set; }
@@ -125,6 +126,7 @@ public sealed class GameManager : MonoBehaviour
         EnemyWaveFourHealth = 2;
         EnemyWaveFourScore = 25;
         EnemyWaveFourSpeed = 1.5f;
+        EnemyWaveFourTimeDistanceBeforeMovement = 0.2f;
     }
 
     private void InitializeShipValues()

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 416c4a2dd5ddcee4ca42b77a01b43bb8, type: 3}
+  m_Name: CycloidFormationLeft
+  m_EditorClassIdentifier: 
+  EnemyTemplate: {fileID: 3800701205536916504, guid: d4d90aac26d2b9e4a96c78fcc4f90c4a, type: 3}
+  EnemyHealthPoints: 2
+  StartPoint: {x: -7.5, y: 0.5, z: 0}
+  TransitionRangeFrom: {x: 0, y: 0, z: 0}
+  TransitionRangeTo: {x: 0, y: 0, z: 0}
+  Distance: {x: 0, y: 0, z: 0}
+  Flag: 0

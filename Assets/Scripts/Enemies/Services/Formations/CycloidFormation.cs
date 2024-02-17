@@ -11,9 +11,9 @@ namespace Enemies.Services.Formations
             var formationId = Guid.NewGuid();
             var gameObjects = new List<EnemyFlightFormationItem>();
 
-            for (int i = 0; i < 5; i++)
+            for (uint i = 0; i < 5; i++)
             {
-                EnemyFlightFormationItem enemyItem = this.CreateNewEnemyItem(formationId);
+                EnemyFlightFormationItem enemyItem = this.CreateNewEnemyItem(formationId, i, enemyFormationData.Flag);
                 gameObjects.Add(enemyItem);
             }
             

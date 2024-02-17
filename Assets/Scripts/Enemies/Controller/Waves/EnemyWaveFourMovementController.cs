@@ -13,10 +13,13 @@ namespace Enemies.Controller.Waves.WaveFour
         private IMovementStrategy activeMovementStrategy;
         private WaveSpawnController enemyController;
         private EnemyFlightFormationItem enemyItem;
+
+        private float waitTimer; 
     
         private void Start()
-        {        
-            GameObject go = GameObject.Find("EnemyWaveFour");
+        {
+            this.waitTimer = 0;
+            var go = GameObject.FindGameObjectWithTag("EnemyWaveFour");
             if (go != null)
             {
                 this.enemyController = go.GetComponent<WaveSpawnController>();
@@ -39,22 +42,28 @@ namespace Enemies.Controller.Waves.WaveFour
     
         private void Update()
         {
+            this.waitTimer += Time.deltaTime;
+            
             // use delta time for game pause here.
             if (GameManager.Instance.IsGameRunning && Time.deltaTime > 0f)
             {
-                if ((!this.enemyItem.Flag && transform.position.x > 9) ||
-                    (this.enemyItem.Flag && transform.position.x < -9))
+                //wait before you move at all
+                if (this.waitTimer > this.enemyItem.PositionInFormation * GameManager.Instance.EnemyWaveFourTimeDistanceBeforeMovement)
                 {
-                    this.enemyItem.Flag = !this.enemyItem.Flag;
-                    //this.RemoveEnemyAndScore(false);
-                    //enemyController.SpawnLoot(new Vector3(0,0,-11f));
-                }
-                else
-                {
-                    transform.position = new Vector3(
-                        CalculateNewXPosition(),
-                        CalculateNewYPosition(),
-                        transform.position.z);   
+                    if ((!this.enemyItem.Flag && transform.position.x > 9) ||
+                        (this.enemyItem.Flag && transform.position.x < -9))
+                    {
+                        this.enemyItem.Flag = !this.enemyItem.Flag;
+                        //this.RemoveEnemyAndScore(false);
+                        //enemyController.SpawnLoot(new Vector3(0,0,-11f));
+                    }
+                    else
+                    {
+                        transform.position = new Vector3(
+                            CalculateNewXPosition(),
+                            CalculateNewYPosition(),
+                            transform.position.z);   
+                    } 
                 }
             }
         }

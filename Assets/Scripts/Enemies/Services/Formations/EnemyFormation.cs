@@ -7,12 +7,12 @@ namespace Enemies.Services.Formations
 {
     public abstract class EnemyFormation : MonoBehaviour
     {
-        [SerializeField] 
-        protected EnemyFormationData enemyFormationData;
-        
+        [SerializeField] protected EnemyFormationData enemyFormationData;
+
         public abstract KeyValuePair<Guid, IList<EnemyFlightFormationItem>> SpawnFormation();
-        
-        protected virtual EnemyFlightFormationItem CreateNewEnemyItem(Guid formationId)
+
+        protected virtual EnemyFlightFormationItem CreateNewEnemyItem(Guid formationId, uint positionInFormation = 0,
+            bool isNegative = false)
         {
             var vector = this.enemyFormationData.StartPoint + this.enemyFormationData.Distance;
 
@@ -21,7 +21,9 @@ namespace Enemies.Services.Formations
                 FormationId = formationId,
                 Health = this.enemyFormationData.EnemyHealthPoints,
                 Enemy = Instantiate(this.enemyFormationData.EnemyTemplate, vector, Quaternion.identity),
-                StartPosition = vector
+                StartPosition = vector,
+                PositionInFormation = positionInFormation,
+                Flag = isNegative
             };
         }
     }
