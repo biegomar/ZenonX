@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Enemies.Model;
+using Enemies.Services.Formations;
 using UnityEngine;
 
 namespace Enemies.Controller.Waves.WaveTwo
@@ -9,7 +10,9 @@ namespace Enemies.Controller.Waves.WaveTwo
     public class EnemyWaveTwoInteractionController : MonoBehaviour
     {
         private WaveSpawnController enemyController;
-        private EnemyItem enemyItem;
+        private EnemyFlightFormationItem enemyItem;
+        private EnemyFormation formation;
+        private Guid formationId;
 
         private const float rayLength = 9.7f;
         private const float translate = 0.5f;
@@ -32,15 +35,12 @@ namespace Enemies.Controller.Waves.WaveTwo
                 if (this.enemyController != null)
                 {
                     this.enemyItem = this.enemyController.Enemies[gameObject.GetInstanceID()];
+                    if (this.enemyItem != null)
+                    {
+                        this.formation = this.enemyItem.Formation;
+                        this.formationId = this.enemyItem.FormationId;
+                    }
                 }
-                else
-                {
-                    Debug.Log("go.GetComponent<EnemyController>() is null");
-                }
-            }
-            else
-            {
-                Debug.Log("GameObject.Find(Enemies) is null");
             }
         }
 
@@ -116,8 +116,9 @@ namespace Enemies.Controller.Waves.WaveTwo
             {
                 GameManager.Instance.Score += GameManager.Instance.EnemyWaveTwoScore;
             }
-        
-            enemyController.SpawnLoot(new Vector3(0,0,0));
+            
+            enemyController.SpawnLoot(this.formationId,
+                this.formation.enemyFormationData.LootTemplate, new Vector3(0,0,0));
         }
 
         private void LetTheHammerFall()

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: PingPongFormationTopRight
   m_EditorClassIdentifier: 
   EnemyTemplate: {fileID: 5814509899843507041, guid: 532f0517a0e482b44bd3931d9cd0232b, type: 3}
+  LootTemplate: {fileID: 1254729175944713818, guid: 212741ee5c0f30f448546515006bcd28, type: 3}
   EnemyHealthPoints: 2
   StartPoint: {x: 0, y: 4.5, z: 0}
   TransitionRangeFrom: {x: 2, y: 0, z: 0}

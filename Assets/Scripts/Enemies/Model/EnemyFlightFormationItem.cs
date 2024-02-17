@@ -1,10 +1,13 @@
 ﻿using System;
+using Enemies.Services.Formations;
 
 namespace Enemies.Model
 {
     public class EnemyFlightFormationItem : EnemyItem
     {
         public Guid FormationId { get; set; }
+
+        public EnemyFormation Formation { get; set; }
 
         public bool Flag { get; set; }
         

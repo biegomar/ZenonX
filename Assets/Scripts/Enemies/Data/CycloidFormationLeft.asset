@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: CycloidFormationLeft
   m_EditorClassIdentifier: 
   EnemyTemplate: {fileID: 3800701205536916504, guid: d4d90aac26d2b9e4a96c78fcc4f90c4a, type: 3}
+  LootTemplate: {fileID: 1254729175944713818, guid: 212741ee5c0f30f448546515006bcd28, type: 3}
   EnemyHealthPoints: 2
   StartPoint: {x: -7.5, y: 0.5, z: 0}
   TransitionRangeFrom: {x: 0, y: 0, z: 0}

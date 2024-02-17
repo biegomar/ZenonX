@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Enemies.Model;
 using Enemies.Services;
+using Enemies.Services.Formations;
 using Enemies.Services.Movements;
 using UnityEngine;
 
@@ -13,6 +14,8 @@ namespace Enemies.Controller.Waves.WaveFour
         private IMovementStrategy activeMovementStrategy;
         private WaveSpawnController enemyController;
         private EnemyFlightFormationItem enemyItem;
+        private EnemyFormation formation;
+        private Guid formationId;
 
         private float waitTimer; 
     
@@ -26,15 +29,12 @@ namespace Enemies.Controller.Waves.WaveFour
                 if (this.enemyController != null)
                 {
                     this.enemyItem = this.enemyController.Enemies[gameObject.GetInstanceID()];
+                    if (this.enemyItem != null)
+                    {
+                        this.formation = this.enemyItem.Formation;
+                        this.formationId = this.enemyItem.FormationId;
+                    }
                 }
-                else
-                {
-                    Debug.Log("go.GetComponent<EnemyController>() is null");
-                }
-            }
-            else
-            {
-                Debug.Log("GameObject.Find(Enemies) is null");
             }
 
             this.activeMovementStrategy = new CycloidMovement(this.enemyItem.StartPosition, this.enemyItem);    
@@ -83,7 +83,8 @@ namespace Enemies.Controller.Waves.WaveFour
 
                         RemoveEnemyAndScore();
 
-                        enemyController.SpawnLoot(lastPosition);
+                        enemyController.SpawnLoot(this.formationId,
+                            this.formation.enemyFormationData.LootTemplate, lastPosition);
                     }
                 }
 

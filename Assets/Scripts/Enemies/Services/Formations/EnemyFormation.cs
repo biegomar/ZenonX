@@ -7,9 +7,14 @@ namespace Enemies.Services.Formations
 {
     public abstract class EnemyFormation : MonoBehaviour
     {
-        [SerializeField] protected EnemyFormationData enemyFormationData;
+        [SerializeField] public EnemyFormationData enemyFormationData;
 
         public abstract KeyValuePair<Guid, IList<EnemyFlightFormationItem>> SpawnFormation();
+
+        public virtual void SpawnLoot(Vector3 lastPosition)
+        {
+            Instantiate(this.enemyFormationData.LootTemplate, lastPosition, Quaternion.identity);
+        }
 
         protected virtual EnemyFlightFormationItem CreateNewEnemyItem(Guid formationId, uint positionInFormation = 0,
             bool isNegative = false)
@@ -19,6 +24,7 @@ namespace Enemies.Services.Formations
             return new EnemyFlightFormationItem
             {
                 FormationId = formationId,
+                Formation = this,
                 Health = this.enemyFormationData.EnemyHealthPoints,
                 Enemy = Instantiate(this.enemyFormationData.EnemyTemplate, vector, Quaternion.identity),
                 StartPosition = vector,

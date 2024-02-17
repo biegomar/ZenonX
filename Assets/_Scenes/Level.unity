@@ -243,7 +243,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 306ee30b5fb53524d90eb91e9b3bb6e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lootTemplate: {fileID: 1254729175944713818, guid: 212741ee5c0f30f448546515006bcd28, type: 3}
   enemyFormations:
   - {fileID: 1173299152}
   formationSpawnDistanceTime: 0
@@ -1147,10 +1146,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waveControllers:
-  - {fileID: 739618803}
+  - {fileID: 1946302655}
   - {fileID: 1054390793}
   - {fileID: 257944525}
-  - {fileID: 1946302655}
+  - {fileID: 739618803}
 --- !u!1001 &585914774
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1565,7 +1564,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 306ee30b5fb53524d90eb91e9b3bb6e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lootTemplate: {fileID: 1254729175944713818, guid: 212741ee5c0f30f448546515006bcd28, type: 3}
   enemyFormations:
   - {fileID: 745958561}
   - {fileID: 1840624598}
@@ -1910,7 +1908,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 306ee30b5fb53524d90eb91e9b3bb6e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lootTemplate: {fileID: 1254729175944713818, guid: 212741ee5c0f30f448546515006bcd28, type: 3}
   enemyFormations:
   - {fileID: 1750472680}
   - {fileID: 266439730}
@@ -3068,7 +3065,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 306ee30b5fb53524d90eb91e9b3bb6e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lootTemplate: {fileID: 1254729175944713818, guid: 212741ee5c0f30f448546515006bcd28, type: 3}
   enemyFormations:
   - {fileID: 527443878}
   - {fileID: 585914776}

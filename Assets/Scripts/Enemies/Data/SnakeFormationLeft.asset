@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: SnakeFormationLeft
   m_EditorClassIdentifier: 
   EnemyTemplate: {fileID: 2875307575560752331, guid: 3617ccc85d382e341b4db384d18a75e6, type: 3}
+  LootTemplate: {fileID: 1254729175944713818, guid: 212741ee5c0f30f448546515006bcd28, type: 3}
   EnemyHealthPoints: 2
   StartPoint: {x: 0, y: 4.5, z: 0}
   TransitionRangeFrom: {x: -7, y: 0, z: 0}

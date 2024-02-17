@@ -9,6 +9,7 @@ using UnityEngine.Serialization;
 public class EnemyFormationData : ScriptableObject
 {
     public GameObject EnemyTemplate;
+    public GameObject LootTemplate;
     public uint EnemyHealthPoints;
     public Vector3 StartPoint;
     public Vector3 TransitionRangeFrom;

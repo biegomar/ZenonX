@@ -36,6 +36,7 @@ namespace Enemies.Services.Formations
             return new EnemyFlightFormationItem
             {
                 FormationId = formationId,
+                Formation = this,
                 Health = this.enemyFormationData.EnemyHealthPoints,
                 Enemy = Instantiate(this.enemyFormationData.EnemyTemplate, vector, Quaternion.identity),
                 StartPosition = startVector,

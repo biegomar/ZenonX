@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: HammerHeadFormation
   m_EditorClassIdentifier: 
   EnemyTemplate: {fileID: 8223685631401717535, guid: 95502fae46938694abd8560403048f78, type: 3}
+  LootTemplate: {fileID: 1254729175944713818, guid: 212741ee5c0f30f448546515006bcd28, type: 3}
   EnemyHealthPoints: 2
   StartPoint: {x: -6.5, y: 3.5, z: 0}
   TransitionRangeFrom: {x: 0, y: 0, z: 0}
