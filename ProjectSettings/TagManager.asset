@@ -18,6 +18,8 @@ TagManager:
   - EnemyWaveThree
   - EnemyWaveFour
   - TopBorder
+  - TitleSong
+  - Loot
   layers:
   - Default
   - TransparentFX

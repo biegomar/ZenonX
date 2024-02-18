@@ -8,9 +8,6 @@ namespace Enemies.Controller
     {
         [SerializeField]
         private Rigidbody2D Rigidbody;
-        
-        [SerializeField]
-        private AudioSource CatchLootSound;
 
         private IncentiveManager incentiveManager;
         private bool isInCollisionHandling = false;
@@ -18,7 +15,6 @@ namespace Enemies.Controller
         void Start()
         {
             this.incentiveManager = new IncentiveManager();
-            this.CatchLootSound.enabled = true;
             Rigidbody.AddForce(new Vector2(transform.position.x > 0.0f ? -0.3f : 0.3f, 1f) * GameManager.Instance.ShipBoosterVelocity, ForceMode2D.Impulse);
         }
 
@@ -45,20 +41,13 @@ namespace Enemies.Controller
                 var collisionObject = collision.gameObject;
                 if (collisionObject.CompareTag("Player"))
                 {
-                    this.CatchLootSound.Play();
+                    AudioManager.Instance.GetSound("Loot").Play();
                     isInCollisionHandling = true;
                     incentiveManager.GiveIncentive();
 
-                    StartCoroutine(DestroyAfterSound());
+                    Destroy(gameObject);
                 }
             }
-        }
-        
-        IEnumerator DestroyAfterSound()
-        {
-            yield return new WaitForSeconds(this.CatchLootSound.clip.length);
-            
-            Destroy(gameObject);
         }
     }
 }

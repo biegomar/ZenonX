@@ -12,12 +12,10 @@ namespace Player.Controller.Laser
         [SerializeField]
         private AmmoProgressBarController ammoProgressBarController;
 
-        [SerializeField]
-        private AudioSource laserSound;
-
         private float ActualLaserFrequence;
         private float LaserInterval;
-        private float ActualLaserPowerRegainInterval;        
+        private float ActualLaserPowerRegainInterval;  
+        private AudioSource laserSound;
 
         //new input system
         private GameInput gameInput;
@@ -38,8 +36,9 @@ namespace Player.Controller.Laser
 
         public void Start()
         {
+            this.laserSound = AudioManager.Instance.GetSound("PlayerLaser");
             this.LaserInterval = 0;
-            this.ActualLaserPowerRegainInterval = 0;            
+            this.ActualLaserPowerRegainInterval = 0;
         }
 
         public void Update()
@@ -61,6 +60,7 @@ namespace Player.Controller.Laser
         {
             if (this.LaserInterval >= this.ActualLaserFrequence && GameManager.Instance.ActualShipLaserPower > 0 && this.IsFirePressed())
             {
+                this.laserSound.enabled = true;
                 this.laserSound.Play();
 
                 Instantiate(Laser, new Vector3(

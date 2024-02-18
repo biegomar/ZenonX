@@ -1146,10 +1146,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waveControllers:
-  - {fileID: 739618803}
   - {fileID: 1054390793}
   - {fileID: 257944525}
   - {fileID: 1946302655}
+  - {fileID: 739618803}
 --- !u!1001 &585914774
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1243,7 +1243,6 @@ GameObject:
   - component: {fileID: 682745556}
   - component: {fileID: 682745559}
   - component: {fileID: 682745561}
-  - component: {fileID: 682745560}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1325,7 +1324,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Laser: {fileID: 730346492699851099, guid: 1c88febb99d09bd47b75bd5e392123b9, type: 3}
   ammoProgressBarController: {fileID: 1779148190}
-  laserSound: {fileID: 682745560}
 --- !u!70 &682745557
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -1409,102 +1407,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthProgressBarController: {fileID: 293799508}
---- !u!82 &682745560
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 682745551}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: c0c602d9833ac4646b0b8345941569c5, type: 3}
-  m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!114 &682745561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1570,7 +1472,6 @@ MonoBehaviour:
   - {fileID: 745958561}
   - {fileID: 1840624598}
   - {fileID: 1737132575}
-  - {fileID: 2137152414}
   formationSpawnDistanceTime: 0
 --- !u!1001 &745958559
 PrefabInstance:
@@ -3354,17 +3255,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4740209075276190110, guid: 31d59e487940bec4caf0046d6797365f, type: 3}
   m_PrefabInstance: {fileID: 2137152412}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2137152414 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 558017556780341954, guid: 31d59e487940bec4caf0046d6797365f, type: 3}
-  m_PrefabInstance: {fileID: 2137152412}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d05afeaba7844964864247ba1559c0b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &641181536454588226
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3543,6 +3433,6 @@ SceneRoots:
   - {fileID: 403530096}
   - {fileID: 1395011992}
   - {fileID: 946882447}
-  - {fileID: 583505308}
   - {fileID: 682745553}
+  - {fileID: 583505308}
   - {fileID: 1335738941}

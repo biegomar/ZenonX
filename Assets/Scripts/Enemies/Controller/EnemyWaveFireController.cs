@@ -6,8 +6,7 @@ namespace Enemies.Controller.Waves
     {
         [SerializeField]
         private GameObject Laser;
-
-        [SerializeField]
+        
         private AudioSource laserSound;
     
         private float fireInterval;
@@ -17,6 +16,7 @@ namespace Enemies.Controller.Waves
         {
             this.fireInterval = Random.Range(2f, 6f);
             this.elapsedTimeSinceLastShot = this.fireInterval - (this.fireInterval * .5f);
+            this.laserSound = AudioManager.Instance.GetSound("EnemyLaser");
             this.laserSound.enabled = true;
         }
 
