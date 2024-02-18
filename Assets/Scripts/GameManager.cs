@@ -89,6 +89,25 @@ public sealed class GameManager : MonoBehaviour
 
         InitializeEnemyWaveFourValues();
     }
+    
+    public static T FindObjectInParentChain<T>(Transform currentTransform) where T : Component
+    {
+        // Überprüfen, ob der aktuelle Transform gültig ist
+        if (currentTransform == null)
+        {
+            return null;
+        }
+
+        // Überprüfen, ob der aktuelle Transform das gesuchte Kriterium erfüllt
+        T component = currentTransform.GetComponent<T>();
+        if (component != null)
+        {
+            return component;
+        }
+
+        // Rekursiv die Elternkette durchlaufen, um das gesuchte GameObject zu finden
+        return FindObjectInParentChain<T>(currentTransform.parent);
+    }
 
     private void InitializeGameValues()
     {

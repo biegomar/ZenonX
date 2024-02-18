@@ -25,18 +25,14 @@ namespace Enemies.Controller.Waves.WaveOne
 
         void Start()
         {
-            GameObject go = GameObject.FindGameObjectWithTag("EnemyWaveOne");
-            if (go != null)
+            this.enemyController = GameManager.FindObjectInParentChain<WaveSpawnController>(this.transform);
+            if (this.enemyController != null)
             {
-                this.enemyController = go.GetComponent<WaveSpawnController>();
-                if (this.enemyController != null)
+                this.enemyItem = this.enemyController.Enemies[gameObject.GetInstanceID()];
+                if (this.enemyItem != null)
                 {
-                    this.enemyItem = this.enemyController.Enemies[gameObject.GetInstanceID()];
-                    if (this.enemyItem != null)
-                    {
-                        this.formation = this.enemyItem.Formation;
-                        this.formationId = this.enemyItem.FormationId;
-                    }
+                    this.formation = this.enemyItem.Formation;
+                    this.formationId = this.enemyItem.FormationId;
                 }
             }
 

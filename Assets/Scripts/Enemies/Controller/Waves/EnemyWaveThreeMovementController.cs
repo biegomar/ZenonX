@@ -18,22 +18,18 @@ namespace Enemies.Controller.Waves.WaveThree
         private IMovementStrategy activeMovementStrategy;  
     
         void Start()
-        {        
-            GameObject go = GameObject.FindGameObjectWithTag("EnemyWaveThree");
-            if (go != null)
+        {      
+            this.enemyController = GameManager.FindObjectInParentChain<WaveSpawnController>(this.transform);
+            if (this.enemyController != null)
             {
-                this.enemyController = go.GetComponent<WaveSpawnController>();
-                if (this.enemyController != null)
+                this.enemyItem = this.enemyController.Enemies[gameObject.GetInstanceID()];
+                if (this.enemyItem != null)
                 {
-                    this.enemyItem = this.enemyController.Enemies[gameObject.GetInstanceID()];
-                    if (this.enemyItem != null)
-                    {
-                        this.formation = this.enemyItem.Formation;
-                        this.formationId = this.enemyItem.FormationId;
-                    }
+                    this.formation = this.enemyItem.Formation;
+                    this.formationId = this.enemyItem.FormationId;
                 }
             }
-
+            
             this.activeMovementStrategy = new XPingPongLerpMovement(this.enemyItem.StartPosition);
         }
 

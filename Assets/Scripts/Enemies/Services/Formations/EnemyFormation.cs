@@ -13,7 +13,7 @@ namespace Enemies.Services.Formations
 
         public virtual void SpawnLoot(Vector3 lastPosition)
         {
-            Instantiate(this.enemyFormationData.LootTemplate, lastPosition, Quaternion.identity);
+            Instantiate(this.enemyFormationData.LootTemplate, lastPosition, Quaternion.identity, this.transform);
         }
 
         protected virtual EnemyFlightFormationItem CreateNewEnemyItem(Guid formationId, uint positionInFormation = 0,
@@ -26,7 +26,7 @@ namespace Enemies.Services.Formations
                 FormationId = formationId,
                 Formation = this,
                 Health = this.enemyFormationData.EnemyHealthPoints,
-                Enemy = Instantiate(this.enemyFormationData.EnemyTemplate, vector, Quaternion.identity),
+                Enemy = Instantiate(this.enemyFormationData.EnemyTemplate, vector, Quaternion.identity, this.transform),
                 StartPosition = vector,
                 PositionInFormation = positionInFormation,
                 Flag = isNegative

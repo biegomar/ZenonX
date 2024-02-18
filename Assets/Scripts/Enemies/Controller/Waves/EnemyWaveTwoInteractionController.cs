@@ -28,18 +28,14 @@ namespace Enemies.Controller.Waves.WaveTwo
         {
             this.rigidBody = GetComponent<Rigidbody2D>();
 
-            GameObject go = GameObject.FindGameObjectWithTag("EnemyWaveTwo");
-            if (go != null)
+            this.enemyController = GameManager.FindObjectInParentChain<WaveSpawnController>(this.transform);
+            if (this.enemyController != null)
             {
-                this.enemyController = go.GetComponent<WaveSpawnController>();
-                if (this.enemyController != null)
+                this.enemyItem = this.enemyController.Enemies[gameObject.GetInstanceID()];
+                if (this.enemyItem != null)
                 {
-                    this.enemyItem = this.enemyController.Enemies[gameObject.GetInstanceID()];
-                    if (this.enemyItem != null)
-                    {
-                        this.formation = this.enemyItem.Formation;
-                        this.formationId = this.enemyItem.FormationId;
-                    }
+                    this.formation = this.enemyItem.Formation;
+                    this.formationId = this.enemyItem.FormationId;
                 }
             }
         }

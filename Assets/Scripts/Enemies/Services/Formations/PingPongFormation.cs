@@ -38,7 +38,7 @@ namespace Enemies.Services.Formations
                 FormationId = formationId,
                 Formation = this,
                 Health = this.enemyFormationData.EnemyHealthPoints,
-                Enemy = Instantiate(this.enemyFormationData.EnemyTemplate, vector, Quaternion.identity),
+                Enemy = Instantiate(this.enemyFormationData.EnemyTemplate, vector, Quaternion.identity, this.transform),
                 StartPosition = startVector,
                 PositionInFormation = positionInFormation,
                 Flag = isNegative
