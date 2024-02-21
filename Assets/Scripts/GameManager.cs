@@ -118,8 +118,8 @@ public sealed class GameManager : MonoBehaviour
 
     private void InitializeEnemyWaveOneValues()
     {
-        EnemyWaveOneSinusStep = 0.01f;
-        EnemyWaveOneSinusAmplitude = .25f;
+        EnemyWaveOneSinusStep = 3.0f;
+        EnemyWaveOneSinusAmplitude = .35f;
         EnemyWaveOneYSpeed = 2f;
         EnemyWaveOneDistance = 0.5f;
         EnemyWaveOneHealth = 2;

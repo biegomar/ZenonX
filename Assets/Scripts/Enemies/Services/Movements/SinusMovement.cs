@@ -24,7 +24,7 @@ namespace Enemies.Services.Movements
             
                 if (activeSinus < Math.PI * sinusMultiplier)
                 {
-                    activeSinus += GameManager.Instance.EnemyWaveOneSinusStep;
+                    activeSinus += GameManager.Instance.EnemyWaveOneSinusStep * Time.deltaTime;
                 }
                 else
                 {
