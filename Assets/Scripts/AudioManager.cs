@@ -49,6 +49,9 @@ public class AudioManager : MonoBehaviour
     {
         if (scene.name == "Intro")
         {
+            var gameSong = AudioManager.Instance.GetSound("GameSong");
+            gameSong.Stop();
+            
             var sound = AudioManager.Instance.GetSound("TitleSong");
             sound.enabled = true;
             sound.Play();
@@ -58,6 +61,10 @@ public class AudioManager : MonoBehaviour
         {
             var sound = AudioManager.Instance.GetSound("TitleSong");
             sound.Stop();
+            
+            var gameSong = AudioManager.Instance.GetSound("GameSong");
+            gameSong.enabled = true;
+            gameSong.Play();
         }
     }
 }
