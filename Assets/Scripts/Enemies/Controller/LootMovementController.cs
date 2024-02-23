@@ -9,12 +9,12 @@ namespace Enemies.Controller
         [SerializeField]
         private Rigidbody2D Rigidbody;
 
-        private IncentiveManager incentiveManager;
+        private IncentiveService _incentiveService;
         private bool isInCollisionHandling = false;
 
         void Start()
         {
-            this.incentiveManager = new IncentiveManager();
+            this._incentiveService = new IncentiveService();
             Rigidbody.AddForce(new Vector2(transform.position.x > 0.0f ? -0.3f : 0.3f, 1f) * GameManager.Instance.ShipBoosterVelocity, ForceMode2D.Impulse);
         }
 
@@ -43,7 +43,7 @@ namespace Enemies.Controller
                 {
                     AudioManager.Instance.GetSound("Loot").Play();
                     isInCollisionHandling = true;
-                    incentiveManager.GiveIncentive();
+                    _incentiveService.GiveIncentive();
 
                     Destroy(gameObject);
                 }

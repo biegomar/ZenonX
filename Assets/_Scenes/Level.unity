@@ -1108,7 +1108,7 @@ GameObject:
   - component: {fileID: 583505308}
   - component: {fileID: 583505309}
   m_Layer: 0
-  m_Name: EnemyWaveSpawnController
+  m_Name: WaveSpawnController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1146,10 +1146,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waveControllers:
+  - {fileID: 739618803}
   - {fileID: 1054390793}
   - {fileID: 257944525}
   - {fileID: 1946302655}
-  - {fileID: 739618803}
 --- !u!1001 &585914774
 PrefabInstance:
   m_ObjectHideFlags: 0

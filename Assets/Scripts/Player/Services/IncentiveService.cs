@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 namespace Player.Services
 {
-    public class IncentiveManager
+    public class IncentiveService
     {
         private readonly IDictionary<byte, Action> incentives;
         private const byte LaserFrequencyIndex = 4;
 
-        public IncentiveManager()
+        public IncentiveService()
         {
             this.incentives = new Dictionary<byte, Action>();
         
