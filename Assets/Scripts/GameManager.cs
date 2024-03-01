@@ -57,6 +57,8 @@ public sealed class GameManager : MonoBehaviour
 
     //Game states
     public bool IsGameRunning { get; set; }
+    public bool IsLootSpawned { get; set; }
+    public string LootMessage { get; set; }
 
     private void Awake()
     {
@@ -111,16 +113,18 @@ public sealed class GameManager : MonoBehaviour
 
     private void InitializeGameValues()
     {
-        EnemyWaveLaserSpeed = 6.5f;
+        EnemyWaveLaserSpeed = 7.5f;
         Score = 0;
         IsGameRunning = true;
+        IsLootSpawned = false;
+        LootMessage = string.Empty;
     }
 
     private void InitializeEnemyWaveOneValues()
     {
         EnemyWaveOneSinusStep = 3.0f;
         EnemyWaveOneSinusAmplitude = .35f;
-        EnemyWaveOneYSpeed = 2f;
+        EnemyWaveOneYSpeed = 3f;
         EnemyWaveOneDistance = 0.5f;
         EnemyWaveOneHealth = 2;
         EnemyWaveOneScore = 10;
@@ -144,7 +148,7 @@ public sealed class GameManager : MonoBehaviour
     {
         EnemyWaveFourHealth = 2;
         EnemyWaveFourScore = 25;
-        EnemyWaveFourSpeed = 1.5f;
+        EnemyWaveFourSpeed = 2.5f;
         EnemyWaveFourTimeDistanceBeforeMovement = 0.2f;
     }
 

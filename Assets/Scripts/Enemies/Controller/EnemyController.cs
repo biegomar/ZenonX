@@ -15,14 +15,20 @@ namespace Enemies.Controller
         private WaveSpawnController actualWave;
         private EnemyFormation actualFormation;
 
-        private int waveIndex = 1;
-        private int formationIndex = 1;
+        private int waveIndex;
+        private int formationIndex;
         
-        private bool allWavesSpawned = false;
-        private float timer;
+       private float timer;
 
         private void Start()
         {
+            GetFirstWave();
+        }
+
+        private void GetFirstWave()
+        {
+            waveIndex = 1;
+            formationIndex = 1;
             this.actualWave = waveControllers.FirstOrDefault();
             if (this.actualWave != null)
             {
@@ -35,7 +41,7 @@ namespace Enemies.Controller
         {
             this.timer += Time.deltaTime;
             
-            if (this.actualWave != null && !this.allWavesSpawned)
+            if (this.actualWave != null)
             {
                 if (!this.actualWave.IsWaveSpawned)
                 {
@@ -63,14 +69,15 @@ namespace Enemies.Controller
                 {
                     if (this.waveIndex >= this.waveControllers.Count)
                     {
-                        this.allWavesSpawned = true;
-                        this.waveIndex = 1;
+                        //this.allWavesSpawned = true;
+                        this.waveIndex = 0;
                     }
                     else
                     {
                         this.actualWave = waveControllers[waveIndex];
                         if (this.actualWave != null)
                         {
+                            this.actualWave.ResetWave();
                             this.timer = this.actualWave.formationSpawnDistanceTime;
                             this.actualFormation = this.actualWave.enemyFormations.FirstOrDefault();
                         }

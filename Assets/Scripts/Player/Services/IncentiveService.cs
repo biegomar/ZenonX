@@ -5,10 +5,17 @@ namespace Player.Services
 {
     public class IncentiveService
     {
-        private readonly IDictionary<byte, Action> incentives;
+        private IDictionary<byte, Action> incentives;
+        private IDictionary<byte, string> incentiveMessages;
         private const byte LaserFrequencyIndex = 4;
 
         public IncentiveService()
+        {
+            InitializeIncentives();
+            InitializeIncentiveMessages();
+        }
+
+        private void InitializeIncentives()
         {
             this.incentives = new Dictionary<byte, Action>();
         
@@ -17,7 +24,17 @@ namespace Player.Services
             this.incentives.Add(3, this.GetSpaceShipShield);
             this.incentives.Add(LaserFrequencyIndex, this.GetHigherLaserFrequence);
         }
-    
+        
+        private void InitializeIncentiveMessages()
+        {
+            this.incentiveMessages = new Dictionary<byte, string>();
+        
+            this.incentiveMessages.Add(1, "update maximum ammo");
+            this.incentiveMessages.Add(2, "more health points");
+            this.incentiveMessages.Add(3, "shield");
+            this.incentiveMessages.Add(LaserFrequencyIndex, "update laser frequency");
+        }
+
         public void GiveIncentive()
         {
             byte index;
@@ -25,8 +42,10 @@ namespace Player.Services
             {
                 index = (byte)UnityEngine.Random.Range(1, this.incentives.Count+1);    
             } while (!this.incentives.ContainsKey(index));
-        
+
+            GameManager.Instance.LootMessage = this.incentiveMessages[index];
             this.incentives[index].Invoke();
+            GameManager.Instance.IsLootSpawned = true;
         }
 
         private void GetMoreMaxHealthPoints()

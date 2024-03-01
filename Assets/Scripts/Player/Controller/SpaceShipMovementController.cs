@@ -124,8 +124,10 @@ namespace Player.Controller
         }
 
         private float CalculateNewXPosition()
-        {        
-            return Math.Min(this.playerRightBorder, Math.Max(this.playerLeftBorder, transform.position.x + this.move.ReadValue<Vector2>().x * GameManager.Instance.ShipHorizontalSpeed * Time.deltaTime));
+        {       
+            //return transform.position.x + Input.GetAxis("Horizontal") * this.Speed * Time.deltaTime;
+            return (Math.Min(this.playerRightBorder, Math.Max(this.playerLeftBorder, transform.position.x + this.move.ReadValue<Vector2>().x * GameManager.Instance.ShipHorizontalSpeed * Time.deltaTime)));
+            //return Math.Min(this.playerRightBorder, Math.Max(this.playerLeftBorder, transform.position.x + Input.GetAxis("Horizontal") * GameManager.Instance.ShipHorizontalSpeed * Time.deltaTime));
         }
     }
 }
