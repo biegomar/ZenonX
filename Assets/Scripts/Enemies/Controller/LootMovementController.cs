@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Enemies.Controller
 {
+    /// <summary>
+    /// The controller for the loot movement.
+    /// </summary>
     public class LootMovementController : MonoBehaviour
     {
         [SerializeField]

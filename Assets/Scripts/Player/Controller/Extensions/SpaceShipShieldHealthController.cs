@@ -2,6 +2,9 @@ using UnityEngine;
 
 namespace Player.Controller.Extensions
 {
+    /// <summary>
+    /// A special controller for the space ship shield health.
+    /// </summary>
     public class SpaceShipShieldHealthController : MonoBehaviour
     {
         void Update()

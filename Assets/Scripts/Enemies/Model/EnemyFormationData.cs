@@ -5,6 +5,9 @@ using Enemies.Model;
 using UnityEngine;
 using UnityEngine.Serialization;
 
+/// <summary>
+/// Base object for static data on enemy formations.
+/// </summary>
 [CreateAssetMenu(fileName = "EnemyFormation")]
 public class EnemyFormationData : ScriptableObject
 {

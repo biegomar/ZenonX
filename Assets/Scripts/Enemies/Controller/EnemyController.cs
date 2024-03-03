@@ -7,6 +7,9 @@ using UnityEngine;
 
 namespace Enemies.Controller
 {
+    /// <summary>
+    /// The main enemy controller.
+    /// </summary>
     public class EnemyController : MonoBehaviour
     {
         [SerializeField]
@@ -67,10 +70,12 @@ namespace Enemies.Controller
                 }
                 else if (this.actualWave.IsWaveCompleted)
                 {
+                    this.actualWave.waveSpawnCounter++;
+                    
                     if (this.waveIndex >= this.waveControllers.Count)
                     {
-                        //this.allWavesSpawned = true;
                         this.waveIndex = 0;
+                        GameManager.Instance.IsEnemyWaveGettingStronger = true;
                     }
                     else
                     {

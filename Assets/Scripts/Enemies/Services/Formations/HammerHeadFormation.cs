@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace Enemies.Services.Formations
 {
+    /// <summary>
+    /// The hammer head formation.
+    /// </summary>
     public class HammerHeadFormation : EnemyFormation
     {
         public override KeyValuePair<Guid, IList<EnemyFlightFormationItem>> SpawnFormation()

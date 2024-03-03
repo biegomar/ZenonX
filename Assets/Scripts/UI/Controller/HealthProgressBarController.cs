@@ -3,6 +3,9 @@ using UnityEngine.UI;
 
 namespace UI.Controller
 {
+    /// <summary>
+    /// The health progress bar controller.
+    /// </summary>
     public class HealthProgressBarController : MonoBehaviour
     {
         [SerializeField]

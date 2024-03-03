@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace Enemies.Services.Formations
 {
+    /// <summary>
+    /// The snake formation.
+    /// </summary>
     public class SnakeFormation : EnemyFormation
     {
         public override KeyValuePair<Guid, IList<EnemyFlightFormationItem>> SpawnFormation()

@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace Enemies.Services.Formations
 {
+    /// <summary>
+    /// The ping pong formation.
+    /// </summary>
     public class PingPongFormation : EnemyFormation
     {
         public override KeyValuePair<Guid, IList<EnemyFlightFormationItem>> SpawnFormation()
@@ -37,7 +40,7 @@ namespace Enemies.Services.Formations
             {
                 FormationId = formationId,
                 Formation = this,
-                Health = this.enemyFormationData.EnemyHealthPoints,
+                Health = this.enemyFormationData.EnemyHealthPoints + this.healthAddOn,
                 Enemy = Instantiate(this.enemyFormationData.EnemyTemplate, vector, Quaternion.identity, this.transform),
                 StartPosition = startVector,
                 PositionInFormation = positionInFormation,

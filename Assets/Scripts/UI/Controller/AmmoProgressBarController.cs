@@ -3,6 +3,9 @@ using UnityEngine.UI;
 
 namespace UI.Controller
 {
+    /// <summary>
+    /// The ammo progress bar controller.
+    /// </summary>
     public class AmmoProgressBarController : MonoBehaviour
     {
         [SerializeField]
@@ -23,7 +26,7 @@ namespace UI.Controller
         {
             this.slider.maxValue = GameManager.Instance.MaxShipLaserPower;        
 
-            return (float)GameManager.Instance.ActualShipLaserPower;
+            return GameManager.Instance.ActualShipLaserPower;
         }
     }
 }

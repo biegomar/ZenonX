@@ -2,6 +2,9 @@
 
 namespace Enemies.Services.Movements
 {
+    /// <summary>
+    /// A simple direct movement.
+    /// </summary>
     internal class DirectMovement : IMovementStrategy
     {
         private Vector2 startPosition;

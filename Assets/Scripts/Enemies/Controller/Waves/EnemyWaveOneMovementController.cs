@@ -9,6 +9,9 @@ using UnityEngine;
 
 namespace Enemies.Controller.Waves.WaveOne
 {
+    /// <summary>
+    /// The movement controller for enemy wave one.
+    /// </summary>
     public class EnemyWaveOneMovementController : MonoBehaviour
     {
         private const float hitInterval = 6f;

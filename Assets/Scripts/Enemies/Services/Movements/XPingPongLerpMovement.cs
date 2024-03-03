@@ -2,6 +2,9 @@
 
 namespace Enemies.Services.Movements
 {
+    /// <summary>
+    /// A ping pong lerp movement on the x axis.
+    /// </summary>
     public class XPingPongLerpMovement : IMovementStrategy
     {
         private readonly Vector2 targetPosition;

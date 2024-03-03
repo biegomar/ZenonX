@@ -2,6 +2,9 @@
 
 namespace Enemies.Services.Movements
 {
+    /// <summary>
+    /// The base interface for movement strategies.
+    /// </summary>
     internal interface IMovementStrategy
     {
         float CalculateNewXPosition(GameObject gameObject, bool isRightMovement);

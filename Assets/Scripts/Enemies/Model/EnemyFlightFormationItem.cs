@@ -3,7 +3,10 @@ using Enemies.Services.Formations;
 
 namespace Enemies.Model
 {
-    public class EnemyFlightFormationItem : EnemyItem
+    /// <summary>
+    /// Some meta data for enemies that are part of a formation.
+    /// </summary>
+    public record EnemyFlightFormationItem : EnemyItem
     {
         public Guid FormationId { get; set; }
 

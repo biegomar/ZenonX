@@ -5,12 +5,15 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// The loot message controller.
+/// </summary>
 public class LootMessageController : MonoBehaviour
 {
     [SerializeField]
     private Text LootText;
 
-    private float lootTimer;
+    private float messageTimer;
     private void OnEnable()
     {
         this.LootText.text = string.Empty;
@@ -18,21 +21,21 @@ public class LootMessageController : MonoBehaviour
 
     private void Start()
     {
-        this.lootTimer = 0f;
+        this.messageTimer = 0f;
     }
 
     private void Update()
     {
-        this.lootTimer += Time.deltaTime;
+        this.messageTimer += Time.deltaTime;
         
         if (GameManager.Instance.IsLootSpawned)
         {
-            this.lootTimer = 0f;
+            this.messageTimer = 0f;
             this.LootText.text = GameManager.Instance.LootMessage;
             GameManager.Instance.IsLootSpawned = false;
         }
 
-        if (!string.IsNullOrEmpty(this.LootText.text) && this.lootTimer >= 2f)
+        if (!string.IsNullOrEmpty(this.LootText.text) && this.messageTimer >= 2f)
         {
             this.LootText.text = string.Empty;
         }

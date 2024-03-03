@@ -2,6 +2,9 @@ using UnityEngine;
 
 namespace Enemies.Controller.Waves
 {
+    /// <summary>
+    /// The central fire controller for the enemy waves.
+    /// </summary>
     public class EnemyWaveFireController : MonoBehaviour
     {
         [SerializeField]

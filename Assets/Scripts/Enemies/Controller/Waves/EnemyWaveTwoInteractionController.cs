@@ -7,6 +7,9 @@ using UnityEngine;
 
 namespace Enemies.Controller.Waves.WaveTwo
 {
+    /// <summary>
+    /// The interaction controller for enemy wave two.
+    /// </summary>
     public class EnemyWaveTwoInteractionController : MonoBehaviour
     {
         private WaveSpawnController enemyController;

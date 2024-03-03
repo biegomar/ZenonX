@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// The central game manager.
+/// </summary>
 public sealed class GameManager : MonoBehaviour
 {
     public static GameManager Instance = null;
@@ -27,27 +30,28 @@ public sealed class GameManager : MonoBehaviour
 
     //Enemies - general
     public float EnemyWaveLaserSpeed { get; set; }
+    public bool IsEnemyWaveGettingStronger { get; set; }
     
     //Enemies - Wave One   
     public float EnemyWaveOneSinusStep { get; set; }
     public float EnemyWaveOneSinusAmplitude { get; set; }
     public float EnemyWaveOneYSpeed { get; set; }
     public float EnemyWaveOneDistance { get; set; }
-    public uint EnemyWaveOneHealth { get; set; }
+    public uint EnemyWaveOneHealthAddOn { get; set; }
     public uint EnemyWaveOneScore { get; set; }
 
     //Enemies - Wave Two
     public float EnemyWaveTwoDistance { get; set; }
-    public uint EnemyWaveTwoHealth { get; set; }
+    public uint EnemyWaveTwoHealthAddOn { get; set; }
     public uint EnemyWaveTwoScore { get; set; }
     
     //Enemies - Wave Three
-    public uint EnemyWaveThreeHealth { get; set; }
+    public uint EnemyWaveThreeHealthAddOn { get; set; }
     public uint EnemyWaveThreeScore { get; set; }
     public float EnemyWaveThreeYBaseSpeed { get; set; }
     
     //Enemies - Wave Four
-    public uint EnemyWaveFourHealth { get; set; }
+    public uint EnemyWaveFourHealthAddOn { get; set; }
     public uint EnemyWaveFourScore { get; set; }
     public float EnemyWaveFourSpeed { get; set; }
     public float EnemyWaveFourTimeDistanceBeforeMovement { get; set; }
@@ -114,6 +118,7 @@ public sealed class GameManager : MonoBehaviour
     private void InitializeGameValues()
     {
         EnemyWaveLaserSpeed = 7.5f;
+        IsEnemyWaveGettingStronger = false;
         Score = 0;
         IsGameRunning = true;
         IsLootSpawned = false;
@@ -126,29 +131,29 @@ public sealed class GameManager : MonoBehaviour
         EnemyWaveOneSinusAmplitude = .35f;
         EnemyWaveOneYSpeed = 3f;
         EnemyWaveOneDistance = 0.5f;
-        EnemyWaveOneHealth = 2;
+        EnemyWaveOneHealthAddOn = 0;
         EnemyWaveOneScore = 10;
 }
 
     private void InitializeEnemyWaveTwoValues()
     {
         EnemyWaveTwoDistance = 2.0f;
-        EnemyWaveTwoHealth = 2;
+        EnemyWaveTwoHealthAddOn = 0;
         EnemyWaveTwoScore = 25;
     }
     
     private void InitializeEnemyWaveThreeValues()
     {
-        EnemyWaveThreeHealth = 2;
+        EnemyWaveThreeHealthAddOn = 0;
         EnemyWaveThreeScore = 25;
         EnemyWaveThreeYBaseSpeed = 3f;
     }
     
     private void InitializeEnemyWaveFourValues()
     {
-        EnemyWaveFourHealth = 2;
+        EnemyWaveFourHealthAddOn = 0;
         EnemyWaveFourScore = 25;
-        EnemyWaveFourSpeed = 2.5f;
+        EnemyWaveFourSpeed = 2f;
         EnemyWaveFourTimeDistanceBeforeMovement = 0.2f;
     }
 

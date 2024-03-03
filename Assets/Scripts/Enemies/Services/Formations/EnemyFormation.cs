@@ -5,9 +5,13 @@ using UnityEngine;
 
 namespace Enemies.Services.Formations
 {
+    /// <summary>
+    /// The base class for all enemy formations.
+    /// </summary>
     public abstract class EnemyFormation : MonoBehaviour
     {
         [SerializeField] public EnemyFormationData enemyFormationData;
+        [SerializeField] public uint healthAddOn;
 
         public abstract KeyValuePair<Guid, IList<EnemyFlightFormationItem>> SpawnFormation();
 
@@ -25,7 +29,7 @@ namespace Enemies.Services.Formations
             {
                 FormationId = formationId,
                 Formation = this,
-                Health = this.enemyFormationData.EnemyHealthPoints,
+                Health = this.enemyFormationData.EnemyHealthPoints + this.healthAddOn,
                 Enemy = Instantiate(this.enemyFormationData.EnemyTemplate, vector, Quaternion.identity, this.transform),
                 StartPosition = vector,
                 PositionInFormation = positionInFormation,

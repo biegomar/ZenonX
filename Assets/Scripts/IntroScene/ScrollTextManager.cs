@@ -5,6 +5,9 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
+/// <summary>
+/// The scroll text controller.
+/// </summary>
 public class ScrollTextManager : MonoBehaviour
 {
     [SerializeField] private Vector3 startPosition;

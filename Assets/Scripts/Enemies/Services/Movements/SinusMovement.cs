@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Enemies.Services.Movements
 {
+    /// <summary>
+    /// The sinus movement.
+    /// </summary>
     internal class SinusMovement : IMovementStrategy
     {
         private float initialX;

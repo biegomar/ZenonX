@@ -2,6 +2,9 @@ using UnityEngine;
 
 namespace Sky
 {
+    /// <summary>
+    /// The sky controller is responsible for the background scrolling. 
+    /// </summary>
     public class SkyScroller : MonoBehaviour
     {
         private SpriteRenderer spriteRenderer;

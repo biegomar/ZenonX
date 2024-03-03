@@ -2,7 +2,10 @@ using UnityEngine;
 
 namespace Enemies.Controller.Waves
 {
-    public class EnemyWaveOneLaserMovementController : MonoBehaviour
+    /// <summary>
+    /// The movement controller for the enemy laser.
+    /// </summary>
+    public class EnemyWaveLaserMovementController : MonoBehaviour
     {
         private Rigidbody2D rigidBody;
     

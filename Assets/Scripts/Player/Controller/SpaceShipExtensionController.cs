@@ -2,6 +2,9 @@ using UnityEngine;
 
 namespace Player.Controller
 {
+    /// <summary>
+    /// The spaced ship extension controller.
+    /// </summary>
     public class SpaceShipExtensionController : MonoBehaviour
     {
         [SerializeField] 

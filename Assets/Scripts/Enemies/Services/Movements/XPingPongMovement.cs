@@ -2,6 +2,9 @@
 
 namespace Enemies.Services.Movements
 {
+    /// <summary>
+    /// A simple ping pong movement on the x axis.
+    /// </summary>
     public class XPingPongMovement : IMovementStrategy
     {
         private const float pingPongLength = 13f;

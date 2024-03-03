@@ -3,11 +3,15 @@ using System.Collections.Generic;
 
 namespace Player.Services
 {
+    /// <summary>
+    /// The central service to manage the incentives.
+    /// </summary>
     public class IncentiveService
     {
         private IDictionary<byte, Action> incentives;
         private IDictionary<byte, string> incentiveMessages;
-        private const byte LaserFrequencyIndex = 4;
+        private const byte ShieldIndex = 3;
+        private const byte LaserFrequencyIndex = 5;
 
         public IncentiveService()
         {
@@ -21,7 +25,8 @@ namespace Player.Services
         
             this.incentives.Add(1, this.GetMoreMaxLaserPower);
             this.incentives.Add(2, this.GetMoreMaxHealthPoints);
-            this.incentives.Add(3, this.GetSpaceShipShield);
+            this.incentives.Add(ShieldIndex, this.GetSpaceShipShield);
+            this.incentives.Add(4, this.GetHigherSpaceShipShield);
             this.incentives.Add(LaserFrequencyIndex, this.GetHigherLaserFrequence);
         }
         
@@ -29,14 +34,17 @@ namespace Player.Services
         {
             this.incentiveMessages = new Dictionary<byte, string>();
         
-            this.incentiveMessages.Add(1, "update maximum ammo");
+            this.incentiveMessages.Add(1, "more ammo");
             this.incentiveMessages.Add(2, "more health points");
-            this.incentiveMessages.Add(3, "shield");
+            this.incentiveMessages.Add(ShieldIndex, "shield");
+            this.incentiveMessages.Add(4, "stronger shield");
             this.incentiveMessages.Add(LaserFrequencyIndex, "update laser frequency");
         }
 
         public void GiveIncentive()
         {
+            TryToReAddShieldInIncentives();
+            
             byte index;
             do
             {
@@ -48,9 +56,17 @@ namespace Player.Services
             GameManager.Instance.IsLootSpawned = true;
         }
 
+        private void TryToReAddShieldInIncentives()
+        {
+            if (!GameManager.Instance.IsShipShieldActive && !this.incentiveMessages.ContainsKey(ShieldIndex))
+            {
+                this.incentives.Add(ShieldIndex, this.GetSpaceShipShield);
+            }
+        }
+
         private void GetMoreMaxHealthPoints()
         {
-            GameManager.Instance.MaxShipHealth += 1;
+            GameManager.Instance.MaxShipHealth++;
             GameManager.Instance.ActualShipHealth = GameManager.Instance.MaxShipHealth;
         }
 
@@ -74,8 +90,15 @@ namespace Player.Services
             if (!GameManager.Instance.IsShipShieldActive)
             {
                 GameManager.Instance.IsShipShieldActive = true;
+                this.incentives.Remove(ShieldIndex);
             }
 
+            GameManager.Instance.ActualShieldHealth = GameManager.Instance.MaxShieldHealth;
+        }
+        
+        private void GetHigherSpaceShipShield()
+        {
+            GameManager.Instance.MaxShieldHealth++;
             GameManager.Instance.ActualShieldHealth = GameManager.Instance.MaxShieldHealth;
         }
     }

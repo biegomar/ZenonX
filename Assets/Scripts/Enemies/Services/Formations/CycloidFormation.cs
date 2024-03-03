@@ -4,6 +4,9 @@ using Enemies.Model;
 
 namespace Enemies.Services.Formations
 {
+    /// <summary>
+    /// The cycloid formation.
+    /// </summary>
     public class CycloidFormation : EnemyFormation
     {
         public override KeyValuePair<Guid, IList<EnemyFlightFormationItem>> SpawnFormation()

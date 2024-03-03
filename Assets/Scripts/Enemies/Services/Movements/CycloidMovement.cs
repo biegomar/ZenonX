@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Enemies.Services.Movements
 {
+    /// <summary>
+    /// The cycloid movement.
+    /// </summary>
     public class CycloidMovement : IMovementStrategy
     {
         private const float radius = .8f;

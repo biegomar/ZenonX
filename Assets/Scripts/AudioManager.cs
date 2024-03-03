@@ -6,6 +6,9 @@ using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// The central audio manager.
+/// </summary>
 public class AudioManager : MonoBehaviour
 {
     [SerializeField]

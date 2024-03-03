@@ -2,11 +2,14 @@ using UnityEngine;
 
 namespace Camera.Controller
 {
+    /// <summary>
+    /// The camera controller.
+    /// </summary>
     public class CameraController : MonoBehaviour
     {
-        void Start()
+        private void Start()
         {
-            //Cursor.lockState = CursorLockMode.Locked;
+            Cursor.lockState = CursorLockMode.Locked;
         }
     }
 }

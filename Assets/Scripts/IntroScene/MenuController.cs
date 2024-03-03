@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// The menu controller.
+/// </summary>
 public class MenuController : MonoBehaviour
 {
     public void StartGame()

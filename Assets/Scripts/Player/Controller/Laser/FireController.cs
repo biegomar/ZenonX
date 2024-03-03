@@ -4,6 +4,9 @@ using UnityEngine.InputSystem;
 
 namespace Player.Controller.Laser
 {
+    /// <summary>
+    /// The fire controller for the space ship.
+    /// </summary>
     public class FireController : MonoBehaviour
     {
         [SerializeField]

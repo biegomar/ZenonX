@@ -2,13 +2,17 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace UI.Controller
 {
+    /// <summary>
+    /// The game over controller.
+    /// </summary>
     public class GameOverManagerController : MonoBehaviour
     {
         [SerializeField]
-        private TextMeshProUGUI GameOverText;
+        private Text GameOverText;
 
         //new input system
         private GameInput gameInput;

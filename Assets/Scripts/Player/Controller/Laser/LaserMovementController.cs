@@ -2,6 +2,9 @@ using UnityEngine;
 
 namespace Player.Controller.Laser
 {
+    /// <summary>
+    /// The laser movement controller for the space ship.
+    /// </summary>
     public class LaserMovementController : MonoBehaviour
     {
         [SerializeField] 

@@ -2,6 +2,9 @@
 
 namespace Enemies.Services.Movements
 {
+    /// <summary>
+    /// A simple lerp movement.
+    /// </summary>
     internal class StraightLerpMovement : IMovementStrategy
     {
         private const float targetPositionY = 2.5f;        

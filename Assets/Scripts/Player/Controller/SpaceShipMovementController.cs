@@ -5,6 +5,9 @@ using UnityEngine.InputSystem;
 
 namespace Player.Controller
 {
+    /// <summary>
+    /// The space ship movement controller.
+    /// </summary>
     public class SpaceShipMovementController : MonoBehaviour
     {
         [SerializeField]

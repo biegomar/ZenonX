@@ -8,10 +8,17 @@ using UnityEngine;
 
 namespace Enemies.Controller.Waves
 {
+    /// <summary>
+    /// The central enemy wave spawn controller.
+    /// </summary>
     public class WaveSpawnController : MonoBehaviour
     {
+        [SerializeField]
         public List<EnemyFormation> enemyFormations;
+        [SerializeField]
         public float formationSpawnDistanceTime = 3f;
+        [SerializeField]
+        public uint waveSpawnCounter = 0;
         
         public IDictionary<int, EnemyFlightFormationItem> Enemies;
         public IDictionary<Guid, IList<EnemyFlightFormationItem>> EnemyFlightFormations;
@@ -30,6 +37,7 @@ namespace Enemies.Controller.Waves
         
         public void SpawnFormation(EnemyFormation enemyFormation)
         {
+            enemyFormation.healthAddOn = this.waveSpawnCounter;
             var formation = enemyFormation.SpawnFormation();
             EnemyFlightFormationNegativeDirection.Add(formation.Key, false);
             formation.Value.ToList().ForEach(x => this.Enemies.Add(x.Enemy.GetInstanceID(), x));

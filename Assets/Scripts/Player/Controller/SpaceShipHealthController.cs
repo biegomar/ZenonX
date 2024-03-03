@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace Player.Controller
 {
+    /// <summary>
+    /// The space ship health controller.
+    /// </summary>
     public class SpaceShipHealthController : MonoBehaviour
     {
         [SerializeField]

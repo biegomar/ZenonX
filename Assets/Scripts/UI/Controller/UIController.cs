@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace UI.Controller
 {
+    /// <summary>
+    /// The UI controller.
+    /// </summary>
     public class UIController : MonoBehaviour
     {
         [SerializeField]

@@ -9,6 +9,9 @@ using UnityEngine;
 
 namespace Enemies.Controller.Waves.WaveFour
 {
+    /// <summary>
+    /// The movement controller for enemy wave four.
+    /// </summary>
     public class EnemyWaveFourMovementController : MonoBehaviour
     {
         private IMovementStrategy activeMovementStrategy;
