@@ -5,7 +5,7 @@ namespace IntroScene
     /// <summary>
     /// The scroll text controller.
     /// </summary>
-    public class ScrollTextManager : MonoBehaviour
+    public class ScrollTextController : MonoBehaviour
     {
         [SerializeField] private Vector3 startPosition;
         [SerializeField] private Vector3 endPosition;
