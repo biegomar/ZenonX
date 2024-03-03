@@ -1,51 +1,52 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-/// <summary>
-/// The enemy message controller.
-/// </summary>
-public class EnemyMessageController : MonoBehaviour
+namespace UI.Controller
 {
-    [SerializeField] private List<string> messages;
-    [SerializeField] private Text enemyText;
-
-    private float messageTimer;
-
-    private const string messageFallback = "Your Enemies are getting stronger!";
-    private void OnEnable()
+    /// <summary>
+    /// The enemy message controller.
+    /// </summary>
+    public class EnemyMessageController : MonoBehaviour
     {
-        this.enemyText.text = messageFallback;
-    }
+        [SerializeField] private List<string> messages;
+        [SerializeField] private Text enemyText;
 
-    private void Start()
-    {
-        this.messageTimer = 2f;
-    }
+        private float messageTimer;
 
-    private void Update()
-    {
-        this.messageTimer += Time.deltaTime;
-        
-        if (GameManager.Instance.IsEnemyWaveGettingStronger)
+        private const string messageFallback = "Your Enemies are getting stronger!";
+        private void OnEnable()
         {
-            this.messageTimer = 0f;
-            
-            if (this.messages.Any())
-            {
-                var index = UnityEngine.Random.Range(0, this.messages.Count);
-                this.enemyText.text = this.messages[index];
-            }
-            
-            GameManager.Instance.IsEnemyWaveGettingStronger = false;
+            this.enemyText.text = messageFallback;
         }
 
-        if (!string.IsNullOrEmpty(this.enemyText.text) && this.messageTimer >= 2f)
+        private void Start()
         {
-            this.enemyText.text = string.Empty;
+            this.messageTimer = 2f;
+        }
+
+        private void Update()
+        {
+            this.messageTimer += Time.deltaTime;
+        
+            if (GameManager.Instance.IsEnemyWaveGettingStronger)
+            {
+                this.messageTimer = 0f;
+            
+                if (this.messages.Any())
+                {
+                    var index = UnityEngine.Random.Range(0, this.messages.Count);
+                    this.enemyText.text = this.messages[index];
+                }
+            
+                GameManager.Instance.IsEnemyWaveGettingStronger = false;
+            }
+
+            if (!string.IsNullOrEmpty(this.enemyText.text) && this.messageTimer >= 2f)
+            {
+                this.enemyText.text = string.Empty;
+            }
         }
     }
 }

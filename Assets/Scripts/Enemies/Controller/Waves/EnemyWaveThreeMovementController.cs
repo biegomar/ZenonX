@@ -2,12 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Enemies.Model;
-using Enemies.Services;
 using Enemies.Services.Formations;
 using Enemies.Services.Movements;
 using UnityEngine;
 
-namespace Enemies.Controller.Waves.WaveThree
+namespace Enemies.Controller.Waves
 {
     /// <summary>
     /// The movement controller for enemy wave three.

@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Enemies.Model;
 using Enemies.Services.Formations;
 using UnityEngine;
 
-namespace Enemies.Controller.Waves
+namespace Enemies.Controller
 {
     /// <summary>
     /// The central enemy wave spawn controller.

@@ -5,7 +5,7 @@ using Enemies.Model;
 using Enemies.Services.Formations;
 using UnityEngine;
 
-namespace Enemies.Controller.Waves.WaveTwo
+namespace Enemies.Controller.Waves
 {
     /// <summary>
     /// The interaction controller for enemy wave two.

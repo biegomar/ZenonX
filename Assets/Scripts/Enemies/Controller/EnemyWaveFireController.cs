@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Enemies.Controller.Waves
+namespace Enemies.Controller
 {
     /// <summary>
     /// The central fire controller for the enemy waves.
