@@ -9,7 +9,6 @@ namespace IntroScene
     {
         [SerializeField] private Vector3 startPosition;
         [SerializeField] private Vector3 endPosition;
-        [SerializeField] private bool looping;
         [SerializeField] private float scrollSpeed;
         [SerializeField] private RectTransform scrollText;
 
