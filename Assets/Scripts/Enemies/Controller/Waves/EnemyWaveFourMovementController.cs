@@ -13,16 +13,25 @@ namespace Enemies.Controller.Waves
     /// </summary>
     public class EnemyWaveFourMovementController : MonoBehaviour
     {
+        [SerializeField] private Animator animator;
+        
+        private const float hitInterval = 6f;
+        private float timeSinceLastHit = 0f;
+        
         private IMovementStrategy activeMovementStrategy;
         private WaveSpawnController enemyController;
         private EnemyFlightFormationItem enemyItem;
         private EnemyFormation formation;
         private Guid formationId;
 
-        private float waitTimer; 
+        private float waitTimer;
+        
+        private static readonly int AmIDead = Animator.StringToHash("AmIDead");
+        private bool IAmDying;
     
         private void Start()
         {
+            this.IAmDying = false;
             this.waitTimer = 0;
             this.enemyController = GameManager.FindObjectInParentChain<WaveSpawnController>(this.transform);
             if (this.enemyController != null)
@@ -41,6 +50,7 @@ namespace Enemies.Controller.Waves
         private void Update()
         {
             this.waitTimer += Time.deltaTime;
+            this.timeSinceLastHit += Time.deltaTime;
             
             // use delta time for game pause here.
             if (GameManager.Instance.IsGameRunning && Time.deltaTime > 0f)
@@ -69,14 +79,33 @@ namespace Enemies.Controller.Waves
         public void OnTriggerEnter2D(Collider2D collision)
         {
             var collisionObject = collision.gameObject;
-        
-            if (collisionObject.CompareTag("PlayerLaser"))
+            
+            switch (collisionObject.tag)
             {
-                if (enemyItem != null)
+                case "PlayerLaser":
                 {
-                    enemyItem.Health -= 1;
-                    if (enemyItem.Health <= 0)
+                    if (enemyItem != null && !this.IAmDying)
                     {
+                        Destroy(collisionObject);
+                        enemyItem.Health -= 1;
+                        if (enemyItem.Health <= 0)
+                        {
+                            var lastPosition = transform.position;                            
+                            
+                            RemoveEnemyAndScore();
+
+                            enemyController.SpawnLoot(this.formationId,
+                                this.formation.enemyFormationData.LootTemplate, lastPosition);
+                        }
+                    }
+                    break;
+                }
+                case "Player":
+                    if (timeSinceLastHit > hitInterval && !this.IAmDying)
+                    {
+                        GameManager.Instance.ActualShipHealth -= 5;
+                        timeSinceLastHit = 0f;
+
                         var lastPosition = transform.position;
 
                         RemoveEnemyAndScore();
@@ -84,16 +113,30 @@ namespace Enemies.Controller.Waves
                         enemyController.SpawnLoot(this.formationId,
                             this.formation.enemyFormationData.LootTemplate, lastPosition);
                     }
-                }
+                    break;
+                case "SpaceShipShield":
+                    if (timeSinceLastHit > hitInterval && !this.IAmDying)
+                    {
+                        GameManager.Instance.ActualShieldHealth -= 5;
+                        timeSinceLastHit = 0f;
 
-                Destroy(collisionObject);
+                        var lastPosition = transform.position;
+
+                        RemoveEnemyAndScore();
+
+                        enemyController.SpawnLoot(this.formationId,
+                            this.formation.enemyFormationData.LootTemplate, lastPosition);
+                    }
+                    break;
             }
         }
     
         private void RemoveEnemyAndScore(bool reallyScore = true)
         {
+            this.IAmDying = true;
+            this.animator.SetBool(AmIDead, true);
             RemoveEnemyFromWave(enemyController.EnemyFlightFormations);
-            Destroy(gameObject);
+            Destroy(gameObject, 0.5f);
             if (reallyScore)
             {
                 GameManager.Instance.Score += GameManager.Instance.EnemyWaveFourScore;    

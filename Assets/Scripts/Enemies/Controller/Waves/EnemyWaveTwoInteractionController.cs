@@ -12,6 +12,8 @@ namespace Enemies.Controller.Waves
     /// </summary>
     public class EnemyWaveTwoInteractionController : MonoBehaviour
     {
+        [SerializeField] private Animator animator;
+        
         private WaveSpawnController enemyController;
         private EnemyFlightFormationItem enemyItem;
         private EnemyFormation formation;
@@ -26,6 +28,8 @@ namespace Enemies.Controller.Waves
         private float timeSinceAppearance;
 
         private bool isInCollisionHanding = false;
+        
+        private static readonly int AmIDead = Animator.StringToHash("AmIDead");
 
         private void Start()
         {
@@ -108,8 +112,9 @@ namespace Enemies.Controller.Waves
 
         private void RemoveEnemyAndScore(bool reallyScore = true)
         {
+            this.animator.SetBool(AmIDead, true);
             RemoveEnemyFromWave(enemyController.EnemyFlightFormations);
-            Destroy(gameObject);
+            Destroy(gameObject, 0.5f);
 
             if (reallyScore)
             {

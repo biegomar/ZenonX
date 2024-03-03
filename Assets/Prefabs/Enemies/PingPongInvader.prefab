@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7526379676691431531}
   - component: {fileID: 1431577626753644929}
   - component: {fileID: -8152573069064987663}
+  - component: {fileID: 1619486821867718725}
   m_Layer: 0
   m_Name: PingPongInvader
   m_TagString: Untagged
@@ -99,6 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c7e2ab9bfd7d384b99175ba48af441d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 1619486821867718725}
 --- !u!114 &1431577626753644929
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,3 +159,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.98, y: 0.5}
   m_EdgeRadius: 0
+--- !u!95 &1619486821867718725
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5814509899843507041}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: dfb543a0f70eeb44b97c9ed8be8896fa, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

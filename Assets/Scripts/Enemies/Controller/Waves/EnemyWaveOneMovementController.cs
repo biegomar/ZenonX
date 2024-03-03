@@ -13,8 +13,10 @@ namespace Enemies.Controller.Waves
     /// </summary>
     public class EnemyWaveOneMovementController : MonoBehaviour
     {
+        [SerializeField] private Animator animator;
+        
         private const float hitInterval = 6f;
-        private static float timeSinceLastHit = 0f;
+        private float timeSinceLastHit = 0f;
 
         private WaveSpawnController enemyController;
         private EnemyFlightFormationItem enemyItem;
@@ -24,9 +26,13 @@ namespace Enemies.Controller.Waves
         private IMovementStrategy activeMovementStrategy;    
 
         private bool isSinusWaveYDirectionPositiv;
+        private static readonly int AmIDead = Animator.StringToHash("AmIDead");
+        private bool IAmDying;
 
         void Start()
         {
+            this.IAmDying = false;
+            
             this.enemyController = GameManager.FindObjectInParentChain<WaveSpawnController>(this.transform);
             if (this.enemyController != null)
             {
@@ -73,10 +79,10 @@ namespace Enemies.Controller.Waves
             {
                 case "PlayerLaser":
                 {
-                    if (enemyItem != null)
+                    if (enemyItem != null && !this.IAmDying)
                     {
                         Destroy(collisionObject);
-                        enemyItem.Health = enemyItem.Health - 1;
+                        enemyItem.Health -= 1;
                         if (enemyItem.Health <= 0)
                         {
                             var lastPosition = transform.position;                            
@@ -90,7 +96,7 @@ namespace Enemies.Controller.Waves
                     break;
                 }
                 case "Player":
-                    if (timeSinceLastHit > hitInterval)
+                    if (timeSinceLastHit > hitInterval && !this.IAmDying)
                     {
                         GameManager.Instance.ActualShipHealth -= 5;
                         timeSinceLastHit = 0f;
@@ -104,7 +110,7 @@ namespace Enemies.Controller.Waves
                     }
                     break;
                 case "SpaceShipShield":
-                    if (timeSinceLastHit > hitInterval)
+                    if (timeSinceLastHit > hitInterval && !this.IAmDying)
                     {
                         GameManager.Instance.ActualShieldHealth -= 5;
                         timeSinceLastHit = 0f;
@@ -122,8 +128,10 @@ namespace Enemies.Controller.Waves
 
         private void RemoveEnemyAndScore()
         {
+            this.IAmDying = true;
+            this.animator.SetBool(AmIDead, true);
             RemoveEnemyFromWave(enemyController.EnemyFlightFormations);
-            Destroy(gameObject);
+            Destroy(gameObject, 0.5f);
             GameManager.Instance.Score += GameManager.Instance.EnemyWaveOneScore;
         }
 

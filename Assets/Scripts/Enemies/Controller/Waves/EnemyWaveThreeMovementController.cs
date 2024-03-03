@@ -13,14 +13,21 @@ namespace Enemies.Controller.Waves
     /// </summary>
     public class EnemyWaveThreeMovementController : MonoBehaviour
     {
+        [SerializeField] private Animator animator;
+        
         private WaveSpawnController enemyController;
         private EnemyFlightFormationItem enemyItem;
         private EnemyFormation formation;
         private Guid formationId;
         private IMovementStrategy activeMovementStrategy;  
+        
+        private static readonly int AmIDead = Animator.StringToHash("AmIDead");
+        private bool IAmDying;
     
         void Start()
-        {      
+        {
+            this.IAmDying = false;
+            
             this.enemyController = GameManager.FindObjectInParentChain<WaveSpawnController>(this.transform);
             if (this.enemyController != null)
             {
@@ -41,7 +48,7 @@ namespace Enemies.Controller.Waves
         
             if (collisionObject.CompareTag("PlayerLaser"))
             {
-                if (enemyItem != null)
+                if (enemyItem != null && !this.IAmDying)
                 {
                     enemyItem.Health -= 1;
                     if (enemyItem.Health <= 0)
@@ -75,8 +82,10 @@ namespace Enemies.Controller.Waves
     
         private void RemoveEnemyAndScore()
         {
+            this.IAmDying = true;
+            this.animator.SetBool(AmIDead, true);
             RemoveEnemyFromWave(enemyController.EnemyFlightFormations);
-            Destroy(gameObject);
+            Destroy(gameObject, 0.5f);
             GameManager.Instance.Score += GameManager.Instance.EnemyWaveThreeScore;
         }
 
