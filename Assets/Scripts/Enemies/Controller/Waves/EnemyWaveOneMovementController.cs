@@ -16,7 +16,7 @@ namespace Enemies.Controller.Waves
         [SerializeField] private Animator animator;
         
         private const float hitInterval = 6f;
-        private float timeSinceLastHit = 0f;
+        private float timeSinceLastHit = hitInterval;
 
         private WaveSpawnController enemyController;
         private EnemyFlightFormationItem enemyItem;
