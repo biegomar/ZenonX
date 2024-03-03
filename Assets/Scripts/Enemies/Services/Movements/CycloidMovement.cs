@@ -1,5 +1,4 @@
-﻿using System;
-using Enemies.Model;
+﻿using Enemies.Model;
 using UnityEngine;
 
 namespace Enemies.Services.Movements

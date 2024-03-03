@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using Enemies.Controller.Waves;
 using Enemies.Services.Formations;
-using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Enemies.Controller
