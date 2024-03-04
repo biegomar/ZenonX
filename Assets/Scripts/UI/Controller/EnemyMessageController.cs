@@ -16,10 +16,6 @@ namespace UI.Controller
         private float messageTimer;
 
         private const string messageFallback = "Your Enemies are getting stronger!";
-        private void OnEnable()
-        {
-            this.enemyText.text = messageFallback;
-        }
 
         private void Start()
         {
@@ -33,7 +29,9 @@ namespace UI.Controller
             if (GameManager.Instance.IsEnemyWaveGettingStronger)
             {
                 this.messageTimer = 0f;
-            
+
+                this.enemyText.text = messageFallback;
+                
                 if (this.messages.Any())
                 {
                     var index = UnityEngine.Random.Range(0, this.messages.Count);

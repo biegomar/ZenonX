@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Player.Services
 {
@@ -8,16 +9,38 @@ namespace Player.Services
     /// </summary>
     public class IncentiveService
     {
+        private static IncentiveService instance;
+        private static readonly object lockObject = new object();
+
         private IDictionary<byte, Action> incentives;
         private IDictionary<byte, string> incentiveMessages;
         private const byte ShieldIndex = 3;
         private const byte LaserFrequencyIndex = 5;
 
-        public IncentiveService()
+        private IncentiveService()
         {
             InitializeIncentives();
             InitializeIncentiveMessages();
         }
+
+        public static IncentiveService Instance 
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    lock (lockObject)
+                    {
+                        if (instance == null)
+                        {
+                            instance = new IncentiveService();
+                        }
+                    }
+                }
+                return instance;    
+            }
+        }
+        
 
         private void InitializeIncentives()
         {
@@ -48,7 +71,7 @@ namespace Player.Services
             byte index;
             do
             {
-                index = (byte)UnityEngine.Random.Range(1, this.incentives.Count+1);    
+                index = (byte)UnityEngine.Random.Range(1, this.incentives.Keys.Max() + 1);
             } while (!this.incentives.ContainsKey(index));
 
             GameManager.Instance.LootMessage = this.incentiveMessages[index];
@@ -57,8 +80,8 @@ namespace Player.Services
         }
 
         private void TryToReAddShieldInIncentives()
-        {
-            if (!GameManager.Instance.IsShipShieldActive && !this.incentiveMessages.ContainsKey(ShieldIndex))
+        {   
+            if (!GameManager.Instance.IsShipShieldActive && !this.incentives.ContainsKey(ShieldIndex))
             {
                 this.incentives.Add(ShieldIndex, this.GetSpaceShipShield);
             }

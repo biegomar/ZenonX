@@ -80,6 +80,7 @@ namespace Enemies.Controller.Waves
                     {
                         isInCollisionHanding = true;
                         GameManager.Instance.ActualShipHealth -= 5;
+                        PlayEnemyExplosion();
                         RemoveEnemyAndScore();
 
                         break;
@@ -91,6 +92,7 @@ namespace Enemies.Controller.Waves
                             enemyItem.Health -= 1;
                             if (enemyItem.Health <= 0)
                             {
+                                PlayEnemyExplosion();
                                 RemoveEnemyAndScore();
                             }
                         }
@@ -102,6 +104,7 @@ namespace Enemies.Controller.Waves
                     {
                         isInCollisionHanding = true;
                         GameManager.Instance.ActualShieldHealth -= 5;
+                        PlayEnemyExplosion();
                         RemoveEnemyAndScore();
 
                         break;
@@ -123,6 +126,13 @@ namespace Enemies.Controller.Waves
             
             enemyController.SpawnLoot(this.formationId,
                 this.formation.enemyFormationData.LootTemplate, new Vector3(0,0,0));
+        }
+        
+        private static void PlayEnemyExplosion()
+        {
+            var sound = AudioManager.Instance.GetSound("EnemyExplosion");
+            sound.enabled = true;
+            sound.Play();
         }
 
         private void LetTheHammerFall()

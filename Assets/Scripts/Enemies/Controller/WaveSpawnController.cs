@@ -46,7 +46,7 @@ namespace Enemies.Controller
         public void SpawnLoot(Guid enemyFlightFormationId, GameObject lootTemplate, Vector3 lastPosition)
         {
             var enemyFlightFormation = this.EnemyFlightFormations.FirstOrDefault(f => f.Key == enemyFlightFormationId);
-            if (!enemyFlightFormation.Value.Any())
+            if (enemyFlightFormation.Value != null && !enemyFlightFormation.Value.Any())
             {
                 this.RemoveDeadWaveFromDictionary(enemyFlightFormation.Key);
                 Instantiate(lootTemplate, lastPosition, Quaternion.identity);

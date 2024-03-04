@@ -129,10 +129,18 @@ namespace Enemies.Controller.Waves
         private void RemoveEnemyAndScore()
         {
             this.IAmDying = true;
+            PlayEnemyExplosion();
             this.animator.SetBool(AmIDead, true);
             RemoveEnemyFromWave(enemyController.EnemyFlightFormations);
             Destroy(gameObject, 0.5f);
             GameManager.Instance.Score += GameManager.Instance.EnemyWaveOneScore;
+        }
+
+        private static void PlayEnemyExplosion()
+        {
+            var sound = AudioManager.Instance.GetSound("EnemyExplosion");
+            sound.enabled = true;
+            sound.Play();
         }
 
         private void RemoveEnemyFromWave(IDictionary<Guid, IList<EnemyFlightFormationItem>> enemyWaves)

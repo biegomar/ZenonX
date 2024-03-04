@@ -53,7 +53,7 @@ namespace Enemies.Controller.Waves
             this.timeSinceLastHit += Time.deltaTime;
             
             // use delta time for game pause here.
-            if (GameManager.Instance.IsGameRunning && Time.deltaTime > 0f)
+            if (GameManager.Instance.IsGameRunning && Time.deltaTime > 0f && !this.IAmDying)
             {
                 //wait before you move at all
                 if (this.waitTimer > this.enemyItem.PositionInFormation * GameManager.Instance.EnemyWaveFourTimeDistanceBeforeMovement)
@@ -134,6 +134,7 @@ namespace Enemies.Controller.Waves
         private void RemoveEnemyAndScore(bool reallyScore = true)
         {
             this.IAmDying = true;
+            PlayEnemyExplosion();
             this.animator.SetBool(AmIDead, true);
             RemoveEnemyFromWave(enemyController.EnemyFlightFormations);
             Destroy(gameObject, 0.5f);
@@ -141,6 +142,13 @@ namespace Enemies.Controller.Waves
             {
                 GameManager.Instance.Score += GameManager.Instance.EnemyWaveFourScore;    
             }
+        }
+        
+        private static void PlayEnemyExplosion()
+        {
+            var sound = AudioManager.Instance.GetSound("EnemyExplosion");
+            sound.enabled = true;
+            sound.Play();
         }
     
         private void RemoveEnemyFromWave(IDictionary<Guid, IList<EnemyFlightFormationItem>> enemyWaves)

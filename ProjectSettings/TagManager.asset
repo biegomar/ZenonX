@@ -21,6 +21,7 @@ TagManager:
   - TitleSong
   - Loot
   - GameSong
+  - EnemyExplosion
   layers:
   - Default
   - TransparentFX
