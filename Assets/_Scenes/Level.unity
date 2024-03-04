@@ -1140,9 +1140,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waveControllers:
+  - {fileID: 1946302655}
   - {fileID: 1054390793}
   - {fileID: 257944525}
-  - {fileID: 1946302655}
   - {fileID: 739618803}
 --- !u!1001 &585914774
 PrefabInstance:

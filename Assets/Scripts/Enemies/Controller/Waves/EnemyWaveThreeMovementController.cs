@@ -69,7 +69,7 @@ namespace Enemies.Controller.Waves
         private void Update()
         {
             // use delta time for game pause here.
-            if (GameManager.Instance.IsGameRunning && Time.deltaTime > 0f && !this.IAmDying)
+            if (GameManager.Instance.IsGameRunning && Time.deltaTime > 0f)
             {
                 transform.position = new Vector3(
                     CalculateNewXPosition(),

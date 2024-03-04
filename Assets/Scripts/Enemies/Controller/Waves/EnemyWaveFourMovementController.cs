@@ -53,7 +53,7 @@ namespace Enemies.Controller.Waves
             this.timeSinceLastHit += Time.deltaTime;
             
             // use delta time for game pause here.
-            if (GameManager.Instance.IsGameRunning && Time.deltaTime > 0f && !this.IAmDying)
+            if (GameManager.Instance.IsGameRunning && Time.deltaTime > 0f)
             {
                 //wait before you move at all
                 if (this.waitTimer > this.enemyItem.PositionInFormation * GameManager.Instance.EnemyWaveFourTimeDistanceBeforeMovement)
