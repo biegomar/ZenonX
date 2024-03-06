@@ -20,7 +20,7 @@ namespace Enemies.Controller.Waves
         private Guid formationId;
 
         private const float rayLength = 9.7f;
-        private const float translate = 0.5f;
+        private const float translate = 0.6f;
 
         private RaycastHit2D leftHit;
         private RaycastHit2D rightHit;

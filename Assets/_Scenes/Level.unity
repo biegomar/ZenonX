@@ -581,6 +581,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 293799507}
+  gradient:
+    serializedVersion: 2
+    key0: {r: 0.9622642, g: 0.05900679, b: 0.05900679, a: 1}
+    key1: {r: 0.8137636, g: 0.9528302, b: 0.13034001, a: 1}
+    key2: {r: 0.022249907, g: 0.9433962, b: 0.255623, a: 1}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 42363
+    ctime2: 65535
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 42057
+    atime2: 65535
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 3
+    m_NumAlphaKeys: 3
+  fill: {fileID: 351180568}
 --- !u!1 &351180566
 GameObject:
   m_ObjectHideFlags: 0
@@ -632,7 +663,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.7647059, g: 0.16404867, b: 0.109803915, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1140,9 +1171,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waveControllers:
-  - {fileID: 1946302655}
   - {fileID: 1054390793}
   - {fileID: 257944525}
+  - {fileID: 1946302655}
   - {fileID: 739618803}
 --- !u!1001 &585914774
 PrefabInstance:
@@ -1318,7 +1349,7 @@ Transform:
   m_GameObject: {fileID: 682745551}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.5, z: 0}
+  m_LocalPosition: {x: 0, y: -2.491, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1401,8 +1432,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.0011277199}
-  m_Size: {x: 0.5, y: 0.62335205}
+  m_Offset: {x: 0.0043791085, y: 0.003864646}
+  m_Size: {x: 0.16718632, y: 0.49745202}
   m_Direction: 0
 --- !u!70 &682745558
 CapsuleCollider2D:
@@ -1436,8 +1467,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0022551643, y: -0.063151546}
-  m_Size: {x: 0.8488938, y: 0.38654637}
+  m_Offset: {x: -0.0059566568, y: -0.051109154}
+  m_Size: {x: 0.66169053, y: 0.24642164}
   m_Direction: 1
 --- !u!114 &682745559
 MonoBehaviour:
@@ -2159,7 +2190,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1658994562}
@@ -2209,8 +2240,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1.07, y: 1.18}
+  m_Offset: {x: -0.002052784, y: -0.008484498}
+  m_Size: {x: 1.0330513, y: 1.163031}
   m_Direction: 0
 --- !u!1 &1309177013
 GameObject:
