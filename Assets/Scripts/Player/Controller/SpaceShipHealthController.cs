@@ -13,7 +13,7 @@ namespace Player.Controller
     
         private void Update()
         {
-            this.healthProgressBarController.SetHealthValue();
+            this.healthProgressBarController.SetSliderValue();
         
             if (GameManager.Instance.ActualShipHealth <= 0)
             {

@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -14,12 +15,22 @@ namespace UI.Controller
         [SerializeField]
         private TextMeshProUGUI LaserPower;
 
+        private GameObject shieldHealthProgressBar;
+
+        private void Start()
+        {
+            shieldHealthProgressBar = GameObject.FindGameObjectWithTag("ShieldHealthProgressBar");
+        }
+
         void Update()
         {
             if (GameManager.Instance.IsGameRunning)
             {
                 ScoreText.text = $"Score: {GameManager.Instance.Score}";
-                //LaserPower.text = $"Laserpower: {GameManager.Instance.ActualShipLaserPower}/{GameManager.Instance.MaxShipLaserPower}";    
+                if (this.shieldHealthProgressBar != null)
+                {
+                    this.shieldHealthProgressBar.SetActive(GameManager.Instance.IsShipShieldActive);
+                }
             }
         }
     }

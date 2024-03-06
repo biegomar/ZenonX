@@ -55,7 +55,7 @@ namespace Player.Controller.Laser
 
                 this.FeuerFrei();
                 this.GainFirePower();
-                this.ammoProgressBarController.SetAmmoValue();
+                this.ammoProgressBarController.SetSliderValue();
             }        
         }
 

@@ -6,27 +6,22 @@ namespace UI.Controller
     /// <summary>
     /// The ammo progress bar controller.
     /// </summary>
-    public class AmmoProgressBarController : MonoBehaviour
+    public class AmmoProgressBarController : AProgressBarController
     {
-        [SerializeField]
-        private Slider slider;
-
         private void Start()
         {
-            this.slider.maxValue = GameManager.Instance.MaxShipLaserPower;
+            this.slider.maxValue = this.GetActualBaseMaxValue();
+            this.fill.color = this.gradient.Evaluate(1f);
         }
-
-        public void SetAmmoValue()
+        
+        protected override float GetActualBaseValue()
         {
-            var percentage = this.GetActualLaserPowerValue();
-            this.slider.value = percentage;        
-        }    
-
-        private float GetActualLaserPowerValue()
-        {
-            this.slider.maxValue = GameManager.Instance.MaxShipLaserPower;        
-
             return GameManager.Instance.ActualShipLaserPower;
+        }
+        
+        protected override float GetActualBaseMaxValue()
+        {
+            return GameManager.Instance.MaxShipLaserPower;
         }
     }
 }

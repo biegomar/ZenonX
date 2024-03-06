@@ -1,12 +1,6 @@
-using UnityEngine;
-using UnityEngine.UI;
-
 namespace UI.Controller
 {
-    /// <summary>
-    /// The health progress bar controller.
-    /// </summary>
-    public class HealthProgressBarController : AProgressBarController
+    public class ShieldHealthProgressBarController : AProgressBarController
     {
         private void Start()
         {
@@ -16,12 +10,12 @@ namespace UI.Controller
         
         protected override float GetActualBaseValue()
         {
-            return GameManager.Instance.ActualShipHealth;
+            return GameManager.Instance.ActualShieldHealth;
         }
         
         protected override float GetActualBaseMaxValue()
         {
-            return GameManager.Instance.MaxShipHealth;
+            return GameManager.Instance.MaxShieldHealth;
         }
     }
 }
