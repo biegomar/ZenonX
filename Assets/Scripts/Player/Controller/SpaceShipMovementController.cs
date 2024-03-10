@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,6 +16,12 @@ namespace Player.Controller
     
         [SerializeField] 
         private float playerLeftBorder;
+        
+        [SerializeField]
+        private float playerTopBorder;
+    
+        [SerializeField] 
+        private float playerBottomBorder;
     
         //Sprites
         private GameObject ship;
@@ -22,115 +29,75 @@ namespace Player.Controller
         private GameObject shipLeft;
 
         //new input system
-        private GameInput gameInput;
-        private InputAction move;
-        private InputAction boost;
+        private Vector2 moveInputValue = Vector2.zero;
 
-        private Rigidbody2D Rigidbody;
-
-        private bool isShipBoosted;
-
-
-        private void OnEnable()
-        {
-            this.gameInput = new GameInput();
-            this.move = this.gameInput.Player.Move;
-            this.boost = this.gameInput.Player.Boost;
-
-            this.move.Enable();
-            this.boost.Enable();
-        }
-
-        private void OnDisable()
-        {
-            this.move.Disable();
-            this.boost.Disable();
-        }
-    
         void Start()
         {
-            isShipBoosted = false;
-            this.Rigidbody = GetComponent<Rigidbody2D>();
-
             shipLeft = GameObject.FindGameObjectsWithTag("Left").First();
             shipRight = GameObject.FindGameObjectsWithTag("Right").First();
             ship = GameObject.FindGameObjectsWithTag("Unmoved").First();
         }
-    
-        void Update()
+
+        private void Update()
         {
-            // use delta time for game pause here.        
             if (GameManager.Instance.IsGameRunning && Time.deltaTime > 0f)
             {
-                ShowRelevantShipSprite();
-                MoveHorizontal();
-                BoostShip();
-            }      
-        }
-
-        public void OnTriggerEnter2D(Collider2D collision)
-        {        
-            var collisionObject = collision.gameObject;
-            if (collisionObject.CompareTag("Border"))
-            {            
-                this.Rigidbody.velocity = Vector2.zero;
-                this.Rigidbody.isKinematic = true;
+                CalculateNewPosition();
+                ShowRelevantShipSprite(this.moveInputValue.x);
             }
         }
 
-        private void ShowRelevantShipSprite()
+        private void ShowRelevantShipSprite(float xMovement)
         {
-        
+            if (xMovement > 0)
             {
-                if (this.move.ReadValue<Vector2>().x > 0)
-                {
-                    this.shipRight.SetActive(true);
-                    this.shipLeft.SetActive(false);
-                    this.ship.SetActive(false);
-                }
-                else if (this.move.ReadValue<Vector2>().x < 0)
-                {
-                    this.shipLeft.SetActive(true);
-                    this.shipRight.SetActive(false);
-                    this.ship.SetActive(false);
-                }
-                else if (this.move.ReadValue<Vector2>().x == 0)
-                {
-                    this.ship.SetActive(true);
-                    this.shipLeft.SetActive(false);
-                    this.shipRight.SetActive(false);
-                }
-            }        
+                this.shipRight.SetActive(true);
+                this.shipLeft.SetActive(false);
+                this.ship.SetActive(false);
+            }
+            else if (xMovement < 0)
+            {
+                this.shipLeft.SetActive(true);
+                this.shipRight.SetActive(false);
+                this.ship.SetActive(false);
+            }
+            else if (xMovement == 0)
+            {
+                this.ship.SetActive(true);
+                this.shipLeft.SetActive(false);
+                this.shipRight.SetActive(false);
+            }      
         }
 
-        private void BoostShip()
-        {
-            if (this.Rigidbody.velocity.y == 0)
-            {
-                this.isShipBoosted = false;
-            }        
-
-            if (!this.isShipBoosted & this.boost.triggered)
-            {
-                this.Rigidbody.isKinematic = false;
-                this.Rigidbody.AddForce(Vector2.up * GameManager.Instance.ShipBoosterVelocity, ForceMode2D.Impulse);
-                this.isShipBoosted = true;
-            }            
-        }
-
-        private void MoveHorizontal()
+        private void CalculateNewPosition()
         {
             transform.position = new Vector3(
                 CalculateNewXPosition(),
-                transform.position.y,
+                CalculateNewYPosition(),
                 transform.position.z);
         }
 
         private float CalculateNewXPosition()
         {       
-            //return transform.position.x + Input.GetAxis("Horizontal") * this.Speed * Time.deltaTime;
-            return (Math.Min(this.playerRightBorder, Math.Max(this.playerLeftBorder, transform.position.x + this.move.ReadValue<Vector2>().x * GameManager.Instance.ShipHorizontalSpeed * Time.deltaTime)));
-            //return Math.Min(this.playerRightBorder, Math.Max(this.playerLeftBorder, transform.position.x + Input.GetAxis("Horizontal") * GameManager.Instance.ShipHorizontalSpeed * Time.deltaTime));
+            return Math.Min(this.playerRightBorder, Math.Max(this.playerLeftBorder, transform.position.x + this.moveInputValue.x * GameManager.Instance.ShipHorizontalSpeed * Time.deltaTime));
+        }
+        
+        private float CalculateNewYPosition()
+        {       
+            return Math.Min(this.playerTopBorder, Math.Max(this.playerBottomBorder, transform.position.y + this.moveInputValue.y * GameManager.Instance.ShipVerticalSpeed * Time.deltaTime));
+        }
+
+        public void OnMove(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                this.moveInputValue = context.ReadValue<Vector2>();   
+            }
+
+            if (context.canceled)
+            {
+                this.moveInputValue = Vector2.zero;
+            }
         }
     }
 }

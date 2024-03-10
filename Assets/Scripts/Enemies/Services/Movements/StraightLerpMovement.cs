@@ -8,7 +8,7 @@ namespace Enemies.Services.Movements
     internal class StraightLerpMovement : IMovementStrategy
     {
         private const float targetPositionY = 2.5f;        
-        private const float duration = 2.3f;
+        private const float speed = 2.3f;
 
         private Vector2 targetPosition;
 
@@ -24,7 +24,8 @@ namespace Enemies.Services.Movements
 
         public float CalculateNewYPosition(GameObject gameObject, bool isUpMovement)
         {
-            return Vector2.Lerp(gameObject.transform.position, this.targetPosition, duration * Time.deltaTime).y;
+            var blend = Mathf.Pow(0.5f, speed * Time.deltaTime);
+            return Vector2.Lerp(gameObject.transform.position, this.targetPosition, blend).y;
         }
 
         private void DefineTargetPosition(Vector2 initialPosition)

@@ -1486,6 +1486,7 @@ GameObject:
   - component: {fileID: 682745556}
   - component: {fileID: 682745559}
   - component: {fileID: 682745561}
+  - component: {fileID: 682745562}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1507,6 +1508,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerRightBorder: 6.8
   playerLeftBorder: -6.8
+  playerTopBorder: 3.5
+  playerBottomBorder: -3
 --- !u!4 &682745553
 Transform:
   m_ObjectHideFlags: 0
@@ -1516,7 +1519,7 @@ Transform:
   m_GameObject: {fileID: 682745551}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.491, z: 0}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1541,7 +1544,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -1663,6 +1666,69 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Shield: {fileID: 1293265499}
+--- !u!114 &682745562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 682745551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 3124654305d036949bf3e6c77eba83b8, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 682745552}
+        m_TargetAssemblyTypeName: Player.Controller.SpaceShipMovementController,
+          Assembly-CSharp
+        m_MethodName: OnMove
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 243772c0-b878-4194-8953-1c1ed8fb482a
+    m_ActionName: Player/Move[/Keyboard/a,/Keyboard/d,/Keyboard/leftArrow,/Keyboard/rightArrow,/XInputControllerWindows/leftStick/up,/XInputControllerWindows/leftStick/down,/XInputControllerWindows/leftStick/left,/XInputControllerWindows/leftStick/right]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 17b466d1-1b5e-4159-b064-990e6e685ba6
+    m_ActionName: Player/Boost[/Keyboard/w,/XInputControllerWindows/buttonNorth,/XInputControllerWindows/rightStickPress,/Keyboard/upArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1d36fbdd-0a66-4c40-8e62-18c3d493d213
+    m_ActionName: Player/Fire[/XInputControllerWindows/rightTrigger,/Keyboard/space,/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: bb3a22be-ffa6-4de6-a5ed-0dd7c9f40d73
+    m_ActionName: Game/Pause[/Keyboard/p]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3f065af8-fc02-4057-8309-5a143263c47a
+    m_ActionName: Game/Quit[/Keyboard/escape,/XInputControllerWindows/buttonEast]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &739618801
 GameObject:
   m_ObjectHideFlags: 0
