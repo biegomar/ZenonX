@@ -1,3 +1,4 @@
+using System.Threading;
 using UI.Controller;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -19,29 +20,14 @@ namespace Player.Controller.Laser
         private float LaserInterval;
         private float ActualLaserPowerRegainInterval;  
         private AudioSource laserSound;
-
-        //new input system
-        private GameInput gameInput;
-        private InputAction fire;  
-
-        private void OnEnable()
-        {
-            this.gameInput = new GameInput();
-            this.fire = this.gameInput.Player.Fire;        
-
-            this.fire.Enable();        
-        }
-
-        private void OnDisable()
-        {
-            this.fire.Disable();        
-        }
+        private bool IsFirePressed;
 
         public void Start()
         {
             this.laserSound = AudioManager.Instance.GetSound("PlayerLaser");
             this.LaserInterval = 0;
             this.ActualLaserPowerRegainInterval = 0;
+            this.IsFirePressed = false;
         }
 
         public void Update()
@@ -61,7 +47,7 @@ namespace Player.Controller.Laser
 
         private void FeuerFrei()
         {
-            if (this.LaserInterval >= this.ActualLaserFrequence && GameManager.Instance.ActualShipLaserPower > 0 && this.IsFirePressed())
+            if (this.LaserInterval >= this.ActualLaserFrequence && GameManager.Instance.ActualShipLaserPower > 0 && this.IsFirePressed)
             {
                 this.laserSound.enabled = true;
                 this.laserSound.Play();
@@ -101,9 +87,9 @@ namespace Player.Controller.Laser
             };
         }
 
-        private bool IsFirePressed()
+        public void OnFire(InputAction.CallbackContext context)
         {
-            return this.fire.triggered;
+            this.IsFirePressed = context.performed;
         }
     }
 }

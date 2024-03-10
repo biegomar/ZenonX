@@ -1709,11 +1709,19 @@ MonoBehaviour:
     m_ActionId: 243772c0-b878-4194-8953-1c1ed8fb482a
     m_ActionName: Player/Move[/Keyboard/a,/Keyboard/d,/Keyboard/leftArrow,/Keyboard/rightArrow,/XInputControllerWindows/leftStick/up,/XInputControllerWindows/leftStick/down,/XInputControllerWindows/leftStick/left,/XInputControllerWindows/leftStick/right]
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 17b466d1-1b5e-4159-b064-990e6e685ba6
-    m_ActionName: Player/Boost[/Keyboard/w,/XInputControllerWindows/buttonNorth,/XInputControllerWindows/rightStickPress,/Keyboard/upArrow]
-  - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 682745556}
+        m_TargetAssemblyTypeName: Player.Controller.Laser.FireController, Assembly-CSharp
+        m_MethodName: OnFire
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 1d36fbdd-0a66-4c40-8e62-18c3d493d213
     m_ActionName: Player/Fire[/XInputControllerWindows/rightTrigger,/Keyboard/space,/XInputControllerWindows/buttonSouth]
   - m_PersistentCalls:
