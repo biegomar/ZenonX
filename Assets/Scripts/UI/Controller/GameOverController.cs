@@ -1,3 +1,4 @@
+using System.Threading;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -13,67 +14,37 @@ namespace UI.Controller
         [SerializeField]
         private Text GameOverText;
 
-        //new input system
-        private GameInput gameInput;
-        private InputAction quit;
-        private InputAction pause;
+        private bool isGamePaused;
 
-        private bool IsGamePaused;
-
-        private void OnEnable()
+        private void Awake()
         {
             this.GameOverText.text = string.Empty;
-
-            this.gameInput = new GameInput();
-            this.quit = this.gameInput.Game.Quit;       
-            this.pause = this.gameInput.Game.Pause;
-
-            this.quit.Enable();        
-            this.pause.Enable();
-
-            this.IsGamePaused = false;
-        }
-
-        private void OnDisable()
-        {
-            this.quit.Disable();  
-            this.pause.Disable();
+            this.isGamePaused = false;
         }
 
         private void Update()
         {
-            this.CheckForGamePause();
-
-            if (this.IsGamePaused)
-            {
-                Time.timeScale = 0f;
-            }
-            else
-            {
-                Time.timeScale = 1f;
-            }
+            Time.timeScale = this.isGamePaused ? 0f : 1f;
 
             if (!GameManager.Instance.IsGameRunning)
             {                        
                 this.GameOverText.text = "Game Over!";
-            }   
-            
-            if (this.IsQuitPressed())
+            }
+        }
+
+        public void OnQuit(InputAction.CallbackContext context)
+        {
+            if (context.performed)
             {
                 SceneManager.LoadScene(0);
             }
         }
 
-        private bool IsQuitPressed()
+        public void OnPause(InputAction.CallbackContext context)
         {
-            return this.quit.triggered;
-        }
-
-        private void CheckForGamePause()
-        {
-            if (this.pause.triggered) 
+            if (context.performed) 
             {
-                this.IsGamePaused = !this.IsGamePaused;
+                this.isGamePaused = !this.isGamePaused;
             }
         }
     }
