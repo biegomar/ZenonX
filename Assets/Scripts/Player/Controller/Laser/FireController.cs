@@ -20,14 +20,12 @@ namespace Player.Controller.Laser
         private float LaserInterval;
         private float ActualLaserPowerRegainInterval;  
         private AudioSource laserSound;
-        private bool IsFirePressed;
 
         public void Start()
         {
             this.laserSound = AudioManager.Instance.GetSound("PlayerLaser");
             this.LaserInterval = 0;
             this.ActualLaserPowerRegainInterval = 0;
-            this.IsFirePressed = false;
         }
 
         public void Update()
@@ -38,28 +36,10 @@ namespace Player.Controller.Laser
                 this.ActualLaserFrequence = GameManager.Instance.ShipLaserFrequency;
                 this.LaserInterval += Time.deltaTime;
                 this.ActualLaserPowerRegainInterval += Time.deltaTime;
-
-                this.FeuerFrei();
+                
                 this.GainFirePower();
                 this.ammoProgressBarController.SetSliderValue();
             }        
-        }
-
-        private void FeuerFrei()
-        {
-            if (this.LaserInterval >= this.ActualLaserFrequence && GameManager.Instance.ActualShipLaserPower > 0 && this.IsFirePressed)
-            {
-                this.laserSound.enabled = true;
-                this.laserSound.Play();
-
-                Instantiate(Laser, new Vector3(
-                    transform.position.x,
-                    transform.position.y + 0.3f,
-                    transform.position.z), Quaternion.identity);            
-
-                GameManager.Instance.ActualShipLaserPower--;
-                this.LaserInterval = 0;                
-            }
         }
 
         private void GainFirePower()
@@ -89,7 +69,19 @@ namespace Player.Controller.Laser
 
         public void OnFire(InputAction.CallbackContext context)
         {
-            this.IsFirePressed = context.performed;
+            if (context.performed && this.LaserInterval >= this.ActualLaserFrequence && GameManager.Instance.ActualShipLaserPower > 0)
+            {
+                this.laserSound.enabled = true;
+                this.laserSound.Play();
+
+                Instantiate(Laser, new Vector3(
+                    transform.position.x,
+                    transform.position.y + 0.3f,
+                    transform.position.z), Quaternion.identity);            
+
+                GameManager.Instance.ActualShipLaserPower--;
+                this.LaserInterval = 0;                
+            }
         }
     }
 }
