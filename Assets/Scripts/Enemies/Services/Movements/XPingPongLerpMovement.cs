@@ -17,8 +17,7 @@ namespace Enemies.Services.Movements
 
         public float CalculateNewXPosition(GameObject gameObject, bool isRightMovement)
         {
-            var blend = Mathf.Pow(0.5f, speed * Time.deltaTime);
-            return Vector2.Lerp(gameObject.transform.position, this.targetPosition, blend).x;
+            return Vector2.Lerp(gameObject.transform.position, this.targetPosition, speed * Time.deltaTime).x;
         }
 
         public float CalculateNewYPosition(GameObject gameObject, bool isUpMovement)

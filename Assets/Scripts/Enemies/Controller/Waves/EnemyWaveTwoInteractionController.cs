@@ -21,6 +21,7 @@ namespace Enemies.Controller.Waves
 
         private const float rayLength = 9.7f;
         private const float translate = 0.6f;
+        private const float appearanceWaitTime = 2f;
 
         private RaycastHit2D leftHit;
         private RaycastHit2D rightHit;
@@ -33,6 +34,7 @@ namespace Enemies.Controller.Waves
 
         private void Start()
         {
+            this.timeSinceAppearance = 0f;
             this.rigidBody = GetComponent<Rigidbody2D>();
 
             this.enemyController = GameManager.FindObjectInParentChain<WaveSpawnController>(this.transform);
@@ -71,7 +73,7 @@ namespace Enemies.Controller.Waves
 
         public void OnTriggerEnter2D(Collider2D collision)
         {
-            if (!isInCollisionHanding && this.timeSinceAppearance > 1.0f)
+            if (!isInCollisionHanding && this.timeSinceAppearance > appearanceWaitTime)
             {
                 var collisionObject = collision.gameObject;
                 switch (collisionObject.tag)
@@ -137,18 +139,25 @@ namespace Enemies.Controller.Waves
 
         private void LetTheHammerFall()
         {
-            if ((leftHit.collider != null 
-                 && (leftHit.collider.gameObject.CompareTag("Player") || leftHit.collider.gameObject.CompareTag("SpaceShipShield")))
-                || (rightHit.collider != null 
-                    && (rightHit.collider.gameObject.CompareTag("Player") || rightHit.collider.gameObject.CompareTag("SpaceShipShield"))))
+            if (this.timeSinceAppearance > appearanceWaitTime)
             {
-                this.rigidBody.gravityScale = 2.5f;
+                var isLeftHit = leftHit.collider != null && (leftHit.collider.gameObject.CompareTag("Player") ||
+                                                             leftHit.collider.gameObject.CompareTag("SpaceShipShield"));
+
+                var isRightHit = rightHit.collider != null
+                                 && (rightHit.collider.gameObject.CompareTag("Player") ||
+                                     rightHit.collider.gameObject.CompareTag("SpaceShipShield"));
+                
+                if (isLeftHit || isRightHit)
+                {
+                    this.rigidBody.gravityScale = 2.5f;
+                }    
             }
         }
 
-        private void RemoveEnemyFromWave(IDictionary<Guid, IList<EnemyFlightFormationItem>> EnemyWaves)
+        private void RemoveEnemyFromWave(IDictionary<Guid, IList<EnemyFlightFormationItem>> enemyWaves)
         {
-            foreach (var wave in EnemyWaves)
+            foreach (var wave in enemyWaves)
             {
                 var enemyFlightFormationItem = wave.Value.Where(item => item.Enemy == gameObject).FirstOrDefault();
                 if (enemyFlightFormationItem != null)
