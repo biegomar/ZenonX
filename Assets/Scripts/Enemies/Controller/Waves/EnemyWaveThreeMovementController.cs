@@ -23,10 +23,12 @@ namespace Enemies.Controller.Waves
         
         private static readonly int AmIDead = Animator.StringToHash("AmIDead");
         private bool IAmDying;
+        private bool InCollision;
     
         void Start()
         {
             this.IAmDying = false;
+            this.InCollision = false;
             
             this.enemyController = GameManager.FindObjectInParentChain<WaveSpawnController>(this.transform);
             if (this.enemyController != null)
@@ -36,33 +38,45 @@ namespace Enemies.Controller.Waves
                 {
                     this.formation = this.enemyItem.Formation;
                     this.formationId = this.enemyItem.FormationId;
+                    
+                    this.activeMovementStrategy = new XPingPongLerpMovement(this.enemyItem.StartPosition);
                 }
             }
-            
-            this.activeMovementStrategy = new XPingPongLerpMovement(this.enemyItem.StartPosition);
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            var collisionObject = collision.gameObject;
-        
-            if (collisionObject.CompareTag("PlayerLaser"))
+            if (enemyItem != null && !this.IAmDying && !this.InCollision)
             {
-                if (enemyItem != null && !this.IAmDying)
+                this.InCollision = true;
+                
+                var lastPosition = transform.position;
+                var collisionObject = collision.gameObject;
+            
+                switch (collisionObject.tag)
                 {
-                    enemyItem.Health -= 1;
-                    if (enemyItem.Health <= 0)
+                    case "PlayerLaser":
                     {
-                        var lastPosition = transform.position;
-
-                        RemoveEnemyAndScore();
-
-                        enemyController.SpawnLoot(this.formationId,
-                            this.formation.enemyFormationData.LootTemplate, lastPosition);
+                        Destroy(collisionObject);
+                        enemyItem.Health -= 1;
+                        if (enemyItem.Health <= 0)
+                        {
+                            RemoveEnemyAndScore(lastPosition);
+                        }
+                        break;
                     }
+                    case "Player":
+                        GameManager.Instance.ActualShipHealth -= 5;
+                        RemoveEnemyAndScore(lastPosition);
+                        break;
+                    case "SpaceShipShield":
+                        GameManager.Instance.ActualShieldHealth -= 5;
+                        RemoveEnemyAndScore(lastPosition);
+                        
+                        break;
                 }
-
-                Destroy(collisionObject);
+                
+                this.InCollision = false;
             }
         }
 
@@ -80,7 +94,7 @@ namespace Enemies.Controller.Waves
             TryToSwitchToXPingPongMovement();
         }
     
-        private void RemoveEnemyAndScore()
+        private void RemoveEnemyAndScore(Vector3 lastPosition)
         {
             this.IAmDying = true;
             PlayEnemyExplosion();
@@ -88,6 +102,9 @@ namespace Enemies.Controller.Waves
             RemoveEnemyFromWave(enemyController.EnemyFlightFormations);
             Destroy(gameObject, 0.5f);
             GameManager.Instance.Score += GameManager.Instance.EnemyWaveThreeScore;
+            
+            enemyController.SpawnLoot(this.formationId,
+                this.formation.enemyFormationData.LootTemplate, lastPosition);
         }
         
         private static void PlayEnemyExplosion()
